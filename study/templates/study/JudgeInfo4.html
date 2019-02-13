@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+    <p>
+    During the dots-estimation task, the advisor sent the estimator a message recommending that the number of solid dots in the 30x30 grid was <strong>{{ player.get_recommendation }}</strong>. Recall that the correct number was <strong>{{ player.get_correct_answer }}</strong>.
+    </p>
+
+    {% if player.disclosure == True %}
+    <p>
+    The advisor’s message included a disclosure notice about his/her compensation scheme, which the estimator was able to view before making the ultimate estimate.
+    </p>
+    <p>
+    This disclosure let the estimator know that the advisor was not compensated based on the accuracy of the estimator's estimate, but was paid if the estimator overestimated the true number of solid dots.
+    </p>
+
+
+
+    {% else %}
+    <p>
+    The advisor's message did not disclose the advisor's compensation scheme.
+    </p>
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

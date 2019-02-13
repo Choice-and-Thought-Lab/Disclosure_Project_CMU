@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block content %}
+
+    <p>
+    The actual grid is shown below.
+    </p>
+
+    <td valign="middle" align="center">
+        <img src="/static/{{ group.grid_path }}" width="100%" vspace="20"/>
+    </td>
+
+    <p>
+    The correct number of solid dots is <strong>{{ player.get_correct_answer }}</strong>.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

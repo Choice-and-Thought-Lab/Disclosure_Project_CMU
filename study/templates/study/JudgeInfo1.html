@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+    <p>
+    During the activity, the advisor viewed a 30x30 grid (different from the one you saw earlier) and wrote a recommendation to the estimator about the number of solid dots in this grid.
+    </p>
+    <p>
+    The picture the advisor saw is below:
+    </p>
+
+    <div style="border: thin solid black">
+    <td valign="middle" align="center">
+	    <img src="/static/{{ group.grid_path }}" width="100%" vspace="20"/>
+    </td>
+    <p>
+    The correct number of solid dots is <strong>{{ player.get_correct_answer }}</strong> 
+    </p>
+    </div>
+
+
+    {% next_button %}
+
+{% endblock %}

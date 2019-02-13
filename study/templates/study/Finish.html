@@ -1,0 +1,60 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+{% if player.is_timed_out == True %}
+<p> You have timed out</p>
+{% else %}
+    <p>
+    Thank you for participating in our survey!
+    </p>
+    {% comment %}
+    <p>
+    Your participant ID is:
+    </p>
+    <h3>
+	    {{ participant.label }}
+    </h3>
+    {% endcomment %}
+    <p>
+    <!--Your final payment will be:-->
+    <p>
+      <p>
+    {% if player.role != 'judge' %}
+    <p>
+    You will receive $1 base payment within 24 hours and any bonus payments that you earned within 48 hours.
+    <p>
+    <!--<h3>
+	    {{ participant.payoff }}
+    </h3>-->
+    </p>
+    {% endif %}
+    <p>
+    <!--Your participant code is:-->
+    Please enter this secret code into mTurk to receive payment for this HIT:
+    <h3>
+	    {{ participant.code }}
+    </h3>
+
+    </p>
+    <!--<p>
+    Please show this page to your experimenter to claim your payment.
+  </p>-->
+
+    {% comment %}
+    {% formfield player.email %}
+
+    <div>
+	<button name="entered_email" value="False" class="btn btn-primary btn-large">Skip</button>
+	<button name="entered_email" value="True" class="btn btn-primary btn-large">Submit</button>
+    </div>
+
+    <p>
+    Please be aware that your reward will be sent to you via email.
+    </p>
+
+    {% endcomment %}
+{% endif %}
+{% endblock %}
