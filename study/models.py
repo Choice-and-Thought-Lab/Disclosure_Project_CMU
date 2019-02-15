@@ -6,12 +6,12 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-
 author = 'Aaron Yao-Smith'
 
 doc = """
 Incentive Compatible Disclosure Study
 """
+
 
 def make_Likert_agreement(label):
     return models.IntegerField(
@@ -28,23 +28,25 @@ def make_Likert_agreement(label):
         widget=widgets.RadioSelect
     )
 
+
 class Constants(BaseConstants):
     name_in_url = 'study'
     players_per_group = 6
     num_rounds = 1
-    #base_reward = c(5) # base reward for completing the survey
+    # base_reward = c(5) # base reward for completing the survey
     base_reward = c(1)
-    #estimator_bonus = c(5) # received if estimate within 10 of answer
+    # estimator_bonus = c(5) # received if estimate within 10 of answer
     estimator_bonus = c(2)
-    #advisor_bonus = c(5) # received if estimate > answer
+    # advisor_bonus = c(5) # received if estimate > answer
     advisor_bonus = c(2)
-    #advisor_big_bonus = c(10) # received if estimate >= answer + 100
+    # advisor_big_bonus = c(10) # received if estimate >= answer + 100
     advisor_big_bonus = c(4)
-    #appeal_reward = c(5) # given to estimator on appeal win
+    # appeal_reward = c(5) # given to estimator on appeal win
     appeal_reward = c(2)
-    appeal_reward_split = appeal_reward / 2 # given to both estimator and advisor if appeal lost or no appeal
-    #appeal_cost = c(1) # cost of appeal to estimator
+    appeal_reward_split = appeal_reward / 2  # given to both estimator and advisor if appeal lost or no appeal
+    # appeal_cost = c(1) # cost of appeal to estimator
     appeal_cost = c(0.25)
+
 
 class Subsession(BaseSubsession):
     def creating_session(self):
@@ -54,10 +56,11 @@ class Subsession(BaseSubsession):
             players = group.get_players()
             for p in players:
                 print(p.role())
-            #random.shuffle(players
+            # random.shuffle(players
             group.set_players(players)
-            #group.disclosure = random.choice([True, False])
+            # group.disclosure = random.choice([True, False])
             group.choose_grid()
+
 
 class Group(BaseGroup):
 
@@ -74,13 +77,13 @@ class Group(BaseGroup):
             [False, "No"]
         ]),
         widget=widgets.RadioSelect
-    ) # did estimator appeal?
+    )  # did estimator appeal?
     appeal_granted = models.BooleanField(
-        label="As judge, I determine that the "+str(Constants.appeal_reward)+" bonus shall be awarded as follows:",
+        label="As judge, I determine that the " + str(Constants.appeal_reward) + " bonus shall be awarded as follows:",
         choices=shuffle_choices([
-            [False, "The estimator and advisor shall both receive "+str(Constants.appeal_reward_split)+"."],
-            [True, "The estimator shall receive "+str(Constants.appeal_reward)+
-                " and the advisor shall receive nothing."],
+            [False, "The estimator and advisor shall both receive " + str(Constants.appeal_reward_split) + "."],
+            [True, "The estimator shall receive " + str(Constants.appeal_reward) +
+             " and the advisor shall receive nothing."],
         ]),
         widget=widgets.RadioSelect
     )
@@ -102,7 +105,6 @@ class Group(BaseGroup):
     example_grid_path = models.StringField()
     example_small_grid_path = models.StringField()
 
-
     # Likert scale questions
     e1 = make_Likert_agreement("I blame myself for my guess.")
     e2 = make_Likert_agreement("I blame my advisor for my guess.")
@@ -111,9 +113,9 @@ class Group(BaseGroup):
     e5 = make_Likert_agreement("I believe that others would rule in my favor on an appeal.")
     e6 = make_Likert_agreement("My advisor treated me fairly.")
     e7 = make_Likert_agreement("I was mistreated by my advisor.")
-    e8 = make_Likert_agreement("I deserve to receive the full bonus of "+str(Constants.appeal_reward)+".")
-    e9 = make_Likert_agreement("My advisor does not deserve to receive "+str(Constants.appeal_reward_split)+
-            " of the bonus.")
+    e8 = make_Likert_agreement("I deserve to receive the full bonus of " + str(Constants.appeal_reward) + ".")
+    e9 = make_Likert_agreement("My advisor does not deserve to receive " + str(Constants.appeal_reward_split) +
+                               " of the bonus.")
     j1 = make_Likert_agreement("I blame the estimator for his/her estimate.")
     j2 = make_Likert_agreement("I blame the advisor for the estimator's estimate.")
     j3 = make_Likert_agreement("The estimator has a legitimate grievance against the advisor.")
@@ -121,9 +123,10 @@ class Group(BaseGroup):
     j5 = make_Likert_agreement("I believe that others would rule in the estimator's favor on an appeal.")
     j6 = make_Likert_agreement("The advisor treated the estimator fairly.")
     j7 = make_Likert_agreement("The estimator was mistreated by the advisor.")
-    j8 = make_Likert_agreement("The estimator deserves to receive the full bonus of "+str(Constants.appeal_reward)+".")
-    j9 = make_Likert_agreement("The advisor does not deserve to receive "+str(Constants.appeal_reward_split)+
-            " of the bonus.")
+    j8 = make_Likert_agreement(
+        "The estimator deserves to receive the full bonus of " + str(Constants.appeal_reward) + ".")
+    j9 = make_Likert_agreement("The advisor does not deserve to receive " + str(Constants.appeal_reward_split) +
+                               " of the bonus.")
     a1 = make_Likert_agreement("I blame the estimator for his/her estimate.")
     a2 = make_Likert_agreement("I blame myself, the advisor, for the estimator's estimate.")
     a3 = make_Likert_agreement("The estimator has a legitimate grievance against me, the advisor.")
@@ -131,9 +134,10 @@ class Group(BaseGroup):
     a5 = make_Likert_agreement("I believe that others would rule in the estimator's favor on an appeal.")
     a6 = make_Likert_agreement("I, the advisor treated the estimator fairly.")
     a7 = make_Likert_agreement("The estimator was mistreated by me, the advisor.")
-    a8 = make_Likert_agreement("The estimator deserves to receive the full bonus of "+str(Constants.appeal_reward)+".")
-    a9 = make_Likert_agreement("I, the advisor, do not deserve to receive "+str(Constants.appeal_reward_split)+
-            " of the bonus.")
+    a8 = make_Likert_agreement(
+        "The estimator deserves to receive the full bonus of " + str(Constants.appeal_reward) + ".")
+    a9 = make_Likert_agreement("I, the advisor, do not deserve to receive " + str(Constants.appeal_reward_split) +
+                               " of the bonus.")
 
     estimator_opposite_appeal_payoff = models.CurrencyField(initial=c(0))
 
@@ -159,7 +163,6 @@ class Group(BaseGroup):
         else:
             estimator.grid_reward = c(0)
 
-
     # Chooses a grid. Will choose a random grid-3x3_grid pair based on what is in the directory. Files must be named
     # in this format: gridX_N.svg and small_gridX.svg, where X is a unique number per grid-3x3_grid pair, and N is
     # the number of filled in dots in the entire grid.
@@ -181,16 +184,15 @@ class Group(BaseGroup):
         self.example_small_grid_path = 'study/small_grid' + str(self.example_grid_number) + '.svg'
 
 
-
 class Player(BasePlayer):
     grid_reward = models.CurrencyField(initial=c(0))
     entered_email = models.BooleanField()
     disclosure = models.BooleanField()
-    #disclosure = random.choice([True, False])
-    #disclosure = False
+    # disclosure = random.choice([True, False])
+    # disclosure = False
     email = models.StringField(
-        label="Please provide your email address. We will send your payment as an Amazon.com gift card to this "+
-            "email address within five business days.",
+        label="Please provide your email address. We will send your payment as an Amazon.com gift card to this " +
+              "email address within five business days.",
         blank=True,
         initial=""
     )
@@ -286,17 +288,17 @@ class Player(BasePlayer):
     # Manipulation checks
     m1 = models.BooleanField(
         label="In the dots-estimation task, the advisor would get a bonus if the estimator overestimated the true number of "
-            + "solid dots.",
+              + "solid dots.",
         widget=widgets.RadioSelect
     )
     m2 = models.BooleanField(
         label="In the dots-estimation task, the estimator would get a bonus if they were within 10 dots of the true number of "
-            + "solid dots.",
+              + "solid dots.",
         widget=widgets.RadioSelect
     )
     m3 = models.BooleanField(
         label="In the dots-estimation task, the estimator was informed that the advisor would make more money if the estimator overestimated "
-            + "the true number of solid dots.",
+              + "the true number of solid dots.",
         widget=widgets.RadioSelect
     )
 
@@ -308,11 +310,11 @@ class Player(BasePlayer):
     # define group IDs such that the "advisor" role corresponds to ID==1, "estimator" to ID==2, "judge/judge"
     # to ID==3. Use player.role() to retrieve this role.
     def role(self):
-        if self.id_in_group>=1 and self.id_in_group<=2:
+        if self.id_in_group >= 1 and self.id_in_group <= 2:
             return 'advisor'
-        elif self.id_in_group>=3 and self.id_in_group<=4:
+        elif self.id_in_group >= 3 and self.id_in_group <= 4:
             return 'estimator'
-        elif self.id_in_group>=5 and self.id_in_group<=6:
+        elif self.id_in_group >= 5 and self.id_in_group <= 6:
             return 'judge'
 
     def get_correct_answer(self):
@@ -335,45 +337,47 @@ class Player(BasePlayer):
         #         #print(self.group.correct_answer)
         #         return self.group.correct_answer+14
         return self.group.correct_answer
-    
+
     def set_model_data(self):
         if self.is_advisor():
-            print("Advisor recom : ",self.recommendation)
+            print("Advisor recom : ", self.recommendation)
             print(type(self.recommendation))
-            if self.recommendation is None or self.recommendation==0:
+            if self.recommendation is None or self.recommendation == 0:
                 if self.disclosure:
                     print("Set model advisor diclosure")
-                    self.recommendation = self.group.correct_answer+92
+                    self.recommendation = self.group.correct_answer + 92
                     print("recomm :{0}".format(self.recommendation))
                 else:
                     print("Set model advisor non diclosure")
-                    self.recommendation = self.group.correct_answer+29
+                    self.recommendation = self.group.correct_answer + 29
                     print("recomm nd :{0}".format(self.recommendation))
         elif self.is_estimator():
-            if self.recommendation is None or self.estimate==0:
+            if self.recommendation is None or self.estimate == 0:
                 if self.disclosure:
                     print("Set model estimator diclosure")
-                    self.estimate = self.group.correct_answer+100
+                    self.estimate = self.group.correct_answer + 100
                     print("esti :{0}".format(self.estimate))
                 else:
                     print("Set model estimator non diclosure")
-                    self.estimate = self.group.correct_answer+14
+                    self.estimate = self.group.correct_answer + 14
                     print("esti nd :{0}".format(self.estimate))
         elif self.is_judge():
             pass
 
     def is_advisor(self):
-        return self.id_in_group in list(range(1,3))
+        return self.id_in_group in list(range(1, 3))
+
     def is_estimator(self):
-        return self.id_in_group in list(range(3,5))
+        return self.id_in_group in list(range(3, 5))
+
     def is_judge(self):
-        return self.id_in_group in list(range(5,7))
+        return self.id_in_group in list(range(5, 7))
 
     def get_recommendation(self):
         this_player_id = self.id_in_group
         num_players_per_group = Constants.players_per_group / 3
-        this_player_id = this_player_id%num_players_per_group
-        if this_player_id==0:
+        this_player_id = this_player_id % num_players_per_group
+        if this_player_id == 0:
             this_player_id = num_players_per_group
         for player in self.get_others_in_group():
             if ((player.id_in_group) == this_player_id):
@@ -383,18 +387,18 @@ class Player(BasePlayer):
     def get_estimate(self):
         this_player_id = self.id_in_group
         num_players_per_group = Constants.players_per_group / 3
-        this_player_id = (this_player_id%num_players_per_group)
-        if this_player_id==0:
+        this_player_id = (this_player_id % num_players_per_group)
+        if this_player_id == 0:
             this_player_id = num_players_per_group
-        #print("player id : "+str(this_player_id))
-        if(self.is_estimator()):
+        # print("player id : "+str(this_player_id))
+        if (self.is_estimator()):
             print("Player is an estimator")
             return self.estimate
-        elif(self.is_judge()):
+        elif (self.is_judge()):
             print("From judge info")
             print(this_player_id)
             for player in self.get_others_in_group():
-                if((player.id_in_group) == this_player_id+num_players_per_group):
+                if ((player.id_in_group) == this_player_id + num_players_per_group):
                     print(player.id_in_group)
                     print(num_players_per_group)
                     return player.estimate
@@ -402,13 +406,13 @@ class Player(BasePlayer):
         print("Returning none")
 
     def is_timed_out(self):
-        return self.participant.vars['expiry'] - time.time() <=3
+        return self.participant.vars['expiry'] - time.time() <= 3
 
     def calculate_grid_rewards(self):
 
         corresponding_advisor = None
         for player in self.get_others_in_group():
-            if player.id_in_group == (self.id_in_group - (Constants.players_per_group/3)):
+            if player.id_in_group == (self.id_in_group - (Constants.players_per_group / 3)):
                 print(player.id_in_group)
                 corresponding_advisor = player
 
