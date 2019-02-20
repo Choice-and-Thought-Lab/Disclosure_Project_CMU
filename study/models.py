@@ -33,19 +33,38 @@ class Constants(BaseConstants):
     name_in_url = 'study'
     players_per_group = 6
     num_rounds = 1
-    # base_reward = c(5) # base reward for completing the survey
-    base_reward = c(1)
-    # estimator_bonus = c(5) # received if estimate within 10 of answer
-    estimator_bonus = c(2)
-    # advisor_bonus = c(5) # received if estimate > answer
-    advisor_bonus = c(2)
-    # advisor_big_bonus = c(10) # received if estimate >= answer + 100
-    advisor_big_bonus = c(4)
-    # appeal_reward = c(5) # given to estimator on appeal win
-    appeal_reward = c(2)
+    base_reward = c(1)  # base reward for completing the survey
+    # estimator_bonus = c(2)  # received if estimate within 10 of answer
+    # advisor_bonus = c(2)  # received if estimate > answer
+    # advisor_big_bonus = c(4)  # received if estimate >= answer + 100
+
+    # New PayOffs - estimator
+    estimator_bonus_less_than_neg_40 = c(0)
+    estimator_bonus_within_neg_40_and_31 = c(1)
+    estimator_bonus_within_neg_30_and_21 = c(1.5)
+    estimator_bonus_within_neg_20_and_11 = c(2)
+    estimator_bonus_within_neg_10_and_1 = c(5)
+    estimator_bonus_within_0_and_10 = c(5)
+    estimator_bonus_within_11_and_21 = c(2)
+    estimator_bonus_within_21_and_30 = c(1.5)
+    estimator_bonus_within_31_and_40 = c(1)
+    estimator_bonus_greater_than_40 = c(0)
+
+    # New PayOffs - advisor
+    advisor_bonus_less_than_neg_40 = c(0)
+    advisor_bonus_within_neg_40_and_31 = c(0)
+    advisor_bonus_within_neg_30_and_21 = c(0)
+    advisor_bonus_within_neg_20_and_11 = c(0)
+    advisor_bonus_within_neg_10_and_1 = c(0)
+    advisor_bonus_within_0_and_10 = c(0.5)
+    advisor_bonus_within_11_and_21 = c(1)
+    advisor_bonus_within_21_and_30 = c(1.5)
+    advisor_bonus_within_31_and_40 = c(2)
+    advisor_bonus_greater_than_40 = c(5)
+
+    appeal_reward = c(2)  # given to estimator on appeal win
     appeal_reward_split = appeal_reward / 2  # given to both estimator and advisor if appeal lost or no appeal
-    # appeal_cost = c(1) # cost of appeal to estimator
-    appeal_cost = c(0.25)
+    appeal_cost = c(0.25)  # cost of appeal to estimator
 
 
 class Subsession(BaseSubsession):
