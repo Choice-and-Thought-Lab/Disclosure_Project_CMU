@@ -7,6 +7,7 @@ from otree.api import (
 )
 
 author = 'Aaron Yao-Smith'
+modification_author = 'Saran Prasad Ambikapathy'
 
 doc = """
 Incentive Compatible Disclosure Study
