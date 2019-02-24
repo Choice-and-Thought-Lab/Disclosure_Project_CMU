@@ -166,21 +166,46 @@ class Group(BaseGroup):
         advisor = self.get_player_by_role('advisor')
         estimator = self.get_player_by_role('estimator')
 
-        # advisor reward
+        # advisor and estimator grid rewards
         print(type(advisor))
         print(type(estimator))
-        if advisor.recommendation >= (self.correct_answer + 100):
-            advisor.grid_reward = Constants.advisor_big_bonus
-        elif advisor.recommendation > self.correct_answer:
-            advisor.grid_reward = Constants.advisor_bonus
-        else:
-            advisor.grid_reward = c(0)
+        # if advisor.recommendation >= (self.correct_answer + 100):
+        #     advisor.grid_reward = Constants.advisor_big_bonus
+        # elif advisor.recommendation > self.correct_answer:
+        #     advisor.grid_reward = Constants.advisor_bonus
+        # else:
+        #     advisor.grid_reward = c(0)
+        if estimator.estimate < (self.correct_answer - 40):
+            estimator.grid_reward = c(0)  # Nothing
+            advisor.grid_reward = c(0) # Nothing
+        elif (self.correct_answer - 40) <= estimator.estimate <= (self.correct_answer - 31):
+            estimator.grid_reward = c(1)
+            advisor.grid_reward = c(0)  # Nothing
+        elif (self.correct_answer - 30) <= estimator.estimate <= (self.correct_answer - 21):
+            estimator.grid_reward = c(1.5)
+            advisor.grid_reward = c(0)  # Nothing
+        elif (self.correct_answer - 20) <= estimator.estimate <= (self.correct_answer - 11):
+            estimator.grid_reward = c(2)
+            advisor.grid_reward = c(0)  # Nothing
+        elif (self.correct_answer - 10) <= estimator.estimate <= (self.correct_answer - 1):
+            estimator.grid_reward = c(5)
+            advisor.grid_reward = c(0)  # Nothing
+        elif (self.correct_answer + 0) <= estimator.estimate <= (self.correct_answer + 10):
+            estimator.grid_reward = c(5)
+            advisor.grid_reward = c(0.5)
+        elif (self.correct_answer + 11) <= estimator.estimate <= (self.correct_answer + 20):
+            estimator.grid_reward = c(2)
+            advisor.grid_reward = c(1)
+        elif (self.correct_answer + 21) <= estimator.estimate <= (self.correct_answer + 30):
+            estimator.grid_reward = c(1.5)
+            advisor.grid_reward = c(1.5)
+        elif (self.correct_answer + 31) <= estimator.estimate <= (self.correct_answer + 40):
+            estimator.grid_reward = c(1)
+            advisor.grid_reward = c(2)
+        elif estimator.estimate > (self.correct_answer + 40):
+            estimator.grid_reward = c(0)  # Nothing
+            advisor.grid_reward = c(5)
 
-        # estimator reward
-        if estimator.estimate >= (self.correct_answer - 10) and estimator.estimate <= (self.correct_answer + 10):
-            estimator.grid_reward = Constants.estimator_bonus
-        else:
-            estimator.grid_reward = c(0)
 
     # Chooses a grid. Will choose a random grid-3x3_grid pair based on what is in the directory. Files must be named
     # in this format: gridX_N.svg and small_gridX.svg, where X is a unique number per grid-3x3_grid pair, and N is
