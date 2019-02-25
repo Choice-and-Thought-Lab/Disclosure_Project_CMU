@@ -49,82 +49,95 @@
     follows:
 </p>
 
+<br/>
 
 <!--New Payoffs - Both Advisor and Estimator-->
-<table style="width:100%; border: 1px solid #CCC;
-    border-collapse: collapse;" margin="20px">
+<table style="width: 100%; border-color: #686868;">
     <tr>
-        <td>If the estimator guesses...</td>
-        <td>the estimator will be paid a bonus of...</td>
-        <td>you, the advisor, will be paid a bonus of...</td>
+        <th style="text-align:center;">If the estimator guesses...</th>
+        <th style="text-align:center;">the estimator will be paid a bonus of...</th>
+        <th style="text-align:center;">you, the advisor, will be paid a bonus of...</th>
     </tr>
     <tr>
         <!--(Less than -40)-->
         <th>Less than 410</th>
-        <td style="border: none;">Nothing</td>
-        <td>Nothing</td>
+        <td style="background-color: #EDEDED; text-align:center; border-color: #686868;">Nothing</td>
+        <td style="background-color: #EDEDED; text-align:center; border-color: #686868;">Nothing</td>
     </tr>
     <tr>
         <!--(Within -40 and -31)-->
         <th>410-419</th>
-        <td bgcolor="#B1D677" style="border: none;"><b>{{ Constants.estimator_bonus_within_neg_40_and_31 }}</b></td>
-        <td>Nothing</td>
+        <td style="background-color: #B1D677; text-align:center; border-color: #686868;">
+            <b>{{ Constants.estimator_bonus_within_neg_40_and_31 }}</b></td>
+        <td style="background-color: #EDEDED; text-align:center; border-color: #686868;">Nothing</td>
     </tr>
 
     <tr>
         <!--(Within -30 and -21)-->
         <th>420-429</th>
-        <td bgcolor="#93C94D" style="border: none;"><b>{{ Constants.estimator_bonus_within_neg_30_and_21 }}</b></td>
-        <td>Nothing</td>
+        <td style="background-color: #93C94D; text-align:center; border-color: #686868;">
+            <b>{{ Constants.estimator_bonus_within_neg_30_and_21 }}</b></td>
+        <td style="background-color: #EDEDED; text-align:center; border-color: #686868;">Nothing</td>
     </tr>
 
     <tr>
         <!--(Within -20 and -11)-->
         <th>430-439</th>
-        <td bgcolor="#7CB72B" style="border: none;"><b>{{ Constants.estimator_bonus_within_neg_20_and_11 }}</b></td>
-        <td>Nothing</td>
+        <td style="background-color: #7CB72B; text-align:center; border-color: #686868;">
+            <b>{{ Constants.estimator_bonus_within_neg_20_and_11 }}</b></td>
+        <td style="background-color: #EDEDED; text-align:center; border-color: #686868;">Nothing</td>
     </tr>
 
     <tr>
         <!--(Within -10 and -1)-->
         <th>440-449</th>
-        <td bgcolor="#6AA629" style="border: none;"><b>{{ Constants.estimator_bonus_within_neg_10_and_1 }}</b></td>
-        <td style="border: none;">Nothing</td>
+        <td style="background-color: #6AA629; text-align:center; border-color: #686868;">
+            <b>{{ Constants.estimator_bonus_within_neg_10_and_1 }}</b></td>
+        <td style="background-color: #EDEDED; text-align:center; border-color: #686868;">Nothing</td>
     </tr>
 
     <tr>
         <!--(Within 0 and +10)-->
         <th>450-460</th>
-        <td bgcolor="#6AA629" style="border: none;"><b>{{ Constants.estimator_bonus_within_0_and_10 }}</b></td>
-        <td bgcolor="#CBE4A4" style="border: none;"><b>{{ Constants.advisor_bonus_within_0_and_10 }}</b></td>
+        <td style="background-color: #6AA629; text-align:center; border-color: #686868;">
+            <b>{{ Constants.estimator_bonus_within_0_and_10 }}</b></td>
+        <td style="background-color: #CBE4A4; text-align:center; border-color: #686868;">
+            <b>{{ Constants.advisor_bonus_within_0_and_10 }}</b></td>
     </tr>
 
     <tr>
         <!--(Within +11 and +20)-->
         <th>461-470</th>
-        <td bgcolor="#7CB72B" style="border: none;"><b>{{ Constants.estimator_bonus_within_11_and_21 }}</b></td>
-        <td bgcolor="#B1D677" style="border: none;"><b>{{ Constants.advisor_bonus_within_11_and_21 }}</b></td>
+        <td style="background-color: #7CB72B; text-align:center; border-color: #686868;">
+            <b>{{ Constants.estimator_bonus_within_11_and_21 }}</b></td>
+        <td style="background-color: #B1D677; text-align:center; border-color: #686868;">
+            <b>{{ Constants.advisor_bonus_within_11_and_21 }}</b></td>
     </tr>
 
     <tr>
         <!--(Within +21 and +30)-->
         <th>471-480</th>
-        <td bgcolor="#93C94D" style="border: none;"><b>{{ Constants.estimator_bonus_within_21_and_30 }}</b></td>
-        <td bgcolor="#93C94D" style="border: none;"><b>{{ Constants.advisor_bonus_within_21_and_30 }}</b></td>
+        <td style="background-color: #93C94D; text-align:center; border-color: #686868;">
+            <b>{{ Constants.estimator_bonus_within_21_and_30 }}</b></td>
+        <td style="background-color: #93C94D; text-align:center; border-color: #686868;">
+            <b>{{ Constants.advisor_bonus_within_21_and_30 }}</b></td>
     </tr>
 
     <tr>
         <!--(Within +31 and +40)-->
         <th>481-490</th>
-        <td bgcolor="#B1D677" style="border: none;"><b>{{ Constants.estimator_bonus_within_31_and_40 }}</b></td>
-        <td bgcolor="#7CB72B" style="border: none;"><b>{{ Constants.advisor_bonus_within_31_and_40 }}</b></td>
+        <td style="background-color: #B1D677; text-align:center; border-color: #686868;">
+            <b>{{ Constants.estimator_bonus_within_31_and_40 }}</b></td>
+        <td style="background-color: #7CB72B; text-align:center; border-color: #686868;">
+            <b>{{ Constants.advisor_bonus_within_31_and_40 }}</b></td>
     </tr>
 
     <tr>
         <!--(Greater than +40)-->
         <th>Greater than 491</th>
-        <td style="border: none;">Nothing</td>
-        <td bgcolor="#6AA629" style="border: none;"><b>{{ Constants.advisor_bonus_greater_than_40 }}</b></td>
+        <td style="background-color: #EDEDED; text-align:center; border-color: #686868;">Nothing</td>
+        <td style="background-color: #6AA629; text-align:center; border-color: #686868;">
+            <b>{{ Constants.advisor_bonus_greater_than_40 }}</b></td>
     </tr>
 
 
