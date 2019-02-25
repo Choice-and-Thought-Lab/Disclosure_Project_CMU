@@ -311,12 +311,20 @@ class EstInfo1(Page):
 
     def vars_for_template(self):
         return {
-            'row2_lower': self.player.get_correct_answer() - 10,
-            'row2_upper': self.player.get_correct_answer(),
-            'row3_lower': self.player.get_correct_answer() + 1,
-            'row3_upper': self.player.get_correct_answer() + 10,
-            'row4_lower': self.player.get_correct_answer() + 11,
-            'row4_upper': self.player.get_correct_answer() + 99,
+            # 'row2_lower': self.player.get_correct_answer() - 10,
+            # 'row2_upper': self.player.get_correct_answer(),
+            # 'row3_lower': self.player.get_correct_answer() + 1,
+            # 'row3_upper': self.player.get_correct_answer() + 10,
+            # 'row4_lower': self.player.get_correct_answer() + 11,
+            # 'row4_upper': self.player.get_correct_answer() + 99,
+            'correct_answer_minus10': self.player.get_correct_answer() - 10,
+            'correct_answer_minus20': self.player.get_correct_answer() - 20,
+            'correct_answer_minus30': self.player.get_correct_answer() - 30,
+            'correct_answer_minus40': self.player.get_correct_answer() - 40,
+            'correct_answer_plus10': self.player.get_correct_answer() + 10,
+            'correct_answer_plus20': self.player.get_correct_answer() + 20,
+            'correct_answer_plus30': self.player.get_correct_answer() + 30,
+            'correct_answer_plus40': self.player.get_correct_answer() + 40,
         }
 
 
@@ -430,12 +438,21 @@ class JudgeInfo3(Page):
 
     def vars_for_template(self):
         return {
-            'row2_lower': self.player.get_correct_answer() - 10,
-            'row2_upper': self.player.get_correct_answer(),
-            'row3_lower': self.player.get_correct_answer() + 1,
-            'row3_upper': self.player.get_correct_answer() + 10,
-            'row4_lower': self.player.get_correct_answer() + 11,
-            'row4_upper': self.player.get_correct_answer() + 99,
+            # 'row2_lower': self.player.get_correct_answer() - 10,
+            # 'row2_upper': self.player.get_correct_answer(),
+            # 'row3_lower': self.player.get_correct_answer() + 1,
+            # 'row3_upper': self.player.get_correct_answer() + 10,
+            # 'row4_lower': self.player.get_correct_answer() + 11,
+            # 'row4_upper': self.player.get_correct_answer() + 99,
+            'correct_answer_minus10': self.player.get_correct_answer() - 10,
+            'correct_answer_minus20': self.player.get_correct_answer() - 20,
+            'correct_answer_minus30': self.player.get_correct_answer() - 30,
+            'correct_answer_minus40': self.player.get_correct_answer() - 40,
+            'correct_answer_plus10': self.player.get_correct_answer() + 10,
+            'correct_answer_plus20': self.player.get_correct_answer() + 20,
+            'correct_answer_plus30': self.player.get_correct_answer() + 30,
+            'correct_answer_plus40': self.player.get_correct_answer() + 40,
+
             'advisor_reward': self.group.get_player_by_role('advisor').grid_reward,
             'estimator_reward': self.group.get_player_by_role('estimator').grid_reward
         }
@@ -471,6 +488,14 @@ class JudgeInfo5(Page):
             'advisor_upper_bound': self.player.get_correct_answer() + 40,
             'estimator_lower_bound': self.player.get_correct_answer() - 10,
             'estimator_upper_bound': self.player.get_correct_answer() + 10,
+            'correct_answer_minus10': self.player.get_correct_answer() - 10,
+            'correct_answer_minus20': self.player.get_correct_answer() - 20,
+            'correct_answer_minus30': self.player.get_correct_answer() - 30,
+            'correct_answer_minus40': self.player.get_correct_answer() - 40,
+            'correct_answer_plus10': self.player.get_correct_answer() + 10,
+            'correct_answer_plus20': self.player.get_correct_answer() + 20,
+            'correct_answer_plus30': self.player.get_correct_answer() + 30,
+            'correct_answer_plus40': self.player.get_correct_answer() + 40,
         }
 
 
@@ -501,12 +526,21 @@ class JudgeInfo7(Page):
 
     def vars_for_template(self):
         return {
-            'row2_lower': self.player.get_correct_answer() - 10,
-            'row2_upper': self.player.get_correct_answer(),
-            'row3_lower': self.player.get_correct_answer() + 1,
-            'row3_upper': self.player.get_correct_answer() + 10,
-            'row4_lower': self.player.get_correct_answer() + 11,
-            'row4_upper': self.player.get_correct_answer() + 99,
+            # 'row2_lower': self.player.get_correct_answer() - 10,
+            # 'row2_upper': self.player.get_correct_answer(),
+            # 'row3_lower': self.player.get_correct_answer() + 1,
+            # 'row3_upper': self.player.get_correct_answer() + 10,
+            # 'row4_lower': self.player.get_correct_answer() + 11,
+            # 'row4_upper': self.player.get_correct_answer() + 99,
+            'correct_answer_minus10': self.player.get_correct_answer() - 10,
+            'correct_answer_minus20': self.player.get_correct_answer() - 20,
+            'correct_answer_minus30': self.player.get_correct_answer() - 30,
+            'correct_answer_minus40': self.player.get_correct_answer() - 40,
+            'correct_answer_plus10': self.player.get_correct_answer() + 10,
+            'correct_answer_plus20': self.player.get_correct_answer() + 20,
+            'correct_answer_plus30': self.player.get_correct_answer() + 30,
+            'correct_answer_plus40': self.player.get_correct_answer() + 40,
+
             'advisor_reward': self.group.get_player_by_role('advisor').grid_reward,
             'estimator_reward': self.group.get_player_by_role('estimator').grid_reward
         }

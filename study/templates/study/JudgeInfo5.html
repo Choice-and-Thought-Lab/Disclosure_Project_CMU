@@ -36,8 +36,8 @@
 <br/>
 
 <p>
-    Based on the advisor's recommendation, the estimator provided an estimate of <strong>{{ player.get_estimate
-    }}</strong>.
+    Based on the advisor's recommendation, the estimator provided an estimate of
+    <strong>{{ player.get_estimate }}</strong>.
 </p>
 
 
@@ -47,25 +47,25 @@
     As a result, the estimator earned {{ Constants.estimator_bonus_within_0_and_10 }} because their estimate was ten or
     less away from {{ player.get_correct_answer }}.
 </p>
-{% elif (player.get_correct_answer - 20) <= player.get_estimate <= (player.get_correct_answer + 20) %}
+{% elif correct_answer_minus20 <= player.get_estimate <= correct_answer_plus20 %}
 <p>
     As a result, the estimator earned {{ Constants.estimator_bonus_within_11_and_21 }} because their estimate was twenty
     or less away from {{ player.get_correct_answer }}.
 </p>
-{% elif (player.get_correct_answer - 30) <= player.get_estimate <= (player.get_correct_answer + 30) %}
+{% elif correct_answer_minus30 <= player.get_estimate <= correct_answer_plus30 %}
 <p>
     As a result, the estimator earned {{ Constants.estimator_bonus_within_21_and_30 }} because their estimate was thirty
     or less away from {{ player.get_correct_answer }}.
 </p>
-{% elif (player.get_correct_answer - 40) <= player.get_estimate <= (player.get_correct_answer + 40) %}
+{% elif correct_answer_minus40 <= player.get_estimate <= correct_answer_plus40 %}
 <p>
     As a result, the estimator earned {{ Constants.estimator_bonus_within_31_and_40 }} because their estimate was forty
     or less away from {{ player.get_correct_answer }}.
 </p>
 {% else %}
 <p>
-    As a result, the estimator earned no bonus because their estimate was more than forty away from {{
-    player.get_correct_answer }}.
+    As a result, the estimator earned no bonus because their estimate was more than forty away from
+    {{ player.get_correct_answer }}.
 </p>
 {% endif %}
 
@@ -76,22 +76,22 @@
     As a result, the advisor earned no bonus because the estimator's estimate was {{ player.get_correct_answer }} or
     below.
 </p>
-{% elif player.get_correct_answer <= player.get_estimate <= (player.get_correct_answer + 10) %}
+{% elif player.get_correct_answer <= player.get_estimate <= correct_answer_plus10 %}
 <p>
     As a result, the advisor earned {{ Constants.advisor_bonus_within_0_and_10 }} because the estimator's estimate was
     ten or less above {{ player.get_correct_answer }}
 </p>
-{% elif (player.get_correct_answer + 10) < player.get_estimate <= (player.get_correct_answer + 20) %}
+{% elif correct_answer_plus10 < player.get_estimate <= correct_answer_plus20 %}
 <p>
     As a result, the advisor earned {{ Constants.advisor_bonus_within_11_and_21 }} because the estimator's estimate was
     twenty or less above {{ player.get_correct_answer }}
 </p>
-{% elif (player.get_correct_answer + 10) < player.get_estimate <= (player.get_correct_answer + 20) %}
+{% elif correct_answer_plus20 < player.get_estimate <= correct_answer_plus30 %}
 <p>
     As a result, the advisor earned {{ Constants.advisor_bonus_within_21_and_30 }} because the estimator's estimate was
     thirty or less above {{ player.get_correct_answer }}
 </p>
-{% elif (player.get_correct_answer + 10) < player.get_estimate <= (player.get_correct_answer + 20) %}
+{% elif correct_answer_plus30 < player.get_estimate <= correct_answer_plus40 %}
 <p>
     As a result, the advisor earned {{ Constants.advisor_bonus_within_31_and_40 }} because the estimator's estimate was
     forty or less above {{ player.get_correct_answer }}
