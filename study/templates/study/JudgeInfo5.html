@@ -4,64 +4,106 @@
 
 {% block content %}
 
-    <div align="center" style="border: thin solid black">
+<div align="center" style="border: thin solid black">
 
     <h3>
-    Communication Form
+        Communication Form
     </h3>
     <td valign="middle" align="center">
         <img src="/static/{{ group.small_grid_path }}" vspace="20"/>
     </td>
 
     {% if player.disclosure == True %}
-        <p>
-	I should let you know that I am rewarded with a {{ Constants.advisor_bonus }} bonus if your estimate is above the correct number of
-	solid dots. I will receive a {{ Constants.advisor_big_bonus }} bonus if your estimate is 100 or more dots above the correct
-	number.
-	</p>
-	<p>
-	So, it is in my interest that you estimate a high number of dots.
-	<p>
-    {% endif %}
+    <p>
+        I should let you know that I am rewarded with a bonus if your estimate is above the correct number of
+        solid dots. I will receive a {{ Constants.advisor_bonus_greater_than_40 }} bonus if your estimate is more than
+        40 dots above the correct
+        number.
+    </p>
+    <p>
+        So, it is in my interest that you estimate a high number of dots.
+    <p>
+        {% endif %}
 
     <p><strong>
-    I, your advisor, recommend that the number of solid dots on the 30x30 grid is:
+        I, your advisor, recommend that the number of solid dots on the 30x30 grid is:
     </strong></p>
 
     <h3><strong>{{ player.get_recommendation }}</strong></h3>
 
-    </div>
+</div>
 
-    <br/>
+<br/>
 
-    <p>
-    Based on the advisor's recommendation, the estimator provided an estimate of <strong>{{ player.get_estimate }}</strong>.
-    </p>
+<p>
+    Based on the advisor's recommendation, the estimator provided an estimate of <strong>{{ player.get_estimate
+    }}</strong>.
+</p>
 
-    {% if player.get_estimate <= estimator_upper_bound and player.get_estimate >= estimator_lower_bound %}
-    <p>
-    As a result, the estimator earned {{ Constants.estimator_bonus }} because their estimate was ten or less away from {{ player.get_correct_answer }}.
-    </p>
-    {% else %}
-    <p>
-    As a result, the estimator earned no bonus because their estimate was more than ten away from {{ player.get_correct_answer }}.
-    </p>
-    {% endif %}
 
-    {% if player.get_estimate <= player.get_correct_answer %}
-    <p>
-    As a result, the advisor earned no bonus because the estimator's estimate was {{ player.get_correct_answer }} or below.
-    </p>
-    {% elif player.get_estimate >= advisor_upper_bound %}
-    <p>
-    As a result, the advisor earned {{ Constants.advisor_big_bonus }} because the estimator's estimate was {{ advisor_upper_bound }} or above.
-    </p>
-    {% else %}
-    <p>
-    As a result, the advisor earned {{ Constants.advisor_bonus }} because the estimator's estimate was higher than {{ player.get_correct_answer }}, but less than {{ advisor_upper_bound }}.
-    </p>
-    {% endif %}
+<!--Estimator Bonus Extra Bonus Logic-->
+{% if estimator_lower_bound <= player.get_estimate <= estimator_upper_bound %}
+<p>
+    As a result, the estimator earned {{ Constants.estimator_bonus_within_0_and_10 }} because their estimate was ten or
+    less away from {{ player.get_correct_answer }}.
+</p>
+{% elif (player.get_correct_answer - 20) <= player.get_estimate <= (player.get_correct_answer + 20) %}
+<p>
+    As a result, the estimator earned {{ Constants.estimator_bonus_within_11_and_21 }} because their estimate was twenty
+    or less away from {{ player.get_correct_answer }}.
+</p>
+{% elif (player.get_correct_answer - 30) <= player.get_estimate <= (player.get_correct_answer + 30) %}
+<p>
+    As a result, the estimator earned {{ Constants.estimator_bonus_within_21_and_30 }} because their estimate was thirty
+    or less away from {{ player.get_correct_answer }}.
+</p>
+{% elif (player.get_correct_answer - 40) <= player.get_estimate <= (player.get_correct_answer + 40) %}
+<p>
+    As a result, the estimator earned {{ Constants.estimator_bonus_within_31_and_40 }} because their estimate was forty
+    or less away from {{ player.get_correct_answer }}.
+</p>
+{% else %}
+<p>
+    As a result, the estimator earned no bonus because their estimate was more than forty away from {{
+    player.get_correct_answer }}.
+</p>
+{% endif %}
 
-    {% next_button %}
+
+<!--Advisor Extra Bonus Logic-->
+{% if player.get_correct_answer < player.get_estimate %}
+<p>
+    As a result, the advisor earned no bonus because the estimator's estimate was {{ player.get_correct_answer }} or
+    below.
+</p>
+{% elif player.get_correct_answer <= player.get_estimate <= (player.get_correct_answer + 10) %}
+<p>
+    As a result, the advisor earned {{ Constants.advisor_bonus_within_0_and_10 }} because the estimator's estimate was
+    ten or less above {{ player.get_correct_answer }}
+</p>
+{% elif (player.get_correct_answer + 10) < player.get_estimate <= (player.get_correct_answer + 20) %}
+<p>
+    As a result, the advisor earned {{ Constants.advisor_bonus_within_11_and_21 }} because the estimator's estimate was
+    twenty or less above {{ player.get_correct_answer }}
+</p>
+{% elif (player.get_correct_answer + 10) < player.get_estimate <= (player.get_correct_answer + 20) %}
+<p>
+    As a result, the advisor earned {{ Constants.advisor_bonus_within_21_and_30 }} because the estimator's estimate was
+    thirty or less above {{ player.get_correct_answer }}
+</p>
+{% elif (player.get_correct_answer + 10) < player.get_estimate <= (player.get_correct_answer + 20) %}
+<p>
+    As a result, the advisor earned {{ Constants.advisor_bonus_within_31_and_40 }} because the estimator's estimate was
+    forty or less above {{ player.get_correct_answer }}
+</p>
+{% else %}
+<p>
+    As a result, the advisor earned {{ Constants.advisor_bonus_greater_than_40 }} because the estimator's estimate was
+    {{ advisor_upper_bound }} or above.
+</p>
+{% endif %}
+
+
+{% next_button %}
 
 {% endblock %}
