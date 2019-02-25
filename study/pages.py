@@ -13,8 +13,8 @@ class Consent(Page):
     form_fields = ['consent18', 'consentRead', 'consentWant']
 
     def before_next_page(self):
-        # user has 20 minutes to complete as many pages as possible
-        self.participant.vars['expiry'] = time.time() + 1200
+        # user has 60 minutes to complete as many pages as possible
+        self.participant.vars['expiry'] = time.time() + 3600
         self.player.disclosure = random.choice([True, False])
 
     def error_message(self, values):
