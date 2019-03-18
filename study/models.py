@@ -253,6 +253,11 @@ class Player(BasePlayer):
         label="I want to participate in this research and continue with this study",
         widget=widgets.RadioSelect
     )
+    mTurkId = models.StringField(
+        label="My Amazon MTurk ID is ",
+        blank=True,
+        initial=""
+    )
 
     # Demographic questions
     d1 = models.IntegerField(
@@ -507,13 +512,19 @@ class Player(BasePlayer):
             self.grid_reward = Constants.estimator_bonus_greater_than_40  # Nothing
             corresponding_advisor.grid_reward = Constants.advisor_bonus_greater_than_40
 
+        print('estimatorGrid Reward is', self.grid_reward)
+        print('advisorGrid Reward is', corresponding_advisor.grid_reward)
+
     # Assigns rewards to players based on initially calculated grid estimation rewards and appeal results.
     def assign_rewards(self):
         self.payoff = Constants.base_reward + self.grid_reward
+        print('GridREWARD: ', self.payoff)
 
         if self.is_advisor():
             if not (self.group.appealed and self.group.appeal_granted):
                 self.payoff += Constants.appeal_reward_split
+
+            print('advisor final PAYOFF is', self.payoff)
 
         if self.is_estimator():
             self.group.estimator_opposite_appeal_payoff = self.payoff
@@ -532,3 +543,5 @@ class Player(BasePlayer):
             else:
                 self.payoff += Constants.appeal_reward_split
                 self.group.estimator_opposite_appeal_payoff += Constants.appeal_reward_split
+
+            print('estimator final PAYOFF is', self.payoff)

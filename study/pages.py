@@ -10,7 +10,7 @@ import random
 
 class Consent(Page):
     form_model = 'player'
-    form_fields = ['consent18', 'consentRead', 'consentWant']
+    form_fields = ['consent18', 'consentRead', 'consentWant', 'mTurkId']
 
     def before_next_page(self):
         # user has 60 minutes to complete as many pages as possible
@@ -20,6 +20,8 @@ class Consent(Page):
     def error_message(self, values):
         if values["consent18"] != True or values["consentRead"] != True or values["consentWant"] != True:
             return 'Sorry, but you are not eligible for this study.'
+        if values["mTurkId"] == '':
+            return 'Please enter a valid mTurkId.'
 
 
 # "You will play the role of %role%."
