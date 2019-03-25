@@ -233,6 +233,7 @@ class EstComm4(Page):
 class EstComm5(Page):
     # form_model = 'group'(Chaged from group to players)
     form_model = 'player'
+    # form_model = 'group'
     form_fields = ['estimate']
 
     def get_timeout_seconds(self):
@@ -242,7 +243,8 @@ class EstComm5(Page):
         return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
-        self.player.calculate_grid_rewards()  # this function is only executed once: once the estimator advances.
+        # self.player.calculate_grid_rewards()  # this function is only executed once: once the estimator advances.
+        self.group.calculate_grid_rewards()  # this function is only executed once: once the estimator advances.
         if self.timeout_happened:
             self.player.set_model_data()
 
@@ -559,6 +561,10 @@ class Judgment(Page):
         return self.player.is_judge() and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
+        if self.group.appeal_granted:
+            self.group.recalculate_payOffs_with_appeal(True)
+        else:
+            self.group.recalculate_payOffs_with_appeal(False)
         if self.timeout_happened:
             self.player.set_model_data()
 
@@ -615,7 +621,7 @@ class ManipulationChecks(Page):
 
     # Prior to conclusion, calculate total rewards
     def before_next_page(self):
-        self.player.assign_rewards()
+        # self.player.assign_rewards() # Saran - commenting because we need to assign rewards at group level
         if self.timeout_happened:
             self.player.set_model_data()
 

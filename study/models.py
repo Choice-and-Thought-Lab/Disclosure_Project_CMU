@@ -34,7 +34,9 @@ class Constants(BaseConstants):
     name_in_url = 'study'
     players_per_group = 6
     num_rounds = 1
-    base_reward = c(1)  # base reward for completing the survey
+
+    # base reward for completing the survey
+    base_reward = c(0)  # Saran - Recent change: from 1 to 0
     # estimator_bonus = c(2)  # received if estimate within 10 of answer
     # advisor_bonus = c(2)  # received if estimate > answer
     # advisor_big_bonus = c(4)  # received if estimate >= answer + 100
@@ -206,6 +208,33 @@ class Group(BaseGroup):
         elif estimator.estimate > (self.correct_answer + 40):
             estimator.grid_reward = Constants.estimator_bonus_greater_than_40  # Nothing
             advisor.grid_reward = Constants.advisor_bonus_greater_than_40
+
+        advisor.participant.payoff = advisor.grid_reward
+        estimator.participant.payoff = estimator.grid_reward
+        print('Calculate Grid Rewards - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+              estimator.participant.payoff)
+
+    def recalculate_payOffs_with_appeal(self, is_appeal_success):
+        advisor = self.get_player_by_role('advisor')
+        estimator = self.get_player_by_role('estimator')
+        judge = self.get_player_by_role('judge')
+
+        print('In Recalculate. Grid Rewards - before', ' advisor: ', advisor.grid_reward, ' estimator: ',
+              estimator.grid_reward, ' judge: ', judge.grid_reward)
+        print('In Recalculate. Payoffs - before', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+              estimator.participant.payoff, ' judge: ', judge.participant.payoff)
+
+        if is_appeal_success:
+            advisor.participant.payoff = advisor.grid_reward
+            estimator.participant.payoff = estimator.grid_reward + Constants.appeal_reward - Constants.appeal_cost
+        else:
+            advisor.participant.payoff = advisor.grid_reward + Constants.appeal_reward_split
+            estimator.participant.payoff = estimator.grid_reward + Constants.appeal_reward_split - Constants.appeal_cost
+
+        judge.participant.payoff = Constants.appeal_cost
+
+        print('In Recalculate. Payoffs - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+              estimator.participant.payoff, ' judge: ', judge.participant.payoff)
 
     # Chooses a grid. Will choose a random grid-3x3_grid pair based on what is in the directory. Files must be named
     # in this format: gridX_N.svg and small_gridX.svg, where X is a unique number per grid-3x3_grid pair, and N is
