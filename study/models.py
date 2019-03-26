@@ -211,6 +211,8 @@ class Group(BaseGroup):
 
         advisor.participant.payoff = advisor.grid_reward
         estimator.participant.payoff = estimator.grid_reward
+        advisor.payoff = advisor.participant.payoff
+        estimator.payoff = estimator.participant.payoff
         print('Calculate Grid Rewards - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
               estimator.participant.payoff)
 
@@ -233,6 +235,11 @@ class Group(BaseGroup):
 
         judge.participant.payoff = Constants.appeal_cost
 
+
+
+        advisor.payoff = advisor.participant.payoff
+        estimator.payoff = estimator.participant.payoff
+        judge.payoff = judge.participant.payoff
         print('In Recalculate. Payoffs - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
               estimator.participant.payoff, ' judge: ', judge.participant.payoff)
 
