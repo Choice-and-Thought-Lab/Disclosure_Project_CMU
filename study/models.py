@@ -32,7 +32,7 @@ def make_Likert_agreement(label):
 
 class Constants(BaseConstants):
     name_in_url = 'study'
-    players_per_group = 6
+    players_per_group = 90
     num_rounds = 1
 
     # base reward for completing the survey
