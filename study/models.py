@@ -73,15 +73,32 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         print("Creating session.")
-        # randomize players in groups, then assign disclosure/non-disclosure randomly to groups
+        playersList = []
+
+        # get default group assignment
         for group in self.get_groups():
             players = group.get_players()
             for p in players:
-                print(p.role())
-            # random.shuffle(players
-            group.set_players(players)
-            # group.disclosure = random.choice([True, False])
+                playersList.append(p);
+
+        i = 0
+        for group in self.get_groups():
+            playersInGroup = [playersList[i], playersList[i+15],playersList[i+30],
+                     playersList[i+45], playersList[i + 60], playersList[i + 75]]
+            group.set_players(playersInGroup)
             group.choose_grid()
+            i += 1
+
+        # self.set_group_matrix(matrix)
+        print("group matrix:")
+        print(self.get_group_matrix())
+
+        for group in self.get_groups():
+            players = group.get_players()
+            for p in players:
+                print(p.role(), p.id_in_group)
+                playersList.append(p);
+            print("-----------")
 
 
 class Group(BaseGroup):
