@@ -32,7 +32,7 @@ def make_Likert_agreement(label):
 
 class Constants(BaseConstants):
     name_in_url = 'study'
-    players_per_group = 3
+    players_per_group = 6
     num_rounds = 1
 
     # base reward for completing the survey
@@ -394,12 +394,14 @@ class Player(BasePlayer):
     #     self.disclosure = random.choice([True, False])
     # define group IDs such that the "advisor" role corresponds to ID==1, "estimator" to ID==2, "judge/judge"
     # to ID==3. Use player.role() to retrieve this role.
+
+    # 6 Player Group
     def role(self):
-        if self.id_in_group >= 1 and self.id_in_group <= 2:
+        if 1 <= self.id_in_group <= 2:
             return 'advisor'
-        elif self.id_in_group >= 3 and self.id_in_group <= 4:
+        elif 3 <= self.id_in_group <= 4:
             return 'estimator'
-        elif self.id_in_group >= 5 and self.id_in_group <= 6:
+        elif 5 <= self.id_in_group <= 6:
             return 'judge'
 
     def get_correct_answer(self):
@@ -437,17 +439,30 @@ class Player(BasePlayer):
                     self.recommendation = self.group.correct_answer + 29
                     print("recomm nd :{0}".format(self.recommendation))
         elif self.is_estimator():
-            if self.recommendation is None or self.estimate == 0:
+            print("Recommendation from ADVISOR: ", self.recommendation);
+            if self.recommendation is None or self.recommendation == 0 or self.estimate == 0:
                 if self.disclosure:
                     print("Set model estimator diclosure")
+                    self.recommendation = self.group.correct_answer + 92
+                    self.estimate = self.group.correct_answer + 100
+                    # print("esti :{0}".format(self.estimate))
+                else:
+                    print("Set model estimator non diclosure")
+                    self.recommendation = self.group.correct_answer + 29
+                    self.estimate = self.group.correct_answer + 14
+                    # print("esti nd :{0}".format(self.estimate))
+        elif self.is_judge():
+            if self.recommendation is None or self.recommendation == 0 or self.estimate == 0:
+                if self.disclosure:
+                    print("Set model estimator diclosure")
+                    self.recommendation = self.group.correct_answer + 92
                     self.estimate = self.group.correct_answer + 100
                     print("esti :{0}".format(self.estimate))
                 else:
                     print("Set model estimator non diclosure")
+                    self.recommendation = self.group.correct_answer + 29
                     self.estimate = self.group.correct_answer + 14
                     print("esti nd :{0}".format(self.estimate))
-        elif self.is_judge():
-            pass
 
     def is_advisor(self):
         return self.id_in_group in list(range(1, 3))
@@ -466,6 +481,7 @@ class Player(BasePlayer):
             this_player_id = num_players_per_group
         for player in self.get_others_in_group():
             if ((player.id_in_group) == this_player_id):
+                player.set_model_data()
                 print("returning recommendation : {0}".format(player.recommendation))
                 return player.recommendation
 
@@ -494,7 +510,6 @@ class Player(BasePlayer):
         return self.participant.vars['expiry'] - time.time() <= 3
 
     def calculate_grid_rewards(self):
-
         corresponding_advisor = None
         for player in self.get_others_in_group():
             if player.id_in_group == (self.id_in_group - (Constants.players_per_group / 3)):
