@@ -21,7 +21,7 @@ SESSION_CONFIGS = [
     {
         'name': 'study',
         'display_name': 'ICD',
-        'num_demo_participants': 90,
+        'num_demo_participants': 12,
         'app_sequence': ['study'],
     },
 ]

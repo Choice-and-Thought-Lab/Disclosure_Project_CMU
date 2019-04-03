@@ -81,15 +81,20 @@ class Subsession(BaseSubsession):
             for p in players:
                 playersList.append(p);
 
+        # assign players to customized groups
+        groups_count = len(self.get_groups())
         i = 0
         for group in self.get_groups():
-            playersInGroup = [playersList[i], playersList[i+15],playersList[i+30],
-                     playersList[i+45], playersList[i + 60], playersList[i + 75]]
+            playersInGroup = [playersList[i]]
+            j = i;
+            while j + groups_count < len(playersList):
+                playersInGroup.append(playersList[j + groups_count])
+                j += groups_count
             group.set_players(playersInGroup)
             group.choose_grid()
             i += 1
 
-        # self.set_group_matrix(matrix)
+
         print("group matrix:")
         print(self.get_group_matrix())
 
