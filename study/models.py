@@ -94,15 +94,13 @@ class Subsession(BaseSubsession):
             group.choose_grid()
             i += 1
 
-
+        # debug print
         print("group matrix:")
         print(self.get_group_matrix())
-
         for group in self.get_groups():
             players = group.get_players()
             for p in players:
                 print(p.role(), p.id_in_group)
-                playersList.append(p);
             print("-----------")
 
 
