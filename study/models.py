@@ -85,12 +85,12 @@ class Subsession(BaseSubsession):
         groups_count = len(self.get_groups())
         i = 0
         for group in self.get_groups():
-            playersInGroup = [playersList[i]]
+            players_in_group = [playersList[i]]
             j = i;
             while j + groups_count < len(playersList):
-                playersInGroup.append(playersList[j + groups_count])
+                players_in_group.append(playersList[j + groups_count])
                 j += groups_count
-            group.set_players(playersInGroup)
+            group.set_players(players_in_group)
             group.choose_grid()
             i += 1
 
