@@ -456,7 +456,7 @@ class Player(BasePlayer):
                     print("recomm :{0}".format(self.recommendation))
                 else:
                     print("Set model advisor non diclosure")
-                    self.recommendation = self.group.correct_answer + 29
+                    self.recommendation = self.group.correct_answer + 28
                     print("recomm nd :{0}".format(self.recommendation))
         elif self.is_estimator():
             print("Recommendation from ADVISOR: ", self.recommendation);
@@ -464,11 +464,11 @@ class Player(BasePlayer):
                 if self.disclosure:
                     print("Set model estimator diclosure")
                     self.recommendation = self.group.correct_answer + 92
-                    self.estimate = self.group.correct_answer + 100
+                    self.estimate = self.group.correct_answer + 46
                     # print("esti :{0}".format(self.estimate))
                 else:
                     print("Set model estimator non diclosure")
-                    self.recommendation = self.group.correct_answer + 29
+                    self.recommendation = self.group.correct_answer + 28
                     self.estimate = self.group.correct_answer + 14
                     # print("esti nd :{0}".format(self.estimate))
         elif self.is_judge():
@@ -476,11 +476,11 @@ class Player(BasePlayer):
                 if self.disclosure:
                     print("Set model estimator diclosure")
                     self.recommendation = self.group.correct_answer + 92
-                    self.estimate = self.group.correct_answer + 100
+                    self.estimate = self.group.correct_answer + 46
                     print("esti :{0}".format(self.estimate))
                 else:
                     print("Set model estimator non diclosure")
-                    self.recommendation = self.group.correct_answer + 29
+                    self.recommendation = self.group.correct_answer + 28
                     self.estimate = self.group.correct_answer + 14
                     print("esti nd :{0}".format(self.estimate))
 
