@@ -279,9 +279,14 @@ class Group(BaseGroup):
         self.correct_answer = int(re.search(r"grid[0-9]*_([0-9]*)\.svg", self.grid_path).group(1))
         self.small_grid_path = 'study/small_grid' + str(self.grid_number) + '.svg'
 
+        # print("-------------------------------------- GridNum: ", self.grid_number," Correct Ans: ",
+        #       self.correct_answer, " GridPath: ", self.grid_path," SmallGridPath: ",self.small_grid_path)
+
         self.example_grid_path = 'study/' + grid_choices.pop()
-        self.example_grid_number = int(re.search(r"grid([0-9]*)_[0-9]*\.svg", self.grid_path).group(1))
+        self.example_grid_number = int(re.search(r"grid([0-9]*)_[0-9]*\.svg", self.example_grid_path).group(1))
         self.example_small_grid_path = 'study/small_grid' + str(self.example_grid_number) + '.svg'
+        print("Example------------------------ GridNum: ", self.example_grid_number,
+              " GridPath: ", self.example_grid_path, " SmallGridPath: ", self.example_small_grid_path)
 
 
 class Player(BasePlayer):
