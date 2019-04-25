@@ -8,12 +8,21 @@
 {% block content %}
 
     {% if player.role == 'advisor' %}
-        <p>Thank you for participating in this study. You will play the role of <strong>advisor</strong>. You have been paired with an "estimator."</p>
+        <p>Thank you for participating in this study. You will play the role of <strong>ADVISER</strong>. You have been paired with an "estimator."</p>
     {% elif player.role == 'estimator' %}
-        <p>Thank you for participating in this study. You will play the role of <strong>estimator</strong>. You have been paired with an "advisor."</p>
+        <p>Thank you for participating in this study. You will play the role of <strong>ESTIMATOR</strong>. You have been paired with an "advisor."</p>
     {% elif player.role == 'judge' %}
-        <p>Thank you for participating in this study. You will play the role of <strong>judge</strong>. You have been paired with an "advisor" and an "estimator."</p>
+        <p>Thank you for participating in this study. You will play the role of <strong>JUDGE</strong>. You have been paired with an "advisor" and an "estimator."</p>
     {% endif %}
+
+
+    <br />
+    <br />
+    
+    <!-- MTurk Id -->
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
 
     {% next_button %}
 

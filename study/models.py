@@ -343,7 +343,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
     mTurkId = models.StringField(
-        label="My Amazon MTurk ID is ",
+        label="Please enter your Amazon MTurk ID to continue:",
         initial=""
     )
 

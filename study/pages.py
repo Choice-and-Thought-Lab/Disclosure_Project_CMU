@@ -26,13 +26,23 @@ class Consent(Page):
 
 # "You will play the role of %role%."
 class Intro1(Page):
+    form_model = 'player'
+    form_fields = ['mTurkId']
+
+    def error_message(self, values):
+        if len(values["mTurkId"]) < 5:
+            return 'Please enter a valid mTurkId.'
+
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
+        self.participant.vars['expiry'] = time.time() + 3600
         return self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
+        # user has 60 minutes to complete as many pages as possible
+        self.participant.vars['expiry'] = time.time() + 3600
         if self.timeout_happened:
             self.player.set_model_data()
 
@@ -703,7 +713,7 @@ class Finish(Page):
 
 
 page_sequence = [
-    Consent,
+    # Consent,
     Intro1,
     Intro2,
     AdvComm1,
