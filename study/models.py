@@ -113,29 +113,29 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    def shuffle_choices(choices):
-        print("In shuffle_choice method")
-        random.shuffle(choices)
-        return choices
+    # def shuffle_choices(choices):
+    #     print("In shuffle_choice method")
+    #     random.shuffle(choices)
+    #     return choices
 
     disclosure = models.BooleanField(initial=True)
     appealed = models.BooleanField(
         label="Would you like to send the case to the judge?",
-        choices=shuffle_choices([
+        choices=[
             [True, "Yes"],
             [False, "No"]
-        ]),
+        ],
         widget=widgets.RadioSelect
     )  # did estimator appeal?
     appeal_granted = models.BooleanField(
         label="As judge, I determine that the " +
         str(Constants.appeal_reward) + " bonus shall be awarded as follows:",
-        choices=shuffle_choices([
-            [False, "The estimator and advisor shall both receive " +
-                str(Constants.appeal_reward_split) + "."],
+        choices=[
             [True, "The estimator shall receive " + str(Constants.appeal_reward) +
              " and the advisor shall receive nothing."],
-        ]),
+            [False, "The estimator and advisor shall both receive " +
+                str(Constants.appeal_reward_split) + "."]
+        ],
         widget=widgets.RadioSelect
     )
     recommendation = models.IntegerField(
@@ -344,7 +344,6 @@ class Player(BasePlayer):
     )
     mTurkId = models.StringField(
         label="My Amazon MTurk ID is ",
-        blank=True,
         initial=""
     )
 
