@@ -1,4 +1,6 @@
-import os, random, re
+import os
+import random
+import re
 import time
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from otree.api import (
@@ -66,7 +68,8 @@ class Constants(BaseConstants):
     advisor_bonus_greater_than_40 = c(5)
 
     appeal_reward = c(2)  # given to estimator on appeal win
-    appeal_reward_split = appeal_reward / 2  # given to both estimator and advisor if appeal lost or no appeal
+    # given to both estimator and advisor if appeal lost or no appeal
+    appeal_reward_split = appeal_reward / 2
     appeal_cost = c(0.25)  # cost of appeal to estimator
 
 
@@ -79,14 +82,14 @@ class Subsession(BaseSubsession):
         for group in self.get_groups():
             players = group.get_players()
             for p in players:
-                playersList.append(p);
+                playersList.append(p)
 
         # assign players to customized groups
         groups_count = len(self.get_groups())
         i = 0
         for group in self.get_groups():
             players_in_group = [playersList[i]]
-            j = i;
+            j = i
             while j + groups_count < len(playersList):
                 players_in_group.append(playersList[j + groups_count])
                 j += groups_count
@@ -94,12 +97,16 @@ class Subsession(BaseSubsession):
             group.choose_grid()
             i += 1
 
-        # debug print
+        # Disclosure Non-Disclosure Condition assignment - debug print
         print("group matrix:")
         print(self.get_group_matrix())
         for group in self.get_groups():
             players = group.get_players()
             for p in players:
+                if p.id_in_group % 2 == 1:
+                    p.disclosure = True
+                else:
+                    p.disclosure = False
                 print(p.role(), p.id_in_group)
             print("-----------")
 
@@ -121,9 +128,11 @@ class Group(BaseGroup):
         widget=widgets.RadioSelect
     )  # did estimator appeal?
     appeal_granted = models.BooleanField(
-        label="As judge, I determine that the " + str(Constants.appeal_reward) + " bonus shall be awarded as follows:",
+        label="As judge, I determine that the " +
+        str(Constants.appeal_reward) + " bonus shall be awarded as follows:",
         choices=shuffle_choices([
-            [False, "The estimator and advisor shall both receive " + str(Constants.appeal_reward_split) + "."],
+            [False, "The estimator and advisor shall both receive " +
+                str(Constants.appeal_reward_split) + "."],
             [True, "The estimator shall receive " + str(Constants.appeal_reward) +
              " and the advisor shall receive nothing."],
         ]),
@@ -150,19 +159,27 @@ class Group(BaseGroup):
     # Likert scale questions
     e1 = make_Likert_agreement("I blame myself for my guess.")
     e2 = make_Likert_agreement("I blame my advisor for my guess.")
-    e3 = make_Likert_agreement("I have a legitimate grievance against my advisor.")
-    e4 = make_Likert_agreement("I have a strong case if I chose to pursue an appeal.")
-    e5 = make_Likert_agreement("I believe that others would rule in my favor on an appeal.")
+    e3 = make_Likert_agreement(
+        "I have a legitimate grievance against my advisor.")
+    e4 = make_Likert_agreement(
+        "I have a strong case if I chose to pursue an appeal.")
+    e5 = make_Likert_agreement(
+        "I believe that others would rule in my favor on an appeal.")
     e6 = make_Likert_agreement("My advisor treated me fairly.")
     e7 = make_Likert_agreement("I was mistreated by my advisor.")
-    e8 = make_Likert_agreement("I deserve to receive the full bonus of " + str(Constants.appeal_reward) + ".")
+    e8 = make_Likert_agreement(
+        "I deserve to receive the full bonus of " + str(Constants.appeal_reward) + ".")
     e9 = make_Likert_agreement("My advisor does not deserve to receive " + str(Constants.appeal_reward_split) +
                                " of the bonus.")
     j1 = make_Likert_agreement("I blame the estimator for his/her estimate.")
-    j2 = make_Likert_agreement("I blame the advisor for the estimator's estimate.")
-    j3 = make_Likert_agreement("The estimator has a legitimate grievance against the advisor.")
-    j4 = make_Likert_agreement("The estimator has a strong case if he/she chooses to pursue an appeal.")
-    j5 = make_Likert_agreement("I believe that others would rule in the estimator's favor on an appeal.")
+    j2 = make_Likert_agreement(
+        "I blame the advisor for the estimator's estimate.")
+    j3 = make_Likert_agreement(
+        "The estimator has a legitimate grievance against the advisor.")
+    j4 = make_Likert_agreement(
+        "The estimator has a strong case if he/she chooses to pursue an appeal.")
+    j5 = make_Likert_agreement(
+        "I believe that others would rule in the estimator's favor on an appeal.")
     j6 = make_Likert_agreement("The advisor treated the estimator fairly.")
     j7 = make_Likert_agreement("The estimator was mistreated by the advisor.")
     j8 = make_Likert_agreement(
@@ -170,12 +187,17 @@ class Group(BaseGroup):
     j9 = make_Likert_agreement("The advisor does not deserve to receive " + str(Constants.appeal_reward_split) +
                                " of the bonus.")
     a1 = make_Likert_agreement("I blame the estimator for his/her estimate.")
-    a2 = make_Likert_agreement("I blame myself, the advisor, for the estimator's estimate.")
-    a3 = make_Likert_agreement("The estimator has a legitimate grievance against me, the advisor.")
-    a4 = make_Likert_agreement("The estimator has a strong case if he/she chooses to pursue an appeal.")
-    a5 = make_Likert_agreement("I believe that others would rule in the estimator's favor on an appeal.")
+    a2 = make_Likert_agreement(
+        "I blame myself, the advisor, for the estimator's estimate.")
+    a3 = make_Likert_agreement(
+        "The estimator has a legitimate grievance against me, the advisor.")
+    a4 = make_Likert_agreement(
+        "The estimator has a strong case if he/she chooses to pursue an appeal.")
+    a5 = make_Likert_agreement(
+        "I believe that others would rule in the estimator's favor on an appeal.")
     a6 = make_Likert_agreement("I, the advisor treated the estimator fairly.")
-    a7 = make_Likert_agreement("The estimator was mistreated by me, the advisor.")
+    a7 = make_Likert_agreement(
+        "The estimator was mistreated by me, the advisor.")
     a8 = make_Likert_agreement(
         "The estimator deserves to receive the full bonus of " + str(Constants.appeal_reward) + ".")
     a9 = make_Likert_agreement("I, the advisor, do not deserve to receive " + str(Constants.appeal_reward_split) +
@@ -248,14 +270,14 @@ class Group(BaseGroup):
 
         if is_appeal_success:
             advisor.participant.payoff = advisor.grid_reward
-            estimator.participant.payoff = estimator.grid_reward + Constants.appeal_reward - Constants.appeal_cost
+            estimator.participant.payoff = estimator.grid_reward + \
+                Constants.appeal_reward - Constants.appeal_cost
         else:
             advisor.participant.payoff = advisor.grid_reward + Constants.appeal_reward_split
-            estimator.participant.payoff = estimator.grid_reward + Constants.appeal_reward_split - Constants.appeal_cost
+            estimator.participant.payoff = estimator.grid_reward + \
+                Constants.appeal_reward_split - Constants.appeal_cost
 
         judge.participant.payoff = Constants.appeal_cost
-
-
 
         advisor.payoff = advisor.participant.payoff
         estimator.payoff = estimator.participant.payoff
@@ -270,21 +292,27 @@ class Group(BaseGroup):
     def choose_grid(self):
         static_dir = './study/static/study'
         static_files = os.listdir(static_dir)
-        grid_choices = list(filter(lambda x: re.match(r"grid[0-9]*_[0-9]*\.svg", x), static_files))
+        grid_choices = list(filter(lambda x: re.match(
+            r"grid[0-9]*_[0-9]*\.svg", x), static_files))
 
         random.shuffle(grid_choices)
 
         self.grid_path = 'study/' + grid_choices.pop()
-        self.grid_number = int(re.search(r"grid([0-9]*)_[0-9]*\.svg", self.grid_path).group(1))
-        self.correct_answer = int(re.search(r"grid[0-9]*_([0-9]*)\.svg", self.grid_path).group(1))
-        self.small_grid_path = 'study/small_grid' + str(self.grid_number) + '.svg'
+        self.grid_number = int(
+            re.search(r"grid([0-9]*)_[0-9]*\.svg", self.grid_path).group(1))
+        self.correct_answer = int(
+            re.search(r"grid[0-9]*_([0-9]*)\.svg", self.grid_path).group(1))
+        self.small_grid_path = 'study/small_grid' + \
+            str(self.grid_number) + '.svg'
 
         # print("-------------------------------------- GridNum: ", self.grid_number," Correct Ans: ",
         #       self.correct_answer, " GridPath: ", self.grid_path," SmallGridPath: ",self.small_grid_path)
 
         self.example_grid_path = 'study/' + grid_choices.pop()
-        self.example_grid_number = int(re.search(r"grid([0-9]*)_[0-9]*\.svg", self.example_grid_path).group(1))
-        self.example_small_grid_path = 'study/small_grid' + str(self.example_grid_number) + '.svg'
+        self.example_grid_number = int(
+            re.search(r"grid([0-9]*)_[0-9]*\.svg", self.example_grid_path).group(1))
+        self.example_small_grid_path = 'study/small_grid' + \
+            str(self.example_grid_number) + '.svg'
         print("Example------------------------ GridNum: ", self.example_grid_number,
               " GridPath: ", self.example_grid_path, " SmallGridPath: ", self.example_small_grid_path)
 
@@ -412,7 +440,8 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
-    comment = models.LongStringField(label="Do you have any comments for the researchers? (Optional)", blank=True)
+    comment = models.LongStringField(
+        label="Do you have any comments for the researchers? (Optional)", blank=True)
 
     # def __init__(self):
     #     super().__init__(self)
@@ -464,7 +493,7 @@ class Player(BasePlayer):
                     self.recommendation = self.group.correct_answer + 28
                     print("recomm nd :{0}".format(self.recommendation))
         elif self.is_estimator():
-            print("Recommendation from ADVISOR: ", self.recommendation);
+            print("Recommendation from ADVISOR: ", self.recommendation)
             if self.recommendation is None or self.recommendation == 0 or self.estimate == 0:
                 if self.disclosure:
                     print("Set model estimator diclosure")
@@ -507,7 +536,8 @@ class Player(BasePlayer):
         for player in self.get_others_in_group():
             if ((player.id_in_group) == this_player_id):
                 player.set_model_data()
-                print("returning recommendation : {0}".format(player.recommendation))
+                print("returning recommendation : {0}".format(
+                    player.recommendation))
                 return player.recommendation
 
     def get_estimate(self):

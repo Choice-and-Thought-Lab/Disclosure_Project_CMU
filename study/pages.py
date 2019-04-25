@@ -15,7 +15,7 @@ class Consent(Page):
     def before_next_page(self):
         # user has 60 minutes to complete as many pages as possible
         self.participant.vars['expiry'] = time.time() + 3600
-        self.player.disclosure = random.choice([True, False])
+        # self.player.disclosure = random.choice([True, False])
 
     def error_message(self, values):
         if values["consent18"] != True or values["consentRead"] != True or values["consentWant"] != True:
@@ -138,7 +138,8 @@ class AdvComm6(Page):
 
 
 class AdvComm7(Page):
-    form_model = 'player'  # this to keep the value entered by each advisor only to that player
+    # this to keep the value entered by each advisor only to that player
+    form_model = 'player'
     form_fields = ['recommendation']
 
     def get_timeout_seconds(self):
@@ -244,7 +245,8 @@ class EstComm5(Page):
 
     def before_next_page(self):
         # self.player.calculate_grid_rewards()  # this function is only executed once: once the estimator advances.
-        self.group.calculate_grid_rewards()  # this function is only executed once: once the estimator advances.
+        # this function is only executed once: once the estimator advances.
+        self.group.calculate_grid_rewards()
         if self.timeout_happened:
             self.player.set_model_data()
 
@@ -690,10 +692,12 @@ class Finish(Page):
     form_fields = ['email', 'entered_email']
 
     def error_message(self, values):
-        email_pattern = re.compile(r"(^$|(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$))")
+        email_pattern = re.compile(
+            r"(^$|(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$))")
         if (
                 (values['entered_email'] is True and values['email'] is None) or
-                (values['entered_email'] is True and not email_pattern.match(values['email']))
+                (values['entered_email']
+                 is True and not email_pattern.match(values['email']))
         ):
             return "Invalid email address"
 
