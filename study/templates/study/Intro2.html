@@ -1,52 +1,136 @@
-{% extends "global/Page.html" %} {% load otree static %} {% load static %} {%
-block title %} Introduction {% endblock %} {% block content %} 
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block title %}
+Introduction
+{% endblock %}
+
+{% block content %}
 
 {% if player.role == 'advisor' %}
 <p>
-  In this study, the estimator will attempt to estimate the number of solid
-  (filled) dots in a 30x30 grid, like the one that you can see below. The
-  estimator will only be able to see a small 3x3 subset of the grid highlighted
-  in yellow below.
+  In this study, you will give the estimator advice on the number of
+  solid(filled) dots in a 30x30 grid.
 </p>
+<p>The number of solid dots can vary from 0-900. Below is an example.</p>
+
 {% elif player.role == 'estimator' %}
 <p>
-  In this study, your advisor will give you advice on the number of solid
-  (filled) dots in a 30x30 grid, like the one that you can see below. You will
-  only be able to see a small 3x3 subset of the grid, highlighted in yellow
-  below.
+  In this study, your adviser will give you advice on the number of
+  solid(filled) dots in a 30x30 grid.
 </p>
+<p>The number of solid dots can vary from 0-900. Below is an example.</p>
 
 {% elif player.role == 'judge' %}
+
 <p>
-  In this study, the advisor was tasked with giving advice on the number of
-  solid (filled) dots in a 30x30 grid. The advisor had access to the full grid,
-  whereas the estimator had access only to a small subset of the grid, 3x3 dots,
-  highlighted in yellow below.
+  Remember, you are playing the role of a neutral judge in this interaction. First, we will introduce to you the
+  dots-estimation task involving advisers and estimators. Then, we will provide you with information about an
+  interaction between a particular adviser and estimator. Lastly, we will ask
+  you to make a judgment about how to allocate bonuses based on the interaction
+  between the adviser and estimator.
 </p>
 <p>
-  Remember, you are playing the role of a neutral judge in this interaction.
-  Later, we will ask for your thoughts on the interaction between the advisor
-  and estimator.
+  In this study, advisers were tasked with giving estimators advice on the
+  number of solid (filled) dots in a 30x30 grid, as shown below. The number of
+  solid dots could vary from 0 – 900.
+</p>
+<p>
+  Below is an example of a 30x30 grid that advisers would see.
 </p>
 
 {% endif %}
 
+<!-- Sample Grid -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col text-center">
+      <img src="/static/{{ group.example_grid_path }}" />
+    </div>
+  </div>
+</div>
+
+
+{% comment %} <td valign="middle" align="center">
+  <img src="/static/{{ group.example_grid_path }}" width="50%" vspace="20" />
+</td> {% endcomment %}
+
+
+{% if player.role == 'advisor' %}
 <p>
-  Below is an EXAMPLE of the 30x30 grid that {% if player.role == 'advisor' %}
-  you, the advisor, will see. {% else %} the advisor will see. {% endif %}
+  The estimator will attempt to estimate the numer of dots in that grid.
+  However, the estimator will only be able to see a small 3x3 subset of the grid
+  highlighted in <span style="background-color: #FFFF00">yellow</span> below
+  along with your advice. Below is an example.</p>
+
+{% elif player.role == 'estimator' %}
+<p>
+  You will attempt to estimate the numer of dots in that grid. However, you will
+  only be able to see a small 3x3 subset of the grid highlighted in
+  <span style="background-color: #FFFF00">yellow</span> below along with your
+  advice. Below is an example.</p>
+
+{% elif player.role == 'judge' %}
+<p>Estimators attempted to estimate the number dots in this grid. However, estimators were only able to see a small 3x3
+  subset of the grid highlighted in yellow below along with their advisers’ advice.
+</p>
+<p>
+  Below is an example of a 3x3 grid that estimators would see
 </p>
 
-<td valign="middle" align="center">
-  <img src="/static/{{ group.example_grid_path }}" width="100%" vspace="20" />
-</td>
+{% endif %}
+
+{% comment %} Sample Small Grid {% endcomment %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col text-center pb-4">
+      <img src="/static/{{ group.example_small_grid_path }}" />
+    </div>
+  </div>
+</div>
+
+<hr />
+
+{% if player.role == 'judge' %}
+<h4>
+  The dots estimation task had the following compensation scheme</h4>
 
 <p>
-  Below is an EXAMPLE of the 3x3 grid that {% if player.role == 'estimator' %}
-  you, the estimator, will see. {% else %} the estimator will see. {% endif %}
+  Estimators would get bigger bonuses the more accurate their estimates were.
 </p>
 
-<td valign="middle" align="center">
-  <img src="/static/{{ group.example_small_grid_path }}" vspace="20" />
-</td>
+<p>
+  <strong>Unbeknownst to estimators</strong>, advisers would get bigger bonuses the more that estimators overestimated
+  the number of
+  solid dots.
+</p>
+
+<p>For example, suppose the correct number of solid dots were <strong>450</strong>, the compensation scheme would be as
+  follows..</p>
+
+{% include "./PaymentsTable.html" with estimate=450 role=player.role %}
+
+<hr />
+
+<p>Advisers gave advice using an online communication form, like the one shown below.</p>
+
+<p>Advisers’ payment scheme <strong>was
+    {% if player.disclosure == "FALSE" %}
+    NOT
+    {% endif %}
+    disclosed</strong> to estimators on the online communication form. That is, estimators <strong>would
+    {% if player.disclosure == "FALSE" %}
+    NOT
+    {% endif %}
+    know</strong> when making their estimates that advisers would be paid a bonus if estimators overestimated the
+  correct number of dots.
+</p>
+
+Sample communication form goes here
+
+
+{% endif %}
+
 
 {% next_button %} {% endblock %}

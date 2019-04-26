@@ -1,0 +1,106 @@
+<!--New Payoffs - Both Advisor and Estimator-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center">
+
+            <table class="table table-light table-striped table-sm table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        {% if role == 'advisor' or role == 'judge' %}
+                        <th scope="col">If the estimator guesses...</th>
+                        <th scope="col">the estimator will be paid a bonus of...</th>
+                        <th scope="col">you, the advisor, will be paid a bonus of...</th>
+                        {% elif role == 'estimator' %}
+                        <th scope="col">If you, the estimator guessed...</th>
+                        <th scope="col">you would be paid a bonus of...</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <!--(Less than -40)-->
+                        <th scope="row">Less than {{ estimate | add:"-40" }} (Less than -40)</th>
+                        <td>Nothing</td>
+                        <td>Nothing</td>
+                    </tr>
+                    <tr>
+                        <!--(Within -40 and -31)-->
+                        <th scope="row">{{ estimate | add:"-40" }}-{{ estimate | add:"-31" }} (Within -40 and -31)</th>
+                        <td style="background-color: #B1D677;">
+                            <b>{{ Constants.estimator_bonus_within_neg_40_and_31 }}</b></td>
+                        <td>Nothing</td>
+                    </tr>
+
+                    <tr>
+                        <!--(Within -30 and -21)-->
+                        <th scope="row">{{ estimate | add:"-30" }}-{{ estimate | add:"-21" }} (Within -30 and -21)</th>
+                        <td style="background-color: #93C94D;">
+                            <b>{{ Constants.estimator_bonus_within_neg_30_and_21 }}</b></td>
+                        <td>Nothing</td>
+                    </tr>
+
+                    <tr>
+                        <!--(Within -20 and -11)-->
+                        <th scope="row">{{ estimate | add:"-20" }}-{{ estimate | add:"-11" }} (Within -20 and -11)</th>
+                        <td style="background-color: #7CB72B;">
+                            <b>{{ Constants.estimator_bonus_within_neg_20_and_11 }}</b></td>
+                        <td>Nothing</td>
+                    </tr>
+
+                    <tr>
+                        <!--(Within -10 and -1)-->
+                        <th scope="row">{{ estimate | add:"-10" }}-{{ estimate | add:"-1" }} (Within -10 and -1)</th>
+                        <td style="background-color: #6AA629;">
+                            <b>{{ Constants.estimator_bonus_within_neg_10_and_1 }}</b></td>
+                        <td>Nothing</td>
+                    </tr>
+
+                    <tr>
+                        <!--(Within 0 and +10)-->
+                        <th scope="row">{{ estimate }}-{{ estimate | add:"10" }} (Within 0 and +10)</th>
+                        <td style="background-color: #6AA629;">
+                            <b>{{ Constants.estimator_bonus_within_0_and_10 }}</b></td>
+                        <td style="background-color: #CBE4A4;">
+                            <b>{{ Constants.advisor_bonus_within_0_and_10 }}</b></td>
+                    </tr>
+
+                    <tr>
+                        <!--(Within +11 and +20)-->
+                        <th scope="row">{{ estimate | add:"11" }}-{{ estimate | add:"20" }} (Within +11 and +20)</th>
+                        <td style="background-color: #7CB72B;">
+                            <b>{{ Constants.estimator_bonus_within_11_and_21 }}</b></td>
+                        <td style="background-color: #B1D677;">
+                            <b>{{ Constants.advisor_bonus_within_11_and_21 }}</b></td>
+                    </tr>
+
+                    <tr>
+                        <!--(Within +21 and +30)-->
+                        <th scope="row">{{ estimate | add:"21" }}-{{ estimate | add:"30" }} (Within +21 and +30)</th>
+                        <td style="background-color: #93C94D;">
+                            <b>{{ Constants.estimator_bonus_within_21_and_30 }}</b></td>
+                        <td style="background-color: #93C94D;">
+                            <b>{{ Constants.advisor_bonus_within_21_and_30 }}</b></td>
+                    </tr>
+
+                    <tr>
+                        <!--(Within +31 and +40)-->
+                        <th scope="row">{{ estimate | add:"31" }}-{{ estimate | add:"40" }} (Within +31 and +40)</th>
+                        <td style="background-color: #B1D677;">
+                            <b>{{ Constants.estimator_bonus_within_31_and_40 }}</b></td>
+                        <td style="background-color: #7CB72B;">
+                            <b>{{ Constants.advisor_bonus_within_31_and_40 }}</b></td>
+                    </tr>
+
+                    <tr>
+                        <!--(Greater than +40)-->
+                        <th scope="row">Greater than {{ estimate | add:"40" }} (Greater than +40)</th>
+                        <td>Nothing</td>
+                        <td style="background-color: #6AA629;">
+                            <b>{{ Constants.advisor_bonus_greater_than_40 }}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
