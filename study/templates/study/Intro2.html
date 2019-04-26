@@ -61,14 +61,14 @@ Introduction
 <p>
   The estimator will attempt to estimate the numer of dots in that grid.
   However, the estimator will only be able to see a small 3x3 subset of the grid
-  highlighted in <span style="background-color: #FFFF00">yellow</span> below
+  highlighted in <span style="background-color: yellow">yellow</span> below
   along with your advice. Below is an example.</p>
 
 {% elif player.role == 'estimator' %}
 <p>
   You will attempt to estimate the numer of dots in that grid. However, you will
   only be able to see a small 3x3 subset of the grid highlighted in
-  <span style="background-color: #FFFF00">yellow</span> below along with your
+  <span style="background-color: yellow">yellow</span> below along with your
   advice. Below is an example.</p>
 
 {% elif player.role == 'judge' %}
@@ -102,8 +102,7 @@ Introduction
 
 <p>
   <strong>Unbeknownst to estimators</strong>, advisers would get bigger bonuses the more that estimators overestimated
-  the number of
-  solid dots.
+  the number of solid dots.
 </p>
 
 <p>For example, suppose the correct number of solid dots were <strong>450</strong>, the compensation scheme would be as
@@ -111,26 +110,43 @@ Introduction
 
 {% include "./PaymentsTable.html" with estimate=450 role=player.role %}
 
+<p>
+  As you can see, the advisor could earn a bonus if the estimator overstimated the number of solid dots. The advisor
+  could earn an even bigger bonus if the estimator overstimated by 40 solid dots or more.
+</p>
+
 <hr />
 
 <p>Advisers gave advice using an online communication form, like the one shown below.</p>
 
 <p>Advisers’ payment scheme <strong>was
-    {% if player.disclosure == "FALSE" %}
+    {% if player.disclosure == False %}
     NOT
     {% endif %}
     disclosed</strong> to estimators on the online communication form. That is, estimators <strong>would
-    {% if player.disclosure == "FALSE" %}
+    {% if player.disclosure == False %}
     NOT
     {% endif %}
     know</strong> when making their estimates that advisers would be paid a bonus if estimators overestimated the
   correct number of dots.
 </p>
 
-Sample communication form goes here
-
+<p>An example of a communication form from an advisor to an estimator: </p>
+{% comment %} Sample communication form goes here {% endcomment %}
+<div align="center" style="border: thin solid black">
+  {% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col text-center mb-3">
+        {% comment %} <h1><strong>542</strong></h1> {% endcomment %}
+        <h1><strong>---</strong></h1>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endif %}
 
+<hr />
 
 {% next_button %} {% endblock %}

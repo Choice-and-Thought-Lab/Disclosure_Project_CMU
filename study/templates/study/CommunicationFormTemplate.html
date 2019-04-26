@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center">
+            <h3>
+                Communication Form
+            </h3>
+
+            {% comment %} Small Grid {% endcomment %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col text-center pb-4">
+                        {% if type == "example" %}
+                        <img src="/static/{{ group.example_small_grid_path }}" />
+                        {% else %}
+                        <img src="/static/{{ group.small_grid_path }}" />
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            </br>
+
+            {% if player.disclosure == True %}
+            <p>
+                I should let you know that I am rewarded with a bonus if your estimate is above the correct number of
+                solid dots. I will receive a {{ Constants.advisor_bonus_greater_than_40 }} bonus if your estimate is
+                more than
+                40 dots above the correct
+                number.
+            </p>
+            <p>
+                So, it is in my interest that you estimate a high number of dots.
+            </p>
+            {% endif %}
+
+
+            <p><strong>
+                    I, your advisor, recommend that the number of solid dots on the 30x30 grid is:
+                </strong></p>
+
+            {% comment %} {% formfield player.recommendation %} {% endcomment %}
+
+        </div>
+    </div>
+</div>

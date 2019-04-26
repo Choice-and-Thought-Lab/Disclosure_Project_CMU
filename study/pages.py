@@ -37,12 +37,10 @@ class Intro1(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        self.participant.vars['expiry'] = time.time() + 3600
+        self.participant.vars['expiry'] = time.time() + 100000
         return self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
-        # user has 60 minutes to complete as many pages as possible
-        self.participant.vars['expiry'] = time.time() + 3600
         if self.timeout_happened:
             self.player.set_model_data()
 
@@ -147,7 +145,8 @@ class AdvComm6(Page):
             self.player.set_model_data()
 
 
-class AdvComm7(Page):
+# class AdvComm7(Page):
+class CommunicationFormAdvEst(Page):
     # this to keep the value entered by each advisor only to that player
     form_model = 'player'
     form_fields = ['recommendation']
@@ -723,7 +722,7 @@ page_sequence = [
     AdvBegin,
     AdvComm5,
     AdvComm6,
-    AdvComm7,
+    # AdvComm7,
     # WaitForRecommendation,
     EstComm1,
     EstComm2,

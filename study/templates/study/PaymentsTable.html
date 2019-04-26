@@ -6,10 +6,14 @@
             <table class="table table-light table-striped table-sm table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        {% if role == 'advisor' or role == 'judge' %}
+                        {% if role == 'advisor' %}
                         <th scope="col">If the estimator guesses...</th>
                         <th scope="col">the estimator will be paid a bonus of...</th>
                         <th scope="col">you, the advisor, will be paid a bonus of...</th>
+                        {% elif role == 'judge' %}
+                        <th scope="col">If the estimator guesses...</th>
+                        <th scope="col">the estimator will be paid a bonus of...</th>
+                        <th scope="col">the advisor, will be paid a bonus of...</th>
                         {% elif role == 'estimator' %}
                         <th scope="col">If you, the estimator guessed...</th>
                         <th scope="col">you would be paid a bonus of...</th>
