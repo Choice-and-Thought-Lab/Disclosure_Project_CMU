@@ -1,0 +1,61 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block content %}
+
+<h3>Communication Form</h3>
+
+
+{% if player.role == 'advisor' %}
+<p>You will give the estimator advice using an online communication form like the one shown below</p>
+
+{% elif player.role == 'estimator' %}
+<p>The adviser will give you, the estimator advice using an online communication form like the one shown below</p>
+
+{% endif %}
+
+<p>An example of a communication form from an advisor to an estimator: </p>
+{% comment %} Sample communication form goes here {% endcomment %}
+<div align="center" style="border: thin solid black">
+	{% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col text-center mb-3">
+				{% comment %} <h1><strong>542</strong></h1> {% endcomment %}
+				<h1><strong>---</strong></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+{% if player.role == 'advisor' %}
+	{% if player.disclosure == True %}
+	<p>
+
+		Your payment scheme <strong>will be disclosed to the estimator</strong> on the online communication form.
+	</p>
+	<p>
+		That is, the estimator <strong>will know</strong> when making his or her estimate that you will be paid a bonus if
+		he or she overestimates the correct number of solid dots.
+	</p>
+	{% else %}
+	<p>
+		Your payment scheme <strong>will NOT be disclosed</strong> to the estimator.
+	</p>
+	<p>
+		That is, the estimator <strong>will NOT know</strong> when making his or her estimate that you will be paid a bonus
+		if he or she overestimates the correct number of solid dots.
+	</p>
+	{% endif %}
+{% endif %}
+
+
+
+{% comment %} TODO: To Ensure: Manipulation Checks {% endcomment %}
+<hr />
+<br />
+{% next_button %}
+
+{% endblock %}

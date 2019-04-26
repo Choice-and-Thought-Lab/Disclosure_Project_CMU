@@ -108,7 +108,7 @@ Introduction
 <p>For example, suppose the correct number of solid dots were <strong>450</strong>, the compensation scheme would be as
   follows..</p>
 
-{% include "./PaymentsTable.html" with estimate=450 role=player.role %}
+{% include "./PaymentsTable.html" with answer=450 role=player.role %}
 
 <p>
   As you can see, the advisor could earn a bonus if the estimator overstimated the number of solid dots. The advisor
@@ -144,9 +144,9 @@ Introduction
     </div>
   </div>
 </div>
-
+<hr />
 {% endif %}
 
-<hr />
+
 
 {% next_button %} {% endblock %}

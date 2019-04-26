@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+<h3>Your Estimate</h3>
+<p>Now it is time for you, as the estimator, to estimate the number of solid (filled) dots in the full 30x30 grid
+    using only the 3x3 subset of the grid shown below and your adviser’s advice, as shown on the communication form
+    below. Recall that the number of solid dots can vary from 0 – 900.</p>
+
+<div align="center" style="border: thin solid black">
+    {% include "./CommunicationFormTemplate.html" with player=player group=group type="actual"%}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center mb-3">
+                <h1><strong>{{ player.get_recommendation }}</strong></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<p>Recall that you will get a bigger bonus the more accurate your estimate is, as detailed below.</p>
+
+{% include "./PaymentsTable.html" with answer=player.get_correct_answer role=player.role %}
+
+<hr />
+
+<p>Please make your estimate of the number of solid dots in the full 30x30 grid:</p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 mb-3" align="center">
+            {% formfield player.estimate %}
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+<hr />
+
+{% next_button %}
+
+{% endblock %}

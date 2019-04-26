@@ -96,12 +96,13 @@ class AdvPaymentScheme(Page):
             self.player.set_model_data()
 
 
-class AdvComm4(Page):
+# class AdvComm4(Page):
+class DisclosureInfo(Page):
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_advisor() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_advisor() or self.player.is_estimator()
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -147,7 +148,7 @@ class AdvComm6(Page):
 
 
 # class AdvComm7(Page):
-class CommunicationFormAdvEst(Page):
+class AdvAdvice(Page):
     # this to keep the value entered by each advisor only to that player
     form_model = 'player'
     form_fields = ['recommendation']
@@ -156,7 +157,7 @@ class CommunicationFormAdvEst(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_advisor() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_advisor()
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -242,7 +243,7 @@ class EstComm4(Page):
             self.player.set_model_data()
 
 
-class EstComm5(Page):
+class EstEstimate(Page):
     # form_model = 'group'(Chaged from group to players)
     form_model = 'player'
     # form_model = 'group'
@@ -252,7 +253,7 @@ class EstComm5(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_estimator()
 
     def before_next_page(self):
         # self.player.calculate_grid_rewards()  # this function is only executed once: once the estimator advances.
@@ -719,20 +720,24 @@ page_sequence = [
     Intro2,
     AdvPaymentScheme,
     EstPaymentScheme,
+    DisclosureInfo,
+    AdvBegin,
+    EstBegin,
+    # CommunicationFormAdvEst,
+    AdvAdvice,
+    EstEstimate,
     # AdvComm1,
     # AdvComm2,
     # AdvComm3,
     # AdvComm4,
-    AdvBegin,
     # AdvComm5,
     # AdvComm6,
     # AdvComm7,
     # EstComm1,
     # EstComm2,
-    EstBegin,
-    EstComm3,
-    EstComm4,
-    EstComm5,
+    # EstComm3,
+    # EstComm4,
+    # EstComm5,
     EstComm6,
     GridReward,
     EstInfo2,

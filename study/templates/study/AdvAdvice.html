@@ -1,0 +1,62 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+<h3>Your Advice</h3>
+<p>
+    Now it is time for you, as the adviser, to give the estimator advice on the number of solid (filled) dots in the
+    30x30 grid, as shown below. The correct number of solid dots in this grid is
+    <strong>{{ player.get_correct_answer }}</strong>.
+</p>
+
+<p>
+    The estimator will attempt to estimate the number of dots in this grid. The estimator will know that the number of
+    solid dots can vary from 0 – 900, but the estimator will only be able to see a small 3x3 subset of the grid
+    highlighted in yellow below along with the advice that you provide on the communication form below.
+</p>
+
+<!-- Actual Grid -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center">
+            <img src="/static/{{ group.grid_path }}" />
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<p>Recall that the estimator will get a bigger bonus the more accurate his or her estimate is, and that you will get a
+    bigger bonus the more the estimator overestimates the true number of solid dots, as detailed below.</p>
+
+<p>Also recall that the <strong>estimator will{% if player.disclosure == False %} NOT{% endif %} know</strong> that you
+    will be paid bigger bonus the more the estimator
+    overestimates the true number of solid dots:</p>
+
+{% include "./PaymentsTable.html" with answer=player.get_correct_answer role=player.role %}
+
+<hr />
+
+<p>Please provide your advice to the estimator using the communication form below:</p>
+<p>Recall that the correct number of dots is <strong>{{ player.get_correct_answer }}</strong></p>
+<div align="center" style="border: thin solid black">
+    {% include "./CommunicationFormTemplate.html" with player=player group=group type="actual"%}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4 mb-3" align="center">
+                {% formfield player.recommendation %}
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+{% next_button %}
+
+{% endblock %}
