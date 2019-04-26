@@ -42,7 +42,7 @@ class Intro1(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 # show EXAMPLE image based on role
@@ -55,7 +55,7 @@ class Intro2(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 # AdvComm: Communication pages for the advisor
@@ -68,7 +68,7 @@ class AdvComm1(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class AdvComm2(Page):
@@ -80,7 +80,7 @@ class AdvComm2(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 # class AdvComm3(Page):
@@ -93,7 +93,7 @@ class AdvPaymentScheme(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 # class AdvComm4(Page):
@@ -106,7 +106,7 @@ class DisclosureInfo(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class AdvBegin(Page):
@@ -120,7 +120,7 @@ class AdvBegin(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class AdvComm5(Page):
@@ -132,7 +132,7 @@ class AdvComm5(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class AdvComm6(Page):
@@ -144,7 +144,7 @@ class AdvComm6(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 # class AdvComm7(Page):
@@ -161,7 +161,7 @@ class AdvAdvice(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class WaitForRecommendation(WaitPage):
@@ -187,7 +187,7 @@ class EstComm1(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 # class EstComm2(Page):
@@ -200,7 +200,7 @@ class EstPaymentScheme(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class EstBegin(Page):
@@ -213,8 +213,9 @@ class EstBegin(Page):
         return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
+        self.prep_before_decision()
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class EstComm3(Page):
@@ -227,7 +228,7 @@ class EstComm3(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class EstComm4(Page):
@@ -240,13 +241,11 @@ class EstComm4(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class EstEstimate(Page):
-    # form_model = 'group'(Chaged from group to players)
     form_model = 'player'
-    # form_model = 'group'
     form_fields = ['estimate']
 
     def get_timeout_seconds(self):
@@ -256,11 +255,9 @@ class EstEstimate(Page):
         return self.player.is_estimator()
 
     def before_next_page(self):
-        # self.player.calculate_grid_rewards()  # this function is only executed once: once the estimator advances.
-        # this function is only executed once: once the estimator advances.
-        self.group.calculate_grid_rewards()
+        self.calculate_grid_rewards()
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class EstComm6(Page):
@@ -273,7 +270,19 @@ class EstComm6(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
+
+
+class EstRevealPreamble(Page):
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
 
 
 class WaitForEstimate(WaitPage):
@@ -297,7 +306,7 @@ class RevealGrid(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class GridReward(Page):
@@ -312,7 +321,7 @@ class GridReward(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class EstInfo1(Page):
@@ -325,7 +334,7 @@ class EstInfo1(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
     def vars_for_template(self):
         return {
@@ -359,7 +368,22 @@ class EstInfo2(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
+
+
+class EstReveal(Page):
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+
+    def vars_for_template(self):
+        return {'advisor_reward': self.group.get_player_by_role('advisor').grid_reward}
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
 
 
 class EstAppeal1(Page):
@@ -372,7 +396,7 @@ class EstAppeal1(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class EstAppeal2(Page):
@@ -385,7 +409,7 @@ class EstAppeal2(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class EstAppeal3(Page):
@@ -400,7 +424,22 @@ class EstAppeal3(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
+
+
+class EstAppeal(Page):
+    form_model = 'player'
+    form_fields = ['appealed']
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
 
 
 class EstAppeal4(Page):
@@ -413,7 +452,7 @@ class EstAppeal4(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class JudgeInfo1(Page):
@@ -426,7 +465,7 @@ class JudgeInfo1(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class JudgeInfo2(Page):
@@ -439,7 +478,7 @@ class JudgeInfo2(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class JudgeInfo3(Page):
@@ -452,7 +491,7 @@ class JudgeInfo3(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
     def vars_for_template(self):
         return {
@@ -486,7 +525,7 @@ class JudgeInfo4(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class JudgeInfo5(Page):
@@ -499,7 +538,7 @@ class JudgeInfo5(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
     def vars_for_template(self):
         return {
@@ -518,7 +557,6 @@ class JudgeInfo5(Page):
 
 
 class JudgeInfo6(Page):
-
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -527,7 +565,20 @@ class JudgeInfo6(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
+
+
+class JudgeBegin(Page):
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_judge()
+
+    def before_next_page(self):
+        self.prep_before_decision()
+        if self.timeout_happened:
+            self.player.set_timeout_data()
 
 
 class JudgeInfo7(Page):
@@ -540,7 +591,7 @@ class JudgeInfo7(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
     def vars_for_template(self):
         return {
@@ -575,12 +626,32 @@ class Judgment(Page):
         return self.player.is_judge() and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
-        if self.group.appeal_granted:
-            self.group.recalculate_payOffs_with_appeal(True)
+        if self.appeal_granted:
+            self.recalculate_payOffs_with_appeal(True)
         else:
-            self.group.recalculate_payOffs_with_appeal(False)
+            self.recalculate_payOffs_with_appeal(False)
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
+
+
+class JudgeCaseAndJudgement(Page):
+    form_model = 'group'
+    form_fields = ['appeal_granted']
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_judge()
+
+    def before_next_page(self):
+        if self.appeal_granted:
+            self.recalculate_payOffs_with_appeal(True)
+        else:
+            self.recalculate_payOffs_with_appeal(False)
+
+        if self.timeout_happened:
+            self.player.set_timeout_data()
 
 
 class WaitForJudgment(WaitPage):
@@ -604,7 +675,7 @@ class AdvPostJudgment(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
     # Removed for Advisor
     # class Blame(Page):
@@ -635,9 +706,8 @@ class ManipulationChecks(Page):
 
     # Prior to conclusion, calculate total rewards
     def before_next_page(self):
-        # self.player.assign_rewards() # Saran - commenting because we need to assign rewards at group level
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
     def vars_for_template(self):
         return {'header': "Please answer the following three questions about the survey."}
@@ -657,7 +727,7 @@ class Conclusion(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class Demographics1(Page):
@@ -669,7 +739,7 @@ class Demographics1(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class Demographics2(Page):
@@ -684,7 +754,7 @@ class Demographics2(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class Comments(Page):
@@ -696,7 +766,7 @@ class Comments(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.set_model_data()
+            self.player.set_timeout_data()
 
 
 class Finish(Page):
@@ -726,6 +796,11 @@ page_sequence = [
     # CommunicationFormAdvEst,
     AdvAdvice,
     EstEstimate,
+    EstRevealPreamble,
+    EstReveal,
+    EstAppeal,
+    JudgeBegin,
+    JudgeCaseAndJudgement,
     # AdvComm1,
     # AdvComm2,
     # AdvComm3,

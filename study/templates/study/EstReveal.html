@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+<h3>Your Payment</h3>
+
+<p>
+    You guessed that there were <strong>{{ player.get_estimate }}</strong> solid dots. The correct number was
+    <strong>{{ player.get_correct_answer }}</strong>.
+</p>
+
+<!-- Actual Grid -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center">
+            <img src="/static/{{ group.grid_path }}" />
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
+<p>As a result, you earned <strong>{{ player.matched_estimator.grid_reward }}</strong> and your advisor earned a bonus
+    of <strong>{{ player.matched_advisor.grid_reward }}</strong>.</p>
+
+<p>
+    As you may recall, the advisor <strong>did{% if player.disclosure == False %} NOT{% endif %} notify you</strong>
+    about his or her conflict of interest before you made your
+    estimate.
+</p>
+
+<hr />
+
+{% next_button %}
+
+{% endblock %}

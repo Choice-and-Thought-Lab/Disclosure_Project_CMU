@@ -1,0 +1,111 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+<h3>The Case</h3>
+
+<p>
+    Now it is time for you, as the judge, to evaluate an interaction between a particular adviser and estimator.
+
+</p>
+<p>
+    In this case, the adviser saw this 30x30 grid and learned that that correct number of solid dots in this grid was
+    <strong>{{ player.get_correct_answer }}</strong>.
+</p>
+
+<!-- Actual Grid -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center">
+            <img src="/static/{{ group.grid_path }}" />
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<p>
+    The adviser advised the estimator that the number of solid dots on the 30x30 grid was
+    <strong>{{ player.get_recommendation }}</strong> and communicated this
+    advice using the communication form below:
+</p>
+<p>
+    Note that the adviser’s payment scheme <strong>was{% if player.disclosure == False %} NOT{% endif %}
+        disclosed</strong> to the estimator on the online communication form. That
+    is, the <strong>estimator did{% if player.disclosure == False %} NOT{% endif %} know</strong> when making his or her
+    estimates that the adviser would be paid a bonus if the
+    estimator overestimated the correct number of dots.
+</p>
+
+<div align="center" style="border: thin solid black">
+    {% include "./CommunicationFormTemplate.html" with player=player group=group type="actual"%}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center mb-3">
+                <h1><strong>{{ player.get_recommendation }}</strong></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<p>The estimator attempted to estimate the number of solid dots in the 30x30 grid. The estimator knew that the number of
+    dots could vary from 0 – 900, but they were only able to see the small 3x3 subset of the grid highlighted in yellow
+    along with the advice that the adviser provided on the communication form above.</p>
+
+<p>Based on the advisor’s recommendation, the estimator provided an estimate of <strong
+        style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
+
+<p>
+    As a result, the advisor earned a bonus of <strong>{{ player.matched_advisor.grid_reward }}</strong>, and the
+    estimator earned
+    <strong>{{ player.matched_estimator.grid_reward }}</strong>.
+
+</p>
+<p>
+    These payments were based on the payment table below:
+</p>
+{% include "./PaymentsTable.html" with answer=player.get_correct_answer role=player.role %}
+<hr />
+
+<h3>Your Judgement</h3>
+<p>
+    Now, we’d like you to make a decision about allocating bonuses.
+
+</p>
+<p>
+    The advisor and the estimator are both eligible to receive additional bonuses for participating. There is
+    {{ Constants.appeal_reward }} to be split between the advisor and the estimator.
+
+</p>
+<p>It is your job, as the judge, to decide how to split the money. You should make this decision based on whether you
+    think the estimator was treated unfairly by the advisor during the dots-estimation task.</p>
+
+
+<p>
+    <strong>To summarize:</strong>
+
+    <ul>
+        <li>The correct number of solid dots was <strong>{{ player.get_correct_answer }}</strong>.</li>
+        <li>The advisor told the estimator there were <strong>{{ player.get_recommendation }}</strong> solid dots, and
+            the estimator <strong>was{% if player.disclosure == False %} NOT{% endif %} informed</strong> that the
+            advisor would get a bigger bonus if the estimator overestimated.</li>
+        <li>The estimator estimated there were <strong>{{ player.get_estimate }}</strong> solid dots. </li>
+        <li>As a result, the advisor earned a bonus of <strong>{{ player.matched_advisor.grid_reward }}</strong>, and
+            the estimator earned
+            <strong>{{ player.matched_estimator.grid_reward }}</strong>.</li>
+    </ul>
+
+</p>
+
+<hr />
+{% formfield group.appeal_granted %}
+
+<hr />
+
+{% next_button %}
+
+{% endblock %}

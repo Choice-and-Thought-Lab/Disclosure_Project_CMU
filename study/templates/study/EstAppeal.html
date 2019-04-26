@@ -1,0 +1,50 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+
+<h3>Additional Bonus</h3>
+<p>
+    We now have some additional information for you.
+</p>
+<p>
+    <strong>You and the advisor are both going to receive additional bonuses for participating.</strong> There is
+    {{ Constants.appeal_reward }} to be split evenly between yourself and the advisor, for
+    {{ Constants.appeal_reward_split }} apiece.
+</p>
+
+<h3>Opportunity to send your case to a Third-Party judge</h3>
+<p>
+    You now have the opportunity to <strong>send your case to a third-party judge</strong>, who will review what
+    happened to you in the dots estimation task. If you choose this option, the judge will determine whether you
+    were treated unfairly by your advisor in the dots-estimation task.
+</p>
+
+<p>It will cost you {{ Constants.appeal_cost }} to send your case to the judge. You will pay this fee <strong>regardless
+        of whether or not you win</strong>
+</p>
+
+<h3>How judge will decide your case</h3>
+<p>
+    <strong>If you send the case and the judge decides you were treated unfairly</strong>, you will pay
+    {{ Constants.appeal_cost }} and receive {{ Constants.appeal_reward }}, while your advisor will receive no bonus.
+</p>
+<p>
+    <strong>If you send the case and the judge decides you were treated fairly</strong>, you will pay
+    {{ Constants.appeal_cost }}. Both you and your advisor will receive {{ Constants.appeal_reward_split }}.
+</p>
+<p>
+    <strong>If you decide not to send the case</strong> you and your advisor will each receive
+    {{ Constants.appeal_reward_split }}.
+</p>
+
+<hr />
+<h3>Your Decision</h3>
+
+{% formfield player.appealed %}
+
+{% next_button %}
+
+{% endblock %}
