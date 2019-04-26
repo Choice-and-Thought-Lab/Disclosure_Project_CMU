@@ -83,7 +83,8 @@ class AdvComm2(Page):
             self.player.set_model_data()
 
 
-class AdvComm3(Page):
+# class AdvComm3(Page):
+class AdvPaymentScheme(Page):
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -188,7 +189,8 @@ class EstComm1(Page):
             self.player.set_model_data()
 
 
-class EstComm2(Page):
+# class EstComm2(Page):
+class EstPaymentScheme(Page):
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -715,17 +717,18 @@ page_sequence = [
     # Consent,
     Intro1,
     Intro2,
-    AdvComm1,
-    AdvComm2,
-    AdvComm3,
-    AdvComm4,
+    AdvPaymentScheme,
+    EstPaymentScheme,
+    # AdvComm1,
+    # AdvComm2,
+    # AdvComm3,
+    # AdvComm4,
     AdvBegin,
-    AdvComm5,
-    AdvComm6,
+    # AdvComm5,
+    # AdvComm6,
     # AdvComm7,
-    # WaitForRecommendation,
-    EstComm1,
-    EstComm2,
+    # EstComm1,
+    # EstComm2,
     EstBegin,
     EstComm3,
     EstComm4,
@@ -737,24 +740,14 @@ page_sequence = [
     EstAppeal2,
     EstAppeal3,
     EstAppeal4,
-    # WaitForEstimate,
-    #    RevealGrid,
     JudgeInfo1,
-    #    JudgeInfo2,
     JudgeInfo3,
     JudgeInfo4,
     JudgeInfo5,
     JudgeInfo6,
     JudgeInfo7,
     Judgment,
-    # WaitForJudgment,
-    # Removed for advisor
-    # AdvPostJudgment,
-    # Removed for advisor
-    # Blame,
     ManipulationChecks,
-    # Removed for all
-    # Conclusion,
     Demographics1,
     Demographics2,
     Comments,

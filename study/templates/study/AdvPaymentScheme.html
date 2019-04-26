@@ -1,0 +1,65 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block content %}
+
+<h3>
+    Estimator's payment
+</h3>
+<p>
+    The estimator will be rewarded for the accuracy of his or her estimate of the correct number of solid
+    dots in the 30x30 grid that you see.
+</p>
+<p>
+    <strong>If the estimator's estimate is within 10 dots of the correct number</strong>, the estimator will
+    receive a bonus of {{ Constants.estimator_bonus_within_0_and_10 }}
+</p>
+
+<p>
+    <strong>
+        The estimator will receive a smaller bonus the further his or her estimate is from the correct number.
+    </strong>
+</p>
+<p>
+    <strong>If the estimator's estimate is off by more than 40</strong>, he or she will receive no bonus.
+</p>
+<h3>
+    Your payment
+</h3>
+<p>
+    As the advisor, you will receive a bonus <strong>if the
+        estimator provides an estimate
+        that is greater
+        than the correct value.</strong>
+</p>
+
+<p>
+    <strong>
+        You will receive a bigger bonus the further his or her estimate is from the correct number.
+    </strong>
+</p>
+<p>
+    You will receive a {{ Constants.advisor_bonus_greater_than_40 }} bonus <strong>if the estimator
+        provides an estimate that is more than 40
+        dots or more over
+        the correct value</strong>.
+</p>
+<hr />
+
+<h3>Example</h3>
+<p>
+    For example, suppose the correct number of solid dots were <strong>450</strong>. The compensation scheme would be as
+    follows:
+</p>
+
+{% include "./PaymentsTable.html" with estimate=450 role=player.role %}
+<br />
+<hr />
+<br />
+
+
+{% comment %} Todo: Manipulation Checks specific to Adviser {% endcomment %}
+
+{% next_button %}
+
+{% endblock %}
