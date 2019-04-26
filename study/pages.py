@@ -442,8 +442,7 @@ class EstAppeal(Page):
             self.player.set_timeout_data()
 
 
-class EstAppeal4(Page):
-
+class EstPostAppeal(Page):
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -635,7 +634,7 @@ class Judgment(Page):
 
 
 class JudgeCaseAndJudgement(Page):
-    form_model = 'group'
+    form_model = 'player'
     form_fields = ['appeal_granted']
 
     def get_timeout_seconds(self):
@@ -799,6 +798,7 @@ page_sequence = [
     EstRevealPreamble,
     EstReveal,
     EstAppeal,
+    EstPostAppeal,
     JudgeBegin,
     JudgeCaseAndJudgement,
     # AdvComm1,

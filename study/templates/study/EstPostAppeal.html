@@ -4,16 +4,18 @@
 
 {% block content %}
 
-    {% if group.appealed == True %}
-    <p>
+{% if group.appealed == True %}
+<p>
     You have chosen to send the case to the judge.
-    </p>
-    {% else %}
-    <p>
+</p>
+{% else %}
+<p>
     You have chosen not to send the case.
-    </p>
-    {% endif %}
+</p>
+{% endif %}
 
-    {% next_button %}
+<hr />
+
+{% next_button %}
 
 {% endblock %}
