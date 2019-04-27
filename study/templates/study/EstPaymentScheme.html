@@ -26,11 +26,18 @@
 </p>
 
 {% include "./PaymentsTable.html" with answer=450 role=player.role %}
+
+
 <br />
 <hr />
-<br />
 
-{% comment %} Todo: Manipulation Checks specific to Estimators {% endcomment %}
+
+{% comment %} Manipulation Checks specific to Estimators {% endcomment %}
+{% comment %} Not letting player advance unless these are answered as True {% endcomment %}
+<p>To ensure that you understand the instructions, please answer the following questions</p>
+{% formfield player.manip_est_estimator_payment_question %}
+
+<hr />
 
 {% next_button %}
 

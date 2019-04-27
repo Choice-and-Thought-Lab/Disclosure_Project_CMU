@@ -3,30 +3,14 @@
 {% load static %}
 
 {% block content %}
-   
-    <p><strong>
-    {{ header }}
-    </strong></p>
 
-    {% comment %}
-    <!--
-    <table class="table">
-        {% for field in form %}
-            <tr>
-                <th>{{ field.label }}</th>
-                {% for choice in field %}
-                    <td>{{ choice }}</td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table><br/>
-    -->
-    {% endcomment %}
+<h3>{{ header }}</h3>
 
-    {% for field in form %}
-    {% formfield field %}
-    {% endfor %}
 
-    {% next_button %}
+{% formfields %}
+
+<hr />
+
+{% next_button %}
 
 {% endblock %}

@@ -58,6 +58,18 @@ class Intro2(Page):
 
 # class AdvComm3(Page):
 class AdvPaymentScheme(Page):
+    form_model = 'player'
+    form_fields = ['manip_adv_adviser_payment_question',
+                   'manip_adv_estimator_payment_question']
+
+    def manip_adv_adviser_payment_question_error_message(self, value):
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+    def manip_adv_estimator_payment_question_error_message(self, value):
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -71,6 +83,22 @@ class AdvPaymentScheme(Page):
 
 # class AdvComm4(Page):
 class DisclosureInfo(Page):
+    form_model = 'player'
+
+    def get_form_fields(self):
+        if self.player.disclosure:
+            return ['manip_adv_payment_scheme_disclosed']
+        else:
+            return ['manip_adv_payment_scheme_not_disclosed']
+
+    def manip_adv_payment_scheme_disclosed_error_message(self, value):
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+    def manip_adv_payment_scheme_not_disclosed_error_message(self, value):
+        if self.player.disclosure == False and value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -129,6 +157,13 @@ class WaitForRecommendation(WaitPage):
 
 # class EstComm2(Page):
 class EstPaymentScheme(Page):
+    form_model = 'player'
+    form_fields = ['manip_est_estimator_payment_question']
+
+    def manip_est_estimator_payment_question_error_message(self, value):
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -325,14 +360,17 @@ class AdvPostJudgment(Page):
 
 class ManipulationChecks(Page):
     template_name = "study/PostQuestions.html"
-
     form_model = 'player'
-    form_fields = ['m1', 'm2', 'm3']
+
+    def get_form_fields(self):
+        if self.player.disclosure:
+            return ['manip_final_adviser_payment_question', 'manip_final_estimator_payment_question', 'manip_final_payment_scheme_disclosed']
+        else:
+            return ['manip_final_adviser_payment_question', 'manip_final_estimator_payment_question', 'manip_final_payment_scheme_not_disclosed']
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
-    # Prior to conclusion, calculate total rewards
     def before_next_page(self):
         if self.timeout_happened:
             self.player.set_timeout_data()

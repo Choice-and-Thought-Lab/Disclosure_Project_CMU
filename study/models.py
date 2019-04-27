@@ -108,6 +108,52 @@ class Subsession(BaseSubsession):
                       p.matched_estimator().id_in_group, p.matched_judge().id_in_group)
             print("-----------")
 
+        # To be removed
+        print('base_reward', Constants.base_reward)
+        print('estimator_bonus_less_than_neg_40',
+              Constants.estimator_bonus_less_than_neg_40)
+        print('estimator_bonus_within_neg_40_and_31',
+              Constants.estimator_bonus_within_neg_40_and_31)
+        print('estimator_bonus_within_neg_30_and_21',
+              Constants.estimator_bonus_within_neg_30_and_21)
+        print('estimator_bonus_within_neg_20_and_11',
+              Constants.estimator_bonus_within_neg_20_and_11)
+        print('estimator_bonus_within_neg_10_and_1',
+              Constants.estimator_bonus_within_neg_10_and_1)
+        print('estimator_bonus_within_0_and_10',
+              Constants.estimator_bonus_within_0_and_10)
+        print('estimator_bonus_within_11_and_21',
+              Constants.estimator_bonus_within_11_and_21)
+        print('estimator_bonus_within_21_and_30',
+              Constants.estimator_bonus_within_21_and_30)
+        print('estimator_bonus_within_31_and_40',
+              Constants.estimator_bonus_within_31_and_40)
+        print('estimator_bonus_greater_than_40',
+              Constants.estimator_bonus_greater_than_40)
+        print('advisor_bonus_less_than_neg_40',
+              Constants.advisor_bonus_less_than_neg_40)
+        print('advisor_bonus_within_neg_40_and_31',
+              Constants.advisor_bonus_within_neg_40_and_31)
+        print('advisor_bonus_within_neg_30_and_21',
+              Constants.advisor_bonus_within_neg_30_and_21)
+        print('advisor_bonus_within_neg_20_and_11',
+              Constants.advisor_bonus_within_neg_20_and_11)
+        print('advisor_bonus_within_neg_10_and_1',
+              Constants.advisor_bonus_within_neg_10_and_1)
+        print('advisor_bonus_within_0_and_10',
+              Constants.advisor_bonus_within_0_and_10)
+        print('advisor_bonus_within_11_and_21',
+              Constants.advisor_bonus_within_11_and_21)
+        print('advisor_bonus_within_21_and_30',
+              Constants.advisor_bonus_within_21_and_30)
+        print('advisor_bonus_within_31_and_40',
+              Constants.advisor_bonus_within_31_and_40)
+        print('advisor_bonus_greater_than_40',
+              Constants.advisor_bonus_greater_than_40)
+        print('appeal_reward', Constants.appeal_reward)
+        print('appeal_reward_split', Constants.appeal_reward_split)
+        print('appeal_cost', Constants.appeal_cost)
+
 
 class Group(BaseGroup):
 
@@ -321,20 +367,50 @@ class Player(BasePlayer):
         initial=None
     )
 
-    # Manipulation checks
-    m1 = models.BooleanField(
-        label="In the dots-estimation task, the advisor would get a bonus if the estimator overestimated the true number of "
-              + "solid dots.",
+    # Final Manipulation checks - No restrictions on answers to players
+    manip_final_adviser_payment_question = models.BooleanField(
+        label="You will get a bigger bonus the more the estimator overestimates the true number of solid dots.",
         widget=widgets.RadioSelect
     )
-    m2 = models.BooleanField(
-        label="In the dots-estimation task, the estimator would get a bonus if they were within 10 dots of the true number of "
-              + "solid dots.",
+
+    manip_final_estimator_payment_question = models.BooleanField(
+        label="The estimator will get a bigger bonus the more accurate his or her estimate is.",
         widget=widgets.RadioSelect
     )
-    m3 = models.BooleanField(
-        label="In the dots-estimation task, the estimator was informed that the advisor would make more money if the estimator overestimated "
-              + "the true number of solid dots.",
+
+    manip_final_payment_scheme_disclosed = models.BooleanField(
+        label="Your payment scheme is disclosed to the estimator in the online communication form.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_final_payment_scheme_not_disclosed = models.BooleanField(
+        label="Your payment scheme is NOT disclosed to the estimator in the online communication form.",
+        widget=widgets.RadioSelect
+    )
+
+    # Initial Manipulation Questions - Players not allowed to proceed unless answered True
+    manip_adv_adviser_payment_question = models.BooleanField(
+        label="You will get a bigger bonus the more the estimator overestimates the true number of solid dots.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_adv_estimator_payment_question = models.BooleanField(
+        label="The estimator will get a bigger bonus the more accurate his or her estimate is.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_adv_payment_scheme_disclosed = models.BooleanField(
+        label="Your payment scheme is disclosed to the estimator in the online communication form.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_adv_payment_scheme_not_disclosed = models.BooleanField(
+        label="Your payment scheme is NOT disclosed to the estimator in the online communication form.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_est_estimator_payment_question = models.BooleanField(
+        label="The estimator will get a bigger bonus the more accurate his or her estimate is.",
         widget=widgets.RadioSelect
     )
 
@@ -404,6 +480,11 @@ class Player(BasePlayer):
         advisor = self.matched_advisor()
         estimator = self.matched_estimator()
 
+        print('Calculate Grid Rewards - before', ' advisor: ', advisor.payoff, ' estimator: ',
+              estimator.payoff)
+        print('Calculate ParticipantPayoff Rewards - before', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+              estimator.participant.payoff)
+
         if estimator.estimate < (self.group.correct_answer - 40):
             estimator.grid_reward = Constants.estimator_bonus_less_than_neg_40  # Nothing
             advisor.grid_reward = Constants.advisor_bonus_less_than_neg_40  # Nothing
@@ -435,11 +516,11 @@ class Player(BasePlayer):
             estimator.grid_reward = Constants.estimator_bonus_greater_than_40  # Nothing
             advisor.grid_reward = Constants.advisor_bonus_greater_than_40
 
-        advisor.participant.payoff = advisor.grid_reward
-        estimator.participant.payoff = estimator.grid_reward
-        advisor.payoff = advisor.participant.payoff
-        estimator.payoff = estimator.participant.payoff
-        print('Calculate Grid Rewards - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+        advisor.payoff = advisor.grid_reward
+        estimator.payoff = estimator.grid_reward
+        print('Calculate Grid Rewards - after', ' advisor: ', advisor.payoff, ' estimator: ',
+              estimator.payoff)
+        print('Calculate ParticipantPayoff Rewards - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
               estimator.participant.payoff)
 
     def recalculate_payOffs_with_appeal(self, is_appeal_success):
@@ -447,26 +528,25 @@ class Player(BasePlayer):
         estimator = self.matched_estimator()
         judge = self.matched_judge()
 
-        print('In Recalculate. Grid Rewards - before', ' advisor: ', advisor.grid_reward, ' estimator: ',
-              estimator.grid_reward, ' judge: ', judge.grid_reward)
-        print('In Recalculate. Payoffs - before', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+        print('In Recalculate. Payoffs - before', ' advisor: ', advisor.payoff, ' estimator: ',
+              estimator.payoff, ' judge: ', judge.participant.payoff)
+        print('In Recalculate. Participant Payoffs - before', ' advisor: ', advisor.participant.payoff, ' estimator: ',
               estimator.participant.payoff, ' judge: ', judge.participant.payoff)
 
         if is_appeal_success:
-            advisor.participant.payoff = advisor.grid_reward
-            estimator.participant.payoff = estimator.grid_reward + \
+            advisor.payoff = advisor.grid_reward
+            estimator.payoff = estimator.grid_reward + \
                 Constants.appeal_reward - Constants.appeal_cost
         else:
-            advisor.participant.payoff = advisor.grid_reward + Constants.appeal_reward_split
-            estimator.participant.payoff = estimator.grid_reward + \
+            advisor.payoff = advisor.grid_reward + Constants.appeal_reward_split
+            estimator.payoff = estimator.grid_reward + \
                 Constants.appeal_reward_split - Constants.appeal_cost
 
-        judge.participant.payoff = Constants.appeal_cost
+        judge.payoff = Constants.appeal_cost
 
-        advisor.payoff = advisor.participant.payoff
-        estimator.payoff = estimator.participant.payoff
-        judge.payoff = judge.participant.payoff
-        print('In Recalculate. Payoffs - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+        print('In Recalculate. Payoffs - after', ' advisor: ', advisor.payoff, ' estimator: ',
+              estimator.payoff, ' judge: ', judge.participant.payoff)
+        print('In Recalculate. Participant Payoffs - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
               estimator.participant.payoff, ' judge: ', judge.participant.payoff)
 
     # Set Default Values for Recommendation and Estimate in times of unexpected failures in Advisor and Estimator rounds respectively

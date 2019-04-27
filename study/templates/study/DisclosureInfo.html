@@ -51,9 +51,21 @@
 	{% endif %}
 {% endif %}
 
+<br />
+<hr />
 
+{% comment %} To Ensure: Manipulation Checks {% endcomment %}
+{% comment %} Not letting player advance unless these are answered as True {% endcomment %}
+{% if player.role == 'advisor' %}
+<p>To ensure that you understand the instructions, please answer the following
+	questions</p>
+	{% if player.disclosure == True %}
+		{% formfield player.manip_adv_payment_scheme_disclosed %}
+	{% else %}
+		{% formfield player.manip_adv_payment_scheme_not_disclosed %}
+	{% endif %}
+{% endif %}
 
-{% comment %} TODO: To Ensure: Manipulation Checks {% endcomment %}
 <hr />
 <br />
 {% next_button %}
