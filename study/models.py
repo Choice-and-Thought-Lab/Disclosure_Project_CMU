@@ -104,7 +104,8 @@ class Subsession(BaseSubsession):
                     p.disclosure = True
                 else:
                     p.disclosure = False
-                print(p.role(), p.id_in_group, p.group.get_players())
+                print(p.role(), p.id_in_group, p.matched_advisor().id_in_group,
+                      p.matched_estimator().id_in_group, p.matched_judge().id_in_group)
             print("-----------")
 
 
@@ -350,28 +351,28 @@ class Player(BasePlayer):
             return 'judge'
 
     def matched_advisor(self):
-        id = self.id_in_group
-        if self.role == 'advisor':
+        id = self.id_in_group - 1
+        if self.is_advisor():
             return self
-        elif self.role == 'estimator':
+        elif self.is_estimator():
             return self.group.get_players()[id - 2]
         else:
             return self.group.get_players()[id - 4]
 
     def matched_estimator(self):
-        id = self.id_in_group
-        if self.role == 'estimator':
+        id = self.id_in_group - 1
+        if self.is_estimator():
             return self
-        elif self.role == 'advisor':
+        elif self.is_advisor():
             return self.group.get_players()[id + 2]
         else:
             return self.group.get_players()[id - 2]
 
     def matched_judge(self):
-        id = self.id_in_group
-        if self.role == 'judge':
+        id = self.id_in_group - 1
+        if self.is_judge():
             return self
-        elif self.role == 'advisor':
+        elif self.is_advisor():
             return self.group.get_players()[id + 4]
         else:
             return self.group.get_players()[id + 2]
@@ -389,10 +390,10 @@ class Player(BasePlayer):
         return self.id_in_group in list(range(5, 7))
 
     def get_recommendation(self):
-        self.matched_advisor().recommendation
+        return self.matched_advisor().recommendation
 
     def get_estimate(self):
-        self.matched_estimator().estimate
+        return self.matched_estimator().estimate
 
     def is_timed_out(self):
         return self.participant.vars['expiry'] - time.time() <= 3
@@ -403,34 +404,34 @@ class Player(BasePlayer):
         advisor = self.matched_advisor()
         estimator = self.matched_estimator()
 
-        if estimator.estimate < (self.correct_answer - 40):
+        if estimator.estimate < (self.group.correct_answer - 40):
             estimator.grid_reward = Constants.estimator_bonus_less_than_neg_40  # Nothing
             advisor.grid_reward = Constants.advisor_bonus_less_than_neg_40  # Nothing
-        elif (self.correct_answer - 40) <= estimator.estimate <= (self.correct_answer - 31):
+        elif (self.group.correct_answer - 40) <= estimator.estimate <= (self.group.correct_answer - 31):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_40_and_31
             advisor.grid_reward = Constants.advisor_bonus_within_neg_40_and_31  # Nothing
-        elif (self.correct_answer - 30) <= estimator.estimate <= (self.correct_answer - 21):
+        elif (self.group.correct_answer - 30) <= estimator.estimate <= (self.group.correct_answer - 21):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_30_and_21
             advisor.grid_reward = Constants.advisor_bonus_within_neg_30_and_21  # Nothing
-        elif (self.correct_answer - 20) <= estimator.estimate <= (self.correct_answer - 11):
+        elif (self.group.correct_answer - 20) <= estimator.estimate <= (self.group.correct_answer - 11):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_20_and_11
             advisor.grid_reward = Constants.advisor_bonus_within_neg_20_and_11  # Nothing
-        elif (self.correct_answer - 10) <= estimator.estimate <= (self.correct_answer - 1):
+        elif (self.group.correct_answer - 10) <= estimator.estimate <= (self.group.correct_answer - 1):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_10_and_1
             advisor.grid_reward = Constants.advisor_bonus_within_neg_10_and_1  # Nothing
-        elif (self.correct_answer + 0) <= estimator.estimate <= (self.correct_answer + 10):
+        elif (self.group.correct_answer + 0) <= estimator.estimate <= (self.group.correct_answer + 10):
             estimator.grid_reward = Constants.estimator_bonus_within_0_and_10
             advisor.grid_reward = Constants.advisor_bonus_within_0_and_10
-        elif (self.correct_answer + 11) <= estimator.estimate <= (self.correct_answer + 20):
+        elif (self.group.correct_answer + 11) <= estimator.estimate <= (self.group.correct_answer + 20):
             estimator.grid_reward = Constants.estimator_bonus_within_11_and_21
             advisor.grid_reward = Constants.advisor_bonus_within_11_and_21
-        elif (self.correct_answer + 21) <= estimator.estimate <= (self.correct_answer + 30):
+        elif (self.group.correct_answer + 21) <= estimator.estimate <= (self.group.correct_answer + 30):
             estimator.grid_reward = Constants.estimator_bonus_within_21_and_30
             advisor.grid_reward = Constants.advisor_bonus_within_21_and_30
-        elif (self.correct_answer + 31) <= estimator.estimate <= (self.correct_answer + 40):
+        elif (self.group.correct_answer + 31) <= estimator.estimate <= (self.group.correct_answer + 40):
             estimator.grid_reward = Constants.estimator_bonus_within_31_and_40
             advisor.grid_reward = Constants.advisor_bonus_within_31_and_40
-        elif estimator.estimate > (self.correct_answer + 40):
+        elif estimator.estimate > (self.group.correct_answer + 40):
             estimator.grid_reward = Constants.estimator_bonus_greater_than_40  # Nothing
             advisor.grid_reward = Constants.advisor_bonus_greater_than_40
 
@@ -474,10 +475,14 @@ class Player(BasePlayer):
             if self.matched_advisor().recommendation is None or self.matched_advisor().recommendation == 0:
                 self.matched_advisor().recommendation = self.group.correct_answer + \
                     (92 if self.disclosure else 28)
+                print('Prep Recommendation',
+                      self.matched_advisor().recommendation)
         if self.is_judge():
             if self.matched_estimator().estimate is None or self.matched_estimator().estimate == 0:
                 self.matched_estimator().estimate = self.group.correct_answer + \
                     (46 if self.disclosure else 14)
+                self.calculate_grid_rewards()
+                print('Prep Estimate', self.matched_estimator().estimate)
 
     # Set Default Data for whole triplet group - for situations like timeout
     def set_timeout_data(self):

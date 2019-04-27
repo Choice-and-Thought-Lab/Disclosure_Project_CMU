@@ -213,7 +213,7 @@ class EstBegin(Page):
         return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
-        self.prep_before_decision()
+        self.player.prep_before_decision()
         if self.timeout_happened:
             self.player.set_timeout_data()
 
@@ -575,7 +575,7 @@ class JudgeBegin(Page):
         return self.player.is_judge()
 
     def before_next_page(self):
-        self.prep_before_decision()
+        self.player.prep_before_decision()
         if self.timeout_happened:
             self.player.set_timeout_data()
 
@@ -792,7 +792,6 @@ page_sequence = [
     DisclosureInfo,
     AdvBegin,
     EstBegin,
-    # CommunicationFormAdvEst,
     AdvAdvice,
     EstEstimate,
     EstRevealPreamble,
@@ -801,32 +800,6 @@ page_sequence = [
     EstPostAppeal,
     JudgeBegin,
     JudgeCaseAndJudgement,
-    # AdvComm1,
-    # AdvComm2,
-    # AdvComm3,
-    # AdvComm4,
-    # AdvComm5,
-    # AdvComm6,
-    # AdvComm7,
-    # EstComm1,
-    # EstComm2,
-    # EstComm3,
-    # EstComm4,
-    # EstComm5,
-    EstComm6,
-    GridReward,
-    EstInfo2,
-    EstAppeal1,
-    EstAppeal2,
-    EstAppeal3,
-    EstAppeal4,
-    JudgeInfo1,
-    JudgeInfo3,
-    JudgeInfo4,
-    JudgeInfo5,
-    JudgeInfo6,
-    JudgeInfo7,
-    Judgment,
     ManipulationChecks,
     Demographics1,
     Demographics2,
