@@ -11,8 +11,8 @@
 </p>
 <p>
     <strong>You and the advisor are both going to receive additional bonuses for participating.</strong> There is
-    {{ Constants.appeal_reward }} to be split evenly between yourself and the advisor, for
-    {{ Constants.appeal_reward_split }} apiece.
+    <strong>{{ Constants.appeal_reward }}</strong> to be split evenly between yourself and the advisor, for
+    <strong>{{ Constants.appeal_reward_split }}</strong> apiece.
 </p>
 
 <h3>Opportunity to send your case to a Third-Party judge</h3>
@@ -22,7 +22,8 @@
     were treated unfairly by your advisor in the dots-estimation task.
 </p>
 
-<p>It will cost you {{ Constants.appeal_cost }} to send your case to the judge. You will pay this fee <strong>regardless
+<p>It will cost you <strong>{{ Constants.appeal_cost }}</strong> to send your case to the judge. You will pay this fee
+    <strong>regardless
         of whether or not you win</strong>
 </p>
 
@@ -34,7 +35,8 @@
     benefit financially if you overestimated.
 </p>
 <p>
-    The judge will know that the correct number of dots is {{ player.get_correct_answer }}. The judge will also see that
+    The judge will know that the correct number of dots is <strong>{{ player.get_correct_answer }}</strong>. The judge
+    will also see that
     you estimated there were <strong>{{ player.get_estimate }}</strong> dots. The judge will see how much both you and
     your advisor earned.
 </p>
@@ -47,15 +49,17 @@
 
 <p>
     <strong>If you send the case and the judge decides you were treated unfairly</strong>, you will pay
-    {{ Constants.appeal_cost }} and receive {{ Constants.appeal_reward }}, while your advisor will receive no bonus.
+    <strong>{{ Constants.appeal_cost }}</strong> and receive <strong>{{ Constants.appeal_reward }}</strong>, while your
+    advisor will receive no bonus.
 </p>
 <p>
     <strong>If you send the case and the judge decides you were treated fairly</strong>, you will pay
-    {{ Constants.appeal_cost }}. Both you and your advisor will receive {{ Constants.appeal_reward_split }}.
+    <strong>{{ Constants.appeal_cost }}</strong>. Both you and your advisor will receive
+    <strong>{{ Constants.appeal_reward_split }}</strong>.
 </p>
 <p>
     <strong>If you decide not to send the case</strong> you and your advisor will each receive
-    {{ Constants.appeal_reward_split }}.
+    <strong>{{ Constants.appeal_reward_split }}</strong>.
 </p>
 
 <hr />
