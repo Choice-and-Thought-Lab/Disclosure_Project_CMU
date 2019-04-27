@@ -86,17 +86,21 @@ class DisclosureInfo(Page):
     form_model = 'player'
 
     def get_form_fields(self):
-        if self.player.disclosure:
-            return ['manip_adv_payment_scheme_disclosed']
+        print('isadvisor', self.player.is_advisor())
+        if self.player.is_advisor():
+            if self.player.disclosure:
+                return ['manip_adv_payment_scheme_disclosed']
+            else:
+                return ['manip_adv_payment_scheme_not_disclosed']
         else:
-            return ['manip_adv_payment_scheme_not_disclosed']
+            return []
 
     def manip_adv_payment_scheme_disclosed_error_message(self, value):
-        if value == False:
+        if value == False and self.player.is_advisor():
             return 'Not the right choice. Please read the instructions carefully'
 
     def manip_adv_payment_scheme_not_disclosed_error_message(self, value):
-        if self.player.disclosure == False and value == False:
+        if value == False and self.player.is_advisor():
             return 'Not the right choice. Please read the instructions carefully'
 
     def get_timeout_seconds(self):
