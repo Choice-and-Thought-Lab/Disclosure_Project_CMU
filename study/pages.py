@@ -74,7 +74,7 @@ class AdvPaymentScheme(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_advisor() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_adviser() and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -86,8 +86,8 @@ class DisclosureInfo(Page):
     form_model = 'player'
 
     def get_form_fields(self):
-        print('isadvisor', self.player.is_advisor())
-        if self.player.is_advisor():
+        print('isadviser', self.player.is_adviser())
+        if self.player.is_adviser():
             if self.player.disclosure:
                 return ['manip_adv_payment_scheme_disclosed']
             else:
@@ -96,18 +96,18 @@ class DisclosureInfo(Page):
             return []
 
     def manip_adv_payment_scheme_disclosed_error_message(self, value):
-        if value == False and self.player.is_advisor():
+        if value == False and self.player.is_adviser():
             return 'Not the right choice. Please read the instructions carefully'
 
     def manip_adv_payment_scheme_not_disclosed_error_message(self, value):
-        if value == False and self.player.is_advisor():
+        if value == False and self.player.is_adviser():
             return 'Not the right choice. Please read the instructions carefully'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_advisor() or self.player.is_estimator()
+        return self.player.is_adviser() or self.player.is_estimator()
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -121,7 +121,7 @@ class AdvBegin(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_advisor() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_adviser() and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -130,7 +130,7 @@ class AdvBegin(Page):
 
 # class AdvComm7(Page):
 class AdvAdvice(Page):
-    # this to keep the value entered by each advisor only to that player
+    # this to keep the value entered by each adviser only to that player
     form_model = 'player'
     form_fields = ['recommendation']
 
@@ -138,7 +138,7 @@ class AdvAdvice(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_advisor()
+        return self.player.is_adviser()
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -149,11 +149,11 @@ class WaitForRecommendation(WaitPage):
     template_name = 'study/WaitProgress.html'
 
     def is_displayed(self):
-        return False  # self.player.is_advisor() #or self.player.is_estimator()
+        return False  # self.player.is_adviser() #or self.player.is_estimator()
 
     def vars_for_template(self):
         return {
-            'advisor': self.group.get_player_by_role('advisor').participant,
+            'adviser': self.group.get_player_by_role('adviser').participant,
             'estimator': self.group.get_player_by_role('estimator').participant,
             'judge': self.group.get_player_by_role('judge').participant
         }
@@ -227,7 +227,7 @@ class WaitForEstimate(WaitPage):
 
     def vars_for_template(self):
         return {
-            'advisor': self.group.get_player_by_role('advisor').participant,
+            'adviser': self.group.get_player_by_role('adviser').participant,
             'estimator': self.group.get_player_by_role('estimator').participant,
             'judge': self.group.get_player_by_role('judge').participant
         }
@@ -254,7 +254,7 @@ class EstReveal(Page):
         return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
 
     def vars_for_template(self):
-        return {'advisor_reward': self.group.get_player_by_role('advisor').grid_reward}
+        return {'adviser_reward': self.group.get_player_by_role('adviser').grid_reward}
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -326,7 +326,7 @@ class WaitForJudgment(WaitPage):
 
     def vars_for_template(self):
         return {
-            'advisor': self.group.get_player_by_role('advisor').participant,
+            'adviser': self.group.get_player_by_role('adviser').participant,
             'estimator': self.group.get_player_by_role('estimator').participant,
             'judge': self.group.get_player_by_role('judge').participant
         }
@@ -338,13 +338,13 @@ class AdvPostJudgment(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_advisor() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_adviser() and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
-    # Removed for Advisor
+    # Removed for adviser
     # class Blame(Page):
     # template_name = "study/PostQuestions.html"
 
@@ -355,7 +355,7 @@ class AdvPostJudgment(Page):
             return ['e1', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7', 'e8', 'e9']
         elif self.player.is_judge():
             return ['j1', 'j2', 'j3', 'j4', 'j5', 'j6', 'j7', 'j8', 'j9']
-        elif self.player.is_advisor():
+        elif self.player.is_adviser():
             return ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9']
 
     def vars_for_template(self):
@@ -389,7 +389,7 @@ class Conclusion(Page):
             'appeal_reward_minus_cost': Constants.appeal_reward - Constants.appeal_cost,
             'appeal_reward_split_minus_cost': Constants.appeal_reward_split - Constants.appeal_cost,
             'estimator_grid_reward': self.group.get_player_by_role('estimator').grid_reward,
-            'advisor_grid_reward': self.group.get_player_by_role('advisor').grid_reward
+            'adviser_grid_reward': self.group.get_player_by_role('adviser').grid_reward
         }
 
     def get_timeout_seconds(self):

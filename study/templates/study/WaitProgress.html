@@ -3,9 +3,9 @@
 {% block title %}{{ title_text }}{% endblock %}
 {% block content %}
     {{ body_text }}
-    {% if player.role == 'advisor' %}
+    {% if player.role == 'adviser' %}
     <p>
-    Your status: {{ advisor.current_page_ }}
+    Your status: {{ adviser.current_page_ }}
     </p>
     <p>
     Other player's status: {{ estimator.current_page_ }}
@@ -15,14 +15,14 @@
     Your status: {{ estimator.current_page_ }}
     </p>
     <p>
-    Other players' status: {{ advisor.current_page_ }} and {{ judge.current_page_ }}
+    Other players' status: {{ adviser.current_page_ }} and {{ judge.current_page_ }}
     </p>
     {% else %}
     <p>
     Your status: {{ judge.current_page_ }}
     </p>
     <p>
-    Other players' status: {{ advisor.current_page_ }} and {{ estimator.current_page_ }}
+    Other players' status: {{ adviser.current_page_ }} and {{ estimator.current_page_ }}
     </p>
     {% endif %}
     <p>

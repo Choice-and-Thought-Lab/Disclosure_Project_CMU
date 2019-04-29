@@ -56,11 +56,11 @@
     dots could vary from 0 – 900, but they were only able to see the small 3x3 subset of the grid highlighted in yellow
     along with the advice that the adviser provided on the communication form above.</p>
 
-<p>Based on the advisor’s recommendation, the estimator provided an estimate of <strong
+<p>Based on the adviser’s recommendation, the estimator provided an estimate of <strong
         style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
 
 <p>
-    As a result, the advisor earned a bonus of <strong>{{ player.matched_advisor.grid_reward }}</strong>, and the
+    As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and the
     estimator earned
     <strong>{{ player.matched_estimator.grid_reward }}</strong>.
 
@@ -77,12 +77,12 @@
 
 </p>
 <p>
-    The advisor and the estimator are both eligible to receive additional bonuses for participating. There is
-    {{ Constants.appeal_reward }} to be split between the advisor and the estimator.
+    The adviser and the estimator are both eligible to receive additional bonuses for participating. There is
+    {{ Constants.appeal_reward }} to be split between the adviser and the estimator.
 
 </p>
 <p>It is your job, as the judge, to decide how to split the money. You should make this decision based on whether you
-    think the estimator was treated unfairly by the advisor during the dots-estimation task.</p>
+    think the estimator was treated unfairly by the adviser during the dots-estimation task.</p>
 
 
 <p>
@@ -90,11 +90,11 @@
 
     <ul>
         <li>The correct number of solid dots was <strong>{{ player.get_correct_answer }}</strong>.</li>
-        <li>The advisor told the estimator there were <strong>{{ player.get_recommendation }}</strong> solid dots, and
+        <li>The adviser told the estimator there were <strong>{{ player.get_recommendation }}</strong> solid dots, and
             the estimator <strong>was{% if player.disclosure == False %} NOT{% endif %} informed</strong> that the
-            advisor would get a bigger bonus if the estimator overestimated.</li>
+            adviser would get a bigger bonus if the estimator overestimated.</li>
         <li>The estimator estimated there were <strong>{{ player.get_estimate }}</strong> solid dots. </li>
-        <li>As a result, the advisor earned a bonus of <strong>{{ player.matched_advisor.grid_reward }}</strong>, and
+        <li>As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and
             the estimator earned
             <strong>{{ player.matched_estimator.grid_reward }}</strong>.</li>
     </ul>

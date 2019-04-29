@@ -6,7 +6,7 @@
 <h3>Communication Form</h3>
 
 
-{% if player.role == 'advisor' %}
+{% if player.role == 'adviser' %}
 <p>You will give the estimator advice using an online communication form like the one shown below</p>
 
 {% elif player.role == 'estimator' %}
@@ -14,7 +14,7 @@
 
 {% endif %}
 
-<p>An example of a communication form from an advisor to an estimator: </p>
+<p>An example of a communication form from an adviser to an estimator: </p>
 {% comment %} Sample communication form goes here {% endcomment %}
 <div align="center" style="border: thin solid black">
 	{% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}
@@ -30,7 +30,7 @@
 
 <hr />
 
-{% if player.role == 'advisor' %}
+{% if player.role == 'adviser' %}
 	{% if player.disclosure == True %}
 	<p>
 
@@ -56,7 +56,7 @@
 
 {% comment %} To Ensure: Manipulation Checks {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
-{% if player.role == 'advisor' %}
+{% if player.role == 'adviser' %}
 <p>To ensure that you understand the instructions, please answer the following
 	questions</p>
 	{% if player.disclosure == True %}

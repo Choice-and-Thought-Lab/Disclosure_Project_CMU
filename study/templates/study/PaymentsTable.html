@@ -1,4 +1,4 @@
-<!--New Payoffs - Both Advisor and Estimator-->
+<!--New Payoffs - Both adviser and Estimator-->
 <div class="container-fluid">
     <div class="row">
         <div class="col text-center">
@@ -6,14 +6,14 @@
             <table class="table table-light table-striped table-sm table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        {% if role == 'advisor' %}
+                        {% if role == 'adviser' %}
                         <th scope="col">If the estimator guesses...</th>
                         <th scope="col">the estimator will be paid a bonus of...</th>
-                        <th scope="col">you, the advisor, will be paid a bonus of...</th>
+                        <th scope="col">you, the adviser, will be paid a bonus of...</th>
                         {% elif role == 'judge' %}
                         <th scope="col">If the estimator guesses...</th>
                         <th scope="col">the estimator will be paid a bonus of...</th>
-                        <th scope="col">the advisor, will be paid a bonus of...</th>
+                        <th scope="col">the adviser, will be paid a bonus of...</th>
                         {% elif role == 'estimator' %}
                         <th scope="col">If you, the estimator guessed...</th>
                         <th scope="col">you would be paid a bonus of...</th>
@@ -65,7 +65,7 @@
                         <td style="background-color: #6AA629;">
                             <b>{{ Constants.estimator_bonus_within_0_and_10 }}</b></td>
                         {% if role != 'estimator' %} <td style="background-color: #CBE4A4;">
-                            <b>{{ Constants.advisor_bonus_within_0_and_10 }}</b></td> {% endif %}
+                            <b>{{ Constants.adviser_bonus_within_0_and_10 }}</b></td> {% endif %}
                     </tr>
 
                     <tr>
@@ -74,7 +74,7 @@
                         <td style="background-color: #7CB72B;">
                             <b>{{ Constants.estimator_bonus_within_11_and_21 }}</b></td>
                         {% if role != 'estimator' %} <td style="background-color: #B1D677;">
-                            <b>{{ Constants.advisor_bonus_within_11_and_21 }}</b></td> {% endif %}
+                            <b>{{ Constants.adviser_bonus_within_11_and_21 }}</b></td> {% endif %}
                     </tr>
 
                     <tr>
@@ -83,7 +83,7 @@
                         <td style="background-color: #93C94D;">
                             <b>{{ Constants.estimator_bonus_within_21_and_30 }}</b></td>
                         {% if role != 'estimator' %} <td style="background-color: #93C94D;">
-                            <b>{{ Constants.advisor_bonus_within_21_and_30 }}</b></td> {% endif %}
+                            <b>{{ Constants.adviser_bonus_within_21_and_30 }}</b></td> {% endif %}
                     </tr>
 
                     <tr>
@@ -92,7 +92,7 @@
                         <td style="background-color: #B1D677;">
                             <b>{{ Constants.estimator_bonus_within_31_and_40 }}</b></td>
                         {% if role != 'estimator' %} <td style="background-color: #7CB72B;">
-                            <b>{{ Constants.advisor_bonus_within_31_and_40 }}</b></td> {% endif %}
+                            <b>{{ Constants.adviser_bonus_within_31_and_40 }}</b></td> {% endif %}
                     </tr>
 
                     <tr>
@@ -100,7 +100,7 @@
                         <th scope="row">Greater than {{ answer | add:"40" }} (Greater than +40)</th>
                         <td>Nothing</td>
                         {% if role != 'estimator' %} <td style="background-color: #6AA629;">
-                            <b>{{ Constants.advisor_bonus_greater_than_40 }}</b></td> {% endif %}
+                            <b>{{ Constants.adviser_bonus_greater_than_40 }}</b></td> {% endif %}
                     </tr>
                 </tbody>
             </table>

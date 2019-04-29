@@ -8,7 +8,7 @@ Introduction
 
 {% block content %}
 
-{% if player.role == 'advisor' %}
+{% if player.role == 'adviser' %}
 <p>
   In this study, you will give the estimator advice on the number of
   solid(filled) dots in a 30x30 grid.
@@ -57,7 +57,7 @@ Introduction
 </td> {% endcomment %}
 
 
-{% if player.role == 'advisor' %}
+{% if player.role == 'adviser' %}
 <p>
   The estimator will attempt to estimate the numer of dots in that grid.
   However, the estimator will only be able to see a small 3x3 subset of the grid
@@ -113,7 +113,7 @@ Introduction
 {% include "./PaymentsTable.html" with answer=450 role=player.role %}
 
 <p>
-  As you can see, the advisor could earn a bonus if the estimator overstimated the number of solid dots. The advisor
+  As you can see, the adviser could earn a bonus if the estimator overstimated the number of solid dots. The adviser
   could earn an even bigger bonus if the estimator overstimated by 40 solid dots or more.
 </p>
 
@@ -133,7 +133,7 @@ Introduction
   correct number of dots.
 </p>
 
-<p>An example of a communication form from an advisor to an estimator: </p>
+<p>An example of a communication form from an adviser to an estimator: </p>
 {% comment %} Sample communication form goes here {% endcomment %}
 <div align="center" style="border: thin solid black">
   {% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}

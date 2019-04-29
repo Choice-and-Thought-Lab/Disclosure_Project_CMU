@@ -7,15 +7,15 @@ Introduction
 
 {% block content %}
 
-{% if player.role == 'advisor' %}
+{% if player.role == 'adviser' %}
 <p>Thank you for participating in this study. You will play the role of <strong>ADVISER</strong>. You have been paired
     with an "Estimator."</p>
 {% elif player.role == 'estimator' %}
 <p>Thank you for participating in this study. You will play the role of <strong>ESTIMATOR</strong>. You have been paired
-    with an "Advisor."</p>
+    with an "Adviser."</p>
 {% elif player.role == 'judge' %}
 <p>Thank you for participating in this study. You will play the role of <strong>JUDGE</strong>. You have been paired
-    with an "Advisor" and an "Estimator."</p>
+    with an "Adviser" and an "Estimator."</p>
 {% endif %}
 
 

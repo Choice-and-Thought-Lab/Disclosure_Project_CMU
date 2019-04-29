@@ -52,20 +52,20 @@ class Constants(BaseConstants):
     estimator_bonus_within_31_and_40 = c(1)
     estimator_bonus_greater_than_40 = c(0)
 
-    # New PayOffs - advisor
-    advisor_bonus_less_than_neg_40 = c(0)
-    advisor_bonus_within_neg_40_and_31 = c(0)
-    advisor_bonus_within_neg_30_and_21 = c(0)
-    advisor_bonus_within_neg_20_and_11 = c(0)
-    advisor_bonus_within_neg_10_and_1 = c(0)
-    advisor_bonus_within_0_and_10 = c(0.5)
-    advisor_bonus_within_11_and_21 = c(1)
-    advisor_bonus_within_21_and_30 = c(1.5)
-    advisor_bonus_within_31_and_40 = c(2)
-    advisor_bonus_greater_than_40 = c(5)
+    # New PayOffs - adviser
+    adviser_bonus_less_than_neg_40 = c(0)
+    adviser_bonus_within_neg_40_and_31 = c(0)
+    adviser_bonus_within_neg_30_and_21 = c(0)
+    adviser_bonus_within_neg_20_and_11 = c(0)
+    adviser_bonus_within_neg_10_and_1 = c(0)
+    adviser_bonus_within_0_and_10 = c(0.5)
+    adviser_bonus_within_11_and_21 = c(1)
+    adviser_bonus_within_21_and_30 = c(1.5)
+    adviser_bonus_within_31_and_40 = c(2)
+    adviser_bonus_greater_than_40 = c(5)
 
     appeal_reward = c(2)  # given to estimator on appeal win
-    # given to both estimator and advisor if appeal lost or no appeal
+    # given to both estimator and adviser if appeal lost or no appeal
     appeal_reward_split = appeal_reward / 2
     appeal_cost = c(0.5)  # cost of appeal to estimator
 
@@ -104,7 +104,7 @@ class Subsession(BaseSubsession):
                     p.disclosure = True
                 else:
                     p.disclosure = False
-                print(p.role(), p.id_in_group, p.matched_advisor().id_in_group,
+                print(p.role(), p.id_in_group, p.matched_adviser().id_in_group,
                       p.matched_estimator().id_in_group, p.matched_judge().id_in_group)
             print("-----------")
 
@@ -130,26 +130,26 @@ class Subsession(BaseSubsession):
               Constants.estimator_bonus_within_31_and_40)
         print('estimator_bonus_greater_than_40',
               Constants.estimator_bonus_greater_than_40)
-        print('advisor_bonus_less_than_neg_40',
-              Constants.advisor_bonus_less_than_neg_40)
-        print('advisor_bonus_within_neg_40_and_31',
-              Constants.advisor_bonus_within_neg_40_and_31)
-        print('advisor_bonus_within_neg_30_and_21',
-              Constants.advisor_bonus_within_neg_30_and_21)
-        print('advisor_bonus_within_neg_20_and_11',
-              Constants.advisor_bonus_within_neg_20_and_11)
-        print('advisor_bonus_within_neg_10_and_1',
-              Constants.advisor_bonus_within_neg_10_and_1)
-        print('advisor_bonus_within_0_and_10',
-              Constants.advisor_bonus_within_0_and_10)
-        print('advisor_bonus_within_11_and_21',
-              Constants.advisor_bonus_within_11_and_21)
-        print('advisor_bonus_within_21_and_30',
-              Constants.advisor_bonus_within_21_and_30)
-        print('advisor_bonus_within_31_and_40',
-              Constants.advisor_bonus_within_31_and_40)
-        print('advisor_bonus_greater_than_40',
-              Constants.advisor_bonus_greater_than_40)
+        print('adviser_bonus_less_than_neg_40',
+              Constants.adviser_bonus_less_than_neg_40)
+        print('adviser_bonus_within_neg_40_and_31',
+              Constants.adviser_bonus_within_neg_40_and_31)
+        print('adviser_bonus_within_neg_30_and_21',
+              Constants.adviser_bonus_within_neg_30_and_21)
+        print('adviser_bonus_within_neg_20_and_11',
+              Constants.adviser_bonus_within_neg_20_and_11)
+        print('adviser_bonus_within_neg_10_and_1',
+              Constants.adviser_bonus_within_neg_10_and_1)
+        print('adviser_bonus_within_0_and_10',
+              Constants.adviser_bonus_within_0_and_10)
+        print('adviser_bonus_within_11_and_21',
+              Constants.adviser_bonus_within_11_and_21)
+        print('adviser_bonus_within_21_and_30',
+              Constants.adviser_bonus_within_21_and_30)
+        print('adviser_bonus_within_31_and_40',
+              Constants.adviser_bonus_within_31_and_40)
+        print('adviser_bonus_greater_than_40',
+              Constants.adviser_bonus_greater_than_40)
         print('appeal_reward', Constants.appeal_reward)
         print('appeal_reward_split', Constants.appeal_reward_split)
         print('appeal_cost', Constants.appeal_cost)
@@ -168,49 +168,49 @@ class Group(BaseGroup):
 
     # Likert scale questions
     e1 = make_Likert_agreement("I blame myself for my guess.")
-    e2 = make_Likert_agreement("I blame my advisor for my guess.")
+    e2 = make_Likert_agreement("I blame my adviser for my guess.")
     e3 = make_Likert_agreement(
-        "I have a legitimate grievance against my advisor.")
+        "I have a legitimate grievance against my adviser.")
     e4 = make_Likert_agreement(
         "I have a strong case if I chose to pursue an appeal.")
     e5 = make_Likert_agreement(
         "I believe that others would rule in my favor on an appeal.")
-    e6 = make_Likert_agreement("My advisor treated me fairly.")
-    e7 = make_Likert_agreement("I was mistreated by my advisor.")
+    e6 = make_Likert_agreement("My adviser treated me fairly.")
+    e7 = make_Likert_agreement("I was mistreated by my adviser.")
     e8 = make_Likert_agreement(
         "I deserve to receive the full bonus of " + str(Constants.appeal_reward) + ".")
-    e9 = make_Likert_agreement("My advisor does not deserve to receive " + str(Constants.appeal_reward_split) +
+    e9 = make_Likert_agreement("My adviser does not deserve to receive " + str(Constants.appeal_reward_split) +
                                " of the bonus.")
     j1 = make_Likert_agreement("I blame the estimator for his/her estimate.")
     j2 = make_Likert_agreement(
-        "I blame the advisor for the estimator's estimate.")
+        "I blame the adviser for the estimator's estimate.")
     j3 = make_Likert_agreement(
-        "The estimator has a legitimate grievance against the advisor.")
+        "The estimator has a legitimate grievance against the adviser.")
     j4 = make_Likert_agreement(
         "The estimator has a strong case if he/she chooses to pursue an appeal.")
     j5 = make_Likert_agreement(
         "I believe that others would rule in the estimator's favor on an appeal.")
-    j6 = make_Likert_agreement("The advisor treated the estimator fairly.")
-    j7 = make_Likert_agreement("The estimator was mistreated by the advisor.")
+    j6 = make_Likert_agreement("The adviser treated the estimator fairly.")
+    j7 = make_Likert_agreement("The estimator was mistreated by the adviser.")
     j8 = make_Likert_agreement(
         "The estimator deserves to receive the full bonus of " + str(Constants.appeal_reward) + ".")
-    j9 = make_Likert_agreement("The advisor does not deserve to receive " + str(Constants.appeal_reward_split) +
+    j9 = make_Likert_agreement("The adviser does not deserve to receive " + str(Constants.appeal_reward_split) +
                                " of the bonus.")
     a1 = make_Likert_agreement("I blame the estimator for his/her estimate.")
     a2 = make_Likert_agreement(
-        "I blame myself, the advisor, for the estimator's estimate.")
+        "I blame myself, the adviser, for the estimator's estimate.")
     a3 = make_Likert_agreement(
-        "The estimator has a legitimate grievance against me, the advisor.")
+        "The estimator has a legitimate grievance against me, the adviser.")
     a4 = make_Likert_agreement(
         "The estimator has a strong case if he/she chooses to pursue an appeal.")
     a5 = make_Likert_agreement(
         "I believe that others would rule in the estimator's favor on an appeal.")
-    a6 = make_Likert_agreement("I, the advisor treated the estimator fairly.")
+    a6 = make_Likert_agreement("I, the adviser treated the estimator fairly.")
     a7 = make_Likert_agreement(
-        "The estimator was mistreated by me, the advisor.")
+        "The estimator was mistreated by me, the adviser.")
     a8 = make_Likert_agreement(
         "The estimator deserves to receive the full bonus of " + str(Constants.appeal_reward) + ".")
-    a9 = make_Likert_agreement("I, the advisor, do not deserve to receive " + str(Constants.appeal_reward_split) +
+    a9 = make_Likert_agreement("I, the adviser, do not deserve to receive " + str(Constants.appeal_reward_split) +
                                " of the bonus.")
 
     estimator_opposite_appeal_payoff = models.CurrencyField(initial=c(0))
@@ -258,8 +258,8 @@ class Player(BasePlayer):
         str(Constants.appeal_reward) + " bonus should be awarded as follows:",
         choices=[
             [True, "The estimator should receive " + str(Constants.appeal_reward) +
-             " and the advisor should receive nothing."],
-            [False, "The estimator and advisor should both receive " +
+             " and the adviser should receive nothing."],
+            [False, "The estimator and adviser should both receive " +
                 str(Constants.appeal_reward_split) + "."]
         ],
         widget=widgets.RadioSelect
@@ -420,15 +420,15 @@ class Player(BasePlayer):
     # 6 Player Group - 1 triplet for disclosure and 1 triplet for non-disclosure conditions
     def role(self):
         if 1 <= self.id_in_group <= 2:
-            return 'advisor'
+            return 'adviser'
         elif 3 <= self.id_in_group <= 4:
             return 'estimator'
         elif 5 <= self.id_in_group <= 6:
             return 'judge'
 
-    def matched_advisor(self):
+    def matched_adviser(self):
         id = self.id_in_group - 1
-        if self.is_advisor():
+        if self.is_adviser():
             return self
         elif self.is_estimator():
             return self.group.get_players()[id - 2]
@@ -439,7 +439,7 @@ class Player(BasePlayer):
         id = self.id_in_group - 1
         if self.is_estimator():
             return self
-        elif self.is_advisor():
+        elif self.is_adviser():
             return self.group.get_players()[id + 2]
         else:
             return self.group.get_players()[id - 2]
@@ -448,7 +448,7 @@ class Player(BasePlayer):
         id = self.id_in_group - 1
         if self.is_judge():
             return self
-        elif self.is_advisor():
+        elif self.is_adviser():
             return self.group.get_players()[id + 4]
         else:
             return self.group.get_players()[id + 2]
@@ -456,7 +456,7 @@ class Player(BasePlayer):
     def get_correct_answer(self):
         return self.group.correct_answer
 
-    def is_advisor(self):
+    def is_adviser(self):
         return self.id_in_group in list(range(1, 3))
 
     def is_estimator(self):
@@ -466,7 +466,7 @@ class Player(BasePlayer):
         return self.id_in_group in list(range(5, 7))
 
     def get_recommendation(self):
-        return self.matched_advisor().recommendation
+        return self.matched_adviser().recommendation
 
     def get_estimate(self):
         return self.matched_estimator().estimate
@@ -474,89 +474,89 @@ class Player(BasePlayer):
     def is_timed_out(self):
         return self.participant.vars['expiry'] - time.time() <= 3
 
-    # Calculates rewards based on the advisor's recommendation and estimator's estimate, then stores them per player
+    # Calculates rewards based on the adviser's recommendation and estimator's estimate, then stores them per player
     # in grid_reward.
     def calculate_grid_rewards(self):
-        advisor = self.matched_advisor()
+        adviser = self.matched_adviser()
         estimator = self.matched_estimator()
 
-        print('Calculate Grid Rewards - before', ' advisor: ', advisor.payoff, ' estimator: ',
+        print('Calculate Grid Rewards - before', ' adviser: ', adviser.payoff, ' estimator: ',
               estimator.payoff)
-        print('Calculate ParticipantPayoff Rewards - before', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+        print('Calculate ParticipantPayoff Rewards - before', ' adviser: ', adviser.participant.payoff, ' estimator: ',
               estimator.participant.payoff)
 
         if estimator.estimate < (self.group.correct_answer - 40):
             estimator.grid_reward = Constants.estimator_bonus_less_than_neg_40  # Nothing
-            advisor.grid_reward = Constants.advisor_bonus_less_than_neg_40  # Nothing
+            adviser.grid_reward = Constants.adviser_bonus_less_than_neg_40  # Nothing
         elif (self.group.correct_answer - 40) <= estimator.estimate <= (self.group.correct_answer - 31):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_40_and_31
-            advisor.grid_reward = Constants.advisor_bonus_within_neg_40_and_31  # Nothing
+            adviser.grid_reward = Constants.adviser_bonus_within_neg_40_and_31  # Nothing
         elif (self.group.correct_answer - 30) <= estimator.estimate <= (self.group.correct_answer - 21):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_30_and_21
-            advisor.grid_reward = Constants.advisor_bonus_within_neg_30_and_21  # Nothing
+            adviser.grid_reward = Constants.adviser_bonus_within_neg_30_and_21  # Nothing
         elif (self.group.correct_answer - 20) <= estimator.estimate <= (self.group.correct_answer - 11):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_20_and_11
-            advisor.grid_reward = Constants.advisor_bonus_within_neg_20_and_11  # Nothing
+            adviser.grid_reward = Constants.adviser_bonus_within_neg_20_and_11  # Nothing
         elif (self.group.correct_answer - 10) <= estimator.estimate <= (self.group.correct_answer - 1):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_10_and_1
-            advisor.grid_reward = Constants.advisor_bonus_within_neg_10_and_1  # Nothing
+            adviser.grid_reward = Constants.adviser_bonus_within_neg_10_and_1  # Nothing
         elif (self.group.correct_answer + 0) <= estimator.estimate <= (self.group.correct_answer + 10):
             estimator.grid_reward = Constants.estimator_bonus_within_0_and_10
-            advisor.grid_reward = Constants.advisor_bonus_within_0_and_10
+            adviser.grid_reward = Constants.adviser_bonus_within_0_and_10
         elif (self.group.correct_answer + 11) <= estimator.estimate <= (self.group.correct_answer + 20):
             estimator.grid_reward = Constants.estimator_bonus_within_11_and_21
-            advisor.grid_reward = Constants.advisor_bonus_within_11_and_21
+            adviser.grid_reward = Constants.adviser_bonus_within_11_and_21
         elif (self.group.correct_answer + 21) <= estimator.estimate <= (self.group.correct_answer + 30):
             estimator.grid_reward = Constants.estimator_bonus_within_21_and_30
-            advisor.grid_reward = Constants.advisor_bonus_within_21_and_30
+            adviser.grid_reward = Constants.adviser_bonus_within_21_and_30
         elif (self.group.correct_answer + 31) <= estimator.estimate <= (self.group.correct_answer + 40):
             estimator.grid_reward = Constants.estimator_bonus_within_31_and_40
-            advisor.grid_reward = Constants.advisor_bonus_within_31_and_40
+            adviser.grid_reward = Constants.adviser_bonus_within_31_and_40
         elif estimator.estimate > (self.group.correct_answer + 40):
             estimator.grid_reward = Constants.estimator_bonus_greater_than_40  # Nothing
-            advisor.grid_reward = Constants.advisor_bonus_greater_than_40
+            adviser.grid_reward = Constants.adviser_bonus_greater_than_40
 
-        advisor.payoff = advisor.grid_reward
+        adviser.payoff = adviser.grid_reward
         estimator.payoff = estimator.grid_reward
-        print('Calculate Grid Rewards - after', ' advisor: ', advisor.payoff, ' estimator: ',
+        print('Calculate Grid Rewards - after', ' adviser: ', adviser.payoff, ' estimator: ',
               estimator.payoff)
-        print('Calculate ParticipantPayoff Rewards - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+        print('Calculate ParticipantPayoff Rewards - after', ' adviser: ', adviser.participant.payoff, ' estimator: ',
               estimator.participant.payoff)
 
     def recalculate_payOffs_with_appeal(self, is_appeal_success):
-        advisor = self.matched_advisor()
+        adviser = self.matched_adviser()
         estimator = self.matched_estimator()
         judge = self.matched_judge()
 
-        print('In Recalculate. Payoffs - before', ' advisor: ', advisor.payoff, ' estimator: ',
+        print('In Recalculate. Payoffs - before', ' adviser: ', adviser.payoff, ' estimator: ',
               estimator.payoff, ' judge: ', judge.participant.payoff)
-        print('In Recalculate. Participant Payoffs - before', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+        print('In Recalculate. Participant Payoffs - before', ' adviser: ', adviser.participant.payoff, ' estimator: ',
               estimator.participant.payoff, ' judge: ', judge.participant.payoff)
 
         if is_appeal_success:
-            advisor.payoff = advisor.grid_reward
+            adviser.payoff = adviser.grid_reward
             estimator.payoff = estimator.grid_reward + \
                 Constants.appeal_reward - Constants.appeal_cost
         else:
-            advisor.payoff = advisor.grid_reward + Constants.appeal_reward_split
+            adviser.payoff = adviser.grid_reward + Constants.appeal_reward_split
             estimator.payoff = estimator.grid_reward + \
                 Constants.appeal_reward_split - Constants.appeal_cost
 
         judge.payoff = Constants.appeal_cost
 
-        print('In Recalculate. Payoffs - after', ' advisor: ', advisor.payoff, ' estimator: ',
+        print('In Recalculate. Payoffs - after', ' adviser: ', adviser.payoff, ' estimator: ',
               estimator.payoff, ' judge: ', judge.participant.payoff)
-        print('In Recalculate. Participant Payoffs - after', ' advisor: ', advisor.participant.payoff, ' estimator: ',
+        print('In Recalculate. Participant Payoffs - after', ' adviser: ', adviser.participant.payoff, ' estimator: ',
               estimator.participant.payoff, ' judge: ', judge.participant.payoff)
 
-    # Set Default Values for Recommendation and Estimate in times of unexpected failures in Advisor and Estimator rounds respectively
+    # Set Default Values for Recommendation and Estimate in times of unexpected failures in adviser and Estimator rounds respectively
     def prep_before_decision(self):
         if self.is_estimator() or self.is_judge():
-            if self.matched_advisor().recommendation is None or self.matched_advisor().recommendation == 0:
-                self.matched_advisor().recommendation = self.group.correct_answer + \
+            if self.matched_adviser().recommendation is None or self.matched_adviser().recommendation == 0:
+                self.matched_adviser().recommendation = self.group.correct_answer + \
                     (92 if self.disclosure else 28)
                 print('Prep Recommendation',
-                      self.matched_advisor().recommendation)
+                      self.matched_adviser().recommendation)
         if self.is_judge():
             if self.matched_estimator().estimate is None or self.matched_estimator().estimate == 0:
                 self.matched_estimator().estimate = self.group.correct_answer + \
@@ -566,7 +566,7 @@ class Player(BasePlayer):
 
     # Set Default Data for whole triplet group - for situations like timeout
     def set_timeout_data(self):
-        if self.is_advisor():
+        if self.is_adviser():
             if self.recommendation is None or self.recommendation == 0:
                 self.recommendation = self.group.correct_answer + \
                     (92 if self.disclosure else 28)
