@@ -367,24 +367,66 @@ class Player(BasePlayer):
         initial=None
     )
 
-    # Final Manipulation checks - No restrictions on answers to players
-    manip_final_adviser_payment_question = models.BooleanField(
-        label="In the dot-estimation task, the adviser would get a bigger bonus the more the estimator overestimated the true number of solid dots.",
+    # Final Manipulation checks - No restrictions on answers to players - Advisers
+    manip_adviser_final_adviser_payment_question = models.BooleanField(
+        label="In the dot-estimation task, you would get a bigger bonus the more the estimator overestimated the true number of solid dots.",
         widget=widgets.RadioSelect
     )
 
-    manip_final_estimator_payment_question = models.BooleanField(
+    manip_adviser_final_estimator_payment_question = models.BooleanField(
         label="In the dot-estimation task, the estimator would get a bigger bonus the more accurate his or her estimate was.",
         widget=widgets.RadioSelect
     )
 
-    manip_final_payment_scheme_disclosed = models.BooleanField(
+    manip_adviser_final_payment_scheme_disclosed = models.BooleanField(
         label="In the dot-estimation task, your payment scheme was disclosed to the estimator in the online communication form.",
         widget=widgets.RadioSelect
     )
 
-    manip_final_payment_scheme_not_disclosed = models.BooleanField(
+    manip_adviser_final_payment_scheme_not_disclosed = models.BooleanField(
         label="In the dot-estimation task, your payment scheme was NOT disclosed to the estimator in the online communication form.",
+        widget=widgets.RadioSelect
+    )
+
+    # Final Manipulation checks - No restrictions on answers to players - Estimators
+    manip_estimator_final_adviser_payment_question = models.BooleanField(
+        label="In the dot-estimation task, the adviser would get a bigger bonus the more you overestimated the true number of solid dots.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_estimator_final_estimator_payment_question = models.BooleanField(
+        label="In the dot-estimation task, you would get a bigger bonus the more accurate your estimate was.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_estimator_final_payment_scheme_disclosed = models.BooleanField(
+        label="In the dot-estimation task, the adviser's payment scheme was disclosed to you in the online communication form.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_estimator_final_payment_scheme_not_disclosed = models.BooleanField(
+        label="In the dot-estimation task, the adviser's payment scheme was NOT disclosed to you in the online communication form.",
+        widget=widgets.RadioSelect
+    )
+
+    # Final Manipulation checks - No restrictions on answers to players - Judges
+    manip_judge_final_adviser_payment_question = models.BooleanField(
+        label="In the dot-estimation task, the adviser would get a bigger bonus the more the estimator overestimated the true number of solid dots.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_judge_final_estimator_payment_question = models.BooleanField(
+        label="In the dot-estimation task, the estimator would get a bigger bonus the more accurate his or her estimate was.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_judge_final_payment_scheme_disclosed = models.BooleanField(
+        label="In the dot-estimation task, the adviser’s payment scheme was disclosed to the estimator in the online communication form.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_judge_final_payment_scheme_not_disclosed = models.BooleanField(
+        label="In the dot-estimation task, the adviser’s payment scheme was NOT disclosed to the estimator in the online communication form.",
         widget=widgets.RadioSelect
     )
 

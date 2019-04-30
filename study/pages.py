@@ -364,15 +364,26 @@ class AdvPostJudgment(Page):
         return {'header': "Now we'd like to ask you to rate your level of agreement with a series of statements."}
 
 
-class ManipulationChecks(Page):
-    template_name = "study/PostQuestions.html"
+class PostQuestions(Page):
+    # Manipulation Checks
     form_model = 'player'
 
     def get_form_fields(self):
-        if self.player.disclosure:
-            return ['manip_final_adviser_payment_question', 'manip_final_estimator_payment_question', 'manip_final_payment_scheme_disclosed']
-        else:
-            return ['manip_final_adviser_payment_question', 'manip_final_estimator_payment_question', 'manip_final_payment_scheme_not_disclosed']
+        if self.player.is_adviser():
+            if self.player.disclosure:
+                return ['manip_adviser_final_adviser_payment_question', 'manip_adviser_final_estimator_payment_question', 'manip_adviser_final_payment_scheme_disclosed']
+            else:
+                return ['manip_adviser_final_adviser_payment_question', 'manip_adviser_final_estimator_payment_question', 'manip_adviser_final_payment_scheme_not_disclosed']
+        elif self.player.is_estimator():
+            if self.player.disclosure:
+                return ['manip_estimator_final_adviser_payment_question', 'manip_estimator_final_estimator_payment_question', 'manip_estimator_final_payment_scheme_disclosed']
+            else:
+                return ['manip_estimator_final_adviser_payment_question', 'manip_estimator_final_estimator_payment_question', 'manip_estimator_final_payment_scheme_not_disclosed']
+        elif self.player.is_judge():
+            if self.player.disclosure:
+                return ['manip_judge_final_adviser_payment_question', 'manip_judge_final_estimator_payment_question', 'manip_judge_final_payment_scheme_disclosed']
+            else:
+                return ['manip_judge_final_adviser_payment_question', 'manip_judge_final_estimator_payment_question', 'manip_judge_final_payment_scheme_not_disclosed']
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -473,7 +484,7 @@ page_sequence = [
     EstPostAppeal,
     JudgeBegin,
     JudgeCaseAndJudgment,
-    ManipulationChecks,
+    PostQuestions,
     Demographics1,
     Demographics2,
     Comments,
