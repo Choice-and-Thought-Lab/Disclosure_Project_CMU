@@ -7,10 +7,10 @@
 
 
 {% if player.role == 'adviser' %}
-<p>You will give the estimator advice using an online communication form like the one shown below</p>
+<p>You will give the estimator advice using an online communication form like the one shown below.</p>
 
 {% elif player.role == 'estimator' %}
-<p>The adviser will give you, the estimator advice using an online communication form like the one shown below</p>
+<p>The adviser will give you, the estimator, advice using an online communication form like the one shown below.</p>
 
 {% endif %}
 
@@ -48,26 +48,28 @@
 		That is, the estimator <strong>will NOT know</strong> when making his or her estimate that you will be paid a bonus
 		if he or she overestimates the correct number of solid dots.
 	</p>
+		
+	<br />
+	<hr />
 	{% endif %}
 {% endif %}
 
-<br />
-<hr />
 
 {% comment %} To Ensure: Manipulation Checks {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
 {% if player.role == 'adviser' %}
 <p>To ensure that you understand the instructions, please answer the following
-	questions</p>
+	question:</p>
 	{% if player.disclosure == True %}
 		{% formfield player.manip_adv_payment_scheme_disclosed %}
 	{% else %}
 		{% formfield player.manip_adv_payment_scheme_not_disclosed %}
 	{% endif %}
+		
+	<hr />
+	<br />
 {% endif %}
 
-<hr />
-<br />
 {% next_button %}
 
 {% endblock %}

@@ -37,7 +37,7 @@ Introduction
   solid dots could vary from 0 – 900.
 </p>
 <p>
-  Below is an example of a 30x30 grid that advisers would see.
+  Below is an example of a 30x30 grid that advisers would see:
 </p>
 
 {% endif %}
@@ -68,15 +68,15 @@ Introduction
 <p>
   You will attempt to estimate the numer of dots in that grid. However, you will
   only be able to see a small 3x3 subset of the grid highlighted in
-  <span style="background-color: yellow">yellow</span> below along with your
-  advice. Below is an example.</p>
+  <span style="background-color: yellow">yellow</span> below along with the advice you receive from your
+  adviser. Below is an example.</p>
 
 {% elif player.role == 'judge' %}
 <p>Estimators attempted to estimate the number dots in this grid. However, estimators were only able to see a small 3x3
   subset of the grid highlighted in yellow below along with their advisers’ advice.
 </p>
 <p>
-  Below is an example of a 3x3 grid that estimators would see
+  Below is an example of a 3x3 grid that estimators would see:
 </p>
 
 {% endif %}
@@ -93,28 +93,23 @@ Introduction
 <hr />
 
 {% if player.role == 'judge' %}
-<h4>
-  The dots estimation task had the following compensation scheme</h4>
-
+<p>
+  The dots estimation task had the following compensation scheme:</p>
 <p>
   Estimators would get bigger bonuses the more accurate their estimates were.
 </p>
-
-{% if player.disclosure == False %}
 <p>
-  <strong>Unbeknownst to estimators</strong>, advisers would get bigger bonuses the more that estimators overestimated
-  the number of solid dots.
+  Advisers would get bigger bonuses the more estimators overestimated the true number of solid dots.
 </p>
-{% endif %}
 
 <p>For example, suppose the correct number of solid dots were <strong>450</strong>, the compensation scheme would be as
-  follows..</p>
+  follows:</p>
 
 {% include "./PaymentsTable.html" with answer=450 role=player.role %}
 
 <p>
-  As you can see, the adviser could earn a bonus if the estimator overstimated the number of solid dots. The adviser
-  could earn an even bigger bonus if the estimator overstimated by 40 solid dots or more.
+  Note that estimators were not shown advisers’ payoffs and were not aware of advisers’ conflict of interest (unless
+  that information was disclosed to estimators along with the advice they received from advisers).
 </p>
 
 <hr />
@@ -133,20 +128,6 @@ Introduction
   correct number of dots.
 </p>
 
-<p>An example of a communication form from an adviser to an estimator: </p>
-{% comment %} Sample communication form goes here {% endcomment %}
-<div align="center" style="border: thin solid black">
-  {% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col text-center mb-3">
-        {% comment %} <h1><strong>542</strong></h1> {% endcomment %}
-        <h1><strong>---</strong></h1>
-      </div>
-    </div>
-  </div>
-</div>
-<hr />
 {% endif %}
 
 

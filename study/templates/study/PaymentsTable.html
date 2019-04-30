@@ -13,7 +13,7 @@
                         {% elif role == 'judge' %}
                         <th scope="col">If the estimator guesses...</th>
                         <th scope="col">the estimator will be paid a bonus of...</th>
-                        <th scope="col">the adviser, will be paid a bonus of...</th>
+                        <th scope="col">the adviser will be paid a bonus of...</th>
                         {% elif role == 'estimator' %}
                         <th scope="col">If you, the estimator guessed...</th>
                         <th scope="col">you would be paid a bonus of...</th>
@@ -23,13 +23,13 @@
                 <tbody>
                     <tr>
                         <!--(Less than -40)-->
-                        <th scope="row">Less than {{ answer | add:"-40" }} (Less than -40)</th>
+                        <th scope="row">{% if answer != 0 %}Less than {{ answer | add:"-40" }} {% endif %}(Less than -40)</th>
                         <td>Nothing</td>
                         {% if role != 'estimator' %} <td>Nothing</td> {% endif %}
                     </tr>
                     <tr>
                         <!--(Within -40 and -31)-->
-                        <th scope="row">{{ answer | add:"-40" }}-{{ answer | add:"-31" }} (Within -40 and -31)</th>
+                        <th scope="row">{% if answer != 0 %}{{ answer | add:"-40" }}-{{ answer | add:"-31" }} {% endif %}(Within -40 and -31)</th>
                         <td style="background-color: #B1D677;">
                             <b>{{ Constants.estimator_bonus_within_neg_40_and_31 }}</b></td>
                         {% if role != 'estimator' %} <td>Nothing</td> {% endif %}
@@ -37,7 +37,7 @@
 
                     <tr>
                         <!--(Within -30 and -21)-->
-                        <th scope="row">{{ answer | add:"-30" }}-{{ answer | add:"-21" }} (Within -30 and -21)</th>
+                        <th scope="row">{% if answer != 0 %}{{ answer | add:"-30" }}-{{ answer | add:"-21" }} {% endif %}(Within -30 and -21)</th>
                         <td style="background-color: #93C94D;">
                             <b>{{ Constants.estimator_bonus_within_neg_30_and_21 }}</b></td>
                         {% if role != 'estimator' %} <td>Nothing</td> {% endif %}
@@ -45,7 +45,7 @@
 
                     <tr>
                         <!--(Within -20 and -11)-->
-                        <th scope="row">{{ answer | add:"-20" }}-{{ answer | add:"-11" }} (Within -20 and -11)</th>
+                        <th scope="row">{% if answer != 0 %}{{ answer | add:"-20" }}-{{ answer | add:"-11" }} {% endif %}(Within -20 and -11)</th>
                         <td style="background-color: #7CB72B;">
                             <b>{{ Constants.estimator_bonus_within_neg_20_and_11 }}</b></td>
                         {% if role != 'estimator' %} <td>Nothing</td> {% endif %}
@@ -53,7 +53,7 @@
 
                     <tr>
                         <!--(Within -10 and -1)-->
-                        <th scope="row">{{ answer | add:"-10" }}-{{ answer | add:"-1" }} (Within -10 and -1)</th>
+                        <th scope="row">{% if answer != 0 %}{{ answer | add:"-10" }}-{{ answer | add:"0" }} {% endif %}(Within -10 and 0)</th>
                         <td style="background-color: #6AA629;">
                             <b>{{ Constants.estimator_bonus_within_neg_10_and_1 }}</b></td>
                         {% if role != 'estimator' %} <td>Nothing</td> {% endif %}
@@ -61,7 +61,7 @@
 
                     <tr>
                         <!--(Within 0 and +10)-->
-                        <th scope="row">{{ answer }}-{{ answer | add:"10" }} (Within 0 and +10)</th>
+                        <th scope="row">{% if answer != 0 %}{{ answer | add:"1" }}-{{ answer | add:"10" }} {% endif %}(Within 1 and +10)</th>
                         <td style="background-color: #6AA629;">
                             <b>{{ Constants.estimator_bonus_within_0_and_10 }}</b></td>
                         {% if role != 'estimator' %} <td style="background-color: #CBE4A4;">
@@ -70,7 +70,7 @@
 
                     <tr>
                         <!--(Within +11 and +20)-->
-                        <th scope="row">{{ answer | add:"11" }}-{{ answer | add:"20" }} (Within +11 and +20)</th>
+                        <th scope="row">{% if answer != 0 %}{{ answer | add:"11" }}-{{ answer | add:"20" }} {% endif %}(Within +11 and +20)</th>
                         <td style="background-color: #7CB72B;">
                             <b>{{ Constants.estimator_bonus_within_11_and_21 }}</b></td>
                         {% if role != 'estimator' %} <td style="background-color: #B1D677;">
@@ -79,7 +79,7 @@
 
                     <tr>
                         <!--(Within +21 and +30)-->
-                        <th scope="row">{{ answer | add:"21" }}-{{ answer | add:"30" }} (Within +21 and +30)</th>
+                        <th scope="row">{% if answer != 0 %}{{ answer | add:"21" }}-{{ answer | add:"30" }} {% endif %}(Within +21 and +30)</th>
                         <td style="background-color: #93C94D;">
                             <b>{{ Constants.estimator_bonus_within_21_and_30 }}</b></td>
                         {% if role != 'estimator' %} <td style="background-color: #93C94D;">
@@ -88,7 +88,7 @@
 
                     <tr>
                         <!--(Within +31 and +40)-->
-                        <th scope="row">{{ answer | add:"31" }}-{{ answer | add:"40" }} (Within +31 and +40)</th>
+                        <th scope="row">{% if answer != 0 %}{{ answer | add:"31" }}-{{ answer | add:"40" }} {% endif %}(Within +31 and +40)</th>
                         <td style="background-color: #B1D677;">
                             <b>{{ Constants.estimator_bonus_within_31_and_40 }}</b></td>
                         {% if role != 'estimator' %} <td style="background-color: #7CB72B;">
@@ -97,7 +97,7 @@
 
                     <tr>
                         <!--(Greater than +40)-->
-                        <th scope="row">Greater than {{ answer | add:"40" }} (Greater than +40)</th>
+                        <th scope="row">{% if answer != 0 %}Greater than {{ answer | add:"40" }} {% endif %}(Greater than +40)</th>
                         <td>Nothing</td>
                         {% if role != 'estimator' %} <td style="background-color: #6AA629;">
                             <b>{{ Constants.adviser_bonus_greater_than_40 }}</b></td> {% endif %}

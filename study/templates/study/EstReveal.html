@@ -6,9 +6,14 @@
 
 <h3>Your Payment</h3>
 
+
+<p>Your adviser advised you that there were <strong>{{ player.get_recommendation }}</strong> solid dots.</p>
+
 <p>
-    You guessed that there were <strong>{{ player.get_estimate }}</strong> solid dots. The correct number was
-    <strong>{{ player.get_correct_answer }}</strong>.
+    You guessed that there were <strong>{{ player.get_estimate }}</strong> solid dots.
+</p>
+<p>
+    The correct number was <strong>{{ player.get_correct_answer }}</strong>. The full grid is shown below:
 </p>
 
 <!-- Actual Grid -->
@@ -23,13 +28,21 @@
 <hr />
 
 
-<p>As a result, you earned <strong>{{ player.matched_estimator.grid_reward }}</strong> and your adviser earned a bonus
-    of <strong>{{ player.matched_adviser.grid_reward }}</strong>.</p>
+<p>As a result, you earned a bonus of <strong>{{ player.matched_estimator.grid_reward }}</strong></p>
+
+<p>Your adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>.</p>
+
+<p>These payoffs were based on the following compensation scheme:</p>
+
+{% include "./PaymentsTable.html" with answer=player.get_correct_answer role='adviser' %}
+
+<hr />
+
+<p>Note that your adviser earned a bigger bonus the more you overestimated the true number of solid dots.</p>
 
 <p>
     As you may recall, the adviser <strong>did{% if player.disclosure == False %} NOT{% endif %} notify you</strong>
-    about his or her conflict of interest before you made your
-    estimate.
+    about his or her conflict of interest before you made your estimate.
 </p>
 
 <hr />

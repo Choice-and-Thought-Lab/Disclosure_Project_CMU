@@ -246,7 +246,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     appealed = models.BooleanField(
-        label="Would you like to send the case to the judge?",
+        label="Would you like to file an appeal?",
         choices=[
             [True, "Yes"],
             [False, "No"]
@@ -369,22 +369,22 @@ class Player(BasePlayer):
 
     # Final Manipulation checks - No restrictions on answers to players
     manip_final_adviser_payment_question = models.BooleanField(
-        label="You will get a bigger bonus the more the estimator overestimates the true number of solid dots.",
+        label="In the dot-estimation task, the adviser would get a bigger bonus the more the estimator overestimated the true number of solid dots.",
         widget=widgets.RadioSelect
     )
 
     manip_final_estimator_payment_question = models.BooleanField(
-        label="The estimator will get a bigger bonus the more accurate his or her estimate is.",
+        label="In the dot-estimation task, the estimator would get a bigger bonus the more accurate his or her estimate was.",
         widget=widgets.RadioSelect
     )
 
     manip_final_payment_scheme_disclosed = models.BooleanField(
-        label="Your payment scheme is disclosed to the estimator in the online communication form.",
+        label="In the dot-estimation task, your payment scheme was disclosed to the estimator in the online communication form.",
         widget=widgets.RadioSelect
     )
 
     manip_final_payment_scheme_not_disclosed = models.BooleanField(
-        label="Your payment scheme is NOT disclosed to the estimator in the online communication form.",
+        label="In the dot-estimation task, your payment scheme was NOT disclosed to the estimator in the online communication form.",
         widget=widgets.RadioSelect
     )
 
@@ -410,7 +410,7 @@ class Player(BasePlayer):
     )
 
     manip_est_estimator_payment_question = models.BooleanField(
-        label="The estimator will get a bigger bonus the more accurate his or her estimate is.",
+        label="You will get a bigger bonus the more accurate your estimate is.",
         widget=widgets.RadioSelect
     )
 
@@ -497,10 +497,10 @@ class Player(BasePlayer):
         elif (self.group.correct_answer - 20) <= estimator.estimate <= (self.group.correct_answer - 11):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_20_and_11
             adviser.grid_reward = Constants.adviser_bonus_within_neg_20_and_11  # Nothing
-        elif (self.group.correct_answer - 10) <= estimator.estimate <= (self.group.correct_answer - 1):
+        elif (self.group.correct_answer - 10) <= estimator.estimate <= (self.group.correct_answer):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_10_and_1
             adviser.grid_reward = Constants.adviser_bonus_within_neg_10_and_1  # Nothing
-        elif (self.group.correct_answer + 0) <= estimator.estimate <= (self.group.correct_answer + 10):
+        elif (self.group.correct_answer + 1) <= estimator.estimate <= (self.group.correct_answer + 10):
             estimator.grid_reward = Constants.estimator_bonus_within_0_and_10
             adviser.grid_reward = Constants.adviser_bonus_within_0_and_10
         elif (self.group.correct_answer + 11) <= estimator.estimate <= (self.group.correct_answer + 20):

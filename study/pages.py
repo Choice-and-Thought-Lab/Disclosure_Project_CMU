@@ -289,6 +289,8 @@ class EstPostAppeal(Page):
 
 
 class JudgeBegin(Page):
+    template_name = 'study/Begin.html'
+
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -301,7 +303,7 @@ class JudgeBegin(Page):
             self.player.set_timeout_data()
 
 
-class JudgeCaseAndJudgement(Page):
+class JudgeCaseAndJudgment(Page):
     form_model = 'player'
     form_fields = ['appeal_granted']
 
@@ -380,7 +382,7 @@ class ManipulationChecks(Page):
             self.player.set_timeout_data()
 
     def vars_for_template(self):
-        return {'header': "Please answer the following three questions about the survey."}
+        return {'header': "To verify that you understood the dot-estimation task, please answer the following three questions:"}
 
 
 class Conclusion(Page):
@@ -470,7 +472,7 @@ page_sequence = [
     EstAppeal,
     EstPostAppeal,
     JudgeBegin,
-    JudgeCaseAndJudgement,
+    JudgeCaseAndJudgment,
     ManipulationChecks,
     Demographics1,
     Demographics2,
