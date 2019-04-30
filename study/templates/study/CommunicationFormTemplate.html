@@ -21,19 +21,12 @@
             </br>
 
             {% if player.disclosure == True %}
-            <p>
-                I should let you know that I am rewarded with a bigger bonus the more you overestimate the true number
-                of solid dots. I will receive a {{ Constants.adviser_bonus_greater_than_40 }} bonus if your estimate is
-                more than
-                40 dots above the correct
-                number.
-            </p>
 
+            <p><strong>Important Disclosure: </strong>Your adviser will get a bigger bonus the more you overestimate the true number of
+                solid dots.</p>
 
+            <p>So, it is in your adviser's interest that you estimate a high number of dots.</p>
 
-            <p>
-                So, it is in my interest that you estimate a high number of dots.
-            </p>
             {% endif %}
 
 

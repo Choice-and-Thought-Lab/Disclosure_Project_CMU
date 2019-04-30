@@ -96,37 +96,51 @@ Introduction
 <p>
   The dots estimation task had the following compensation scheme:</p>
 <p>
-  Estimators would get bigger bonuses the more accurate their estimates were.
+  Estimators would get bigger bonuses the more accurate their estimates were. Following is the compensation scheme that
+  was shown to the estimators:
 </p>
+
+<p>For example, suppose the correct number of solid dots were <strong>450</strong>, the estimators' compensation scheme
+  was shown as follows:</p>
+{% include "./PaymentsTable.html" with answer=450 role='estimator' %}
+<hr />
 <p>
   Advisers would get bigger bonuses the more estimators overestimated the true number of solid dots.
 </p>
 
-<p>For example, suppose the correct number of solid dots were <strong>450</strong>, the compensation scheme would be as
+<p>For example, suppose the correct number of solid dots were <strong>450</strong>, the advisers' compensation scheme
+  was shown as
   follows:</p>
 
 {% include "./PaymentsTable.html" with answer=450 role=player.role %}
-
-<p>
-  Note that estimators were not shown advisers’ payoffs and were not aware of advisers’ conflict of interest (unless
-  that information was disclosed to estimators along with the advice they received from advisers).
-</p>
 
 <hr />
 
 <p>Advisers gave advice using an online communication form, like the one shown below.</p>
 
-<p>Advisers’ payment scheme <strong>was
+<p>Note that the advisers' payment scheme <strong>was{% if player.disclosure == False %} NOT{% endif %}
+    disclosed</strong>
+  to the estimators on the communcation form. That is, estimators <strong>would
     {% if player.disclosure == False %}
     NOT
     {% endif %}
-    disclosed</strong> to estimators on the online communication form. That is, estimators <strong>would
-    {% if player.disclosure == False %}
-    NOT
-    {% endif %}
-    know</strong> when making their estimates that advisers would be paid a bonus if estimators overestimated the
-  correct number of dots.
+    know</strong> when making their estimates that advisers would be paid a bigger bonus the more estimators
+  overestimated the correct number of solid dots.
 </p>
+
+<p>An example of a communication form from an adviser to an estimator: </p>
+{% comment %} Sample communication form goes here {% endcomment %}
+<div align="center" style="border: thin solid black">
+  {% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col text-center mb-3">
+        {% comment %} <h1><strong>542</strong></h1> {% endcomment %}
+        <h1><strong>---</strong></h1>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endif %}
 
