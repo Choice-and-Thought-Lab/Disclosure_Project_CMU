@@ -365,7 +365,7 @@ class Player(BasePlayer):
         "I have a legitimate grievance against the adviser.")
     blame_EST_I_have_a_strong_case_if_I_choose_to_pursue_an_appeal = make_Likert_agreement(
         "I have a strong case if I choose to pursue an appeal.")
-    blame_EST_I_believe_that_others_would_rule_in_my_favor_on_an_appeal = make_Likert_agreement(
+    blame_EST_I_believe_that_others_would_rule_in_my_favor = make_Likert_agreement(
         "I believe that others would rule in my favor on an appeal.")
     blame_EST_The_adviser_treated_me_fairly = make_Likert_agreement(
         "The adviser treated me fairly.")
@@ -379,11 +379,11 @@ class Player(BasePlayer):
         "I blame the estimator for their guess.")
     blame_JUDGE_I_blame_the_adviser_for_the_estimators_guess = make_Likert_agreement(
         "I blame the adviser for the estimator's guess.")
-    blame_JUDGE_The_estimator_has_a_legitimate_grievance_against_the_adviser = make_Likert_agreement(
+    blame_JUDGE_estimator_has_legitimate_grievance_against_adviser = make_Likert_agreement(
         "The estimator has a legitimate grievance against the adviser.")
-    blame_JUDGE_The_estimator_has_a_strong_case_if_he_or_she_choses_to_pursue_an_appeal = make_Likert_agreement(
+    blame_JUDGE_estimator_has_a_strong_case_to_pursue_an_appeal = make_Likert_agreement(
         "The estimator has a strong case if he or she choses to pursue an appeal.")
-    blame_JUDGE_I_believe_that_others_would_rule_in_the_estimators_favor_on_an_appeal = make_Likert_agreement(
+    blame_JUDGE_I_believe_others_would_rule_in_estimators_favor = make_Likert_agreement(
         "I believe that others would rule in the estimator's favor on an appeal.")
     blame_JUDGE_The_adviser_treated_the_estimator_fairly = make_Likert_agreement(
         "The adviser treated the estimator fairly.")

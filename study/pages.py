@@ -343,7 +343,7 @@ class Blame(Page):
                     'blame_EST_I_blame_the_adviser_for_my_guess',
                     'blame_EST_I_have_a_legitimate_grievance_against_the_adviser',
                     'blame_EST_I_have_a_strong_case_if_I_choose_to_pursue_an_appeal',
-                    'blame_EST_I_believe_that_others_would_rule_in_my_favor_on_an_appeal',
+                    'blame_EST_I_believe_that_others_would_rule_in_my_favor',
                     'blame_EST_The_adviser_treated_me_fairly',
                     'blame_EST_I_was_mistreated_by_the_adviser',
                     'blame_EST_I_deserve_to_receive_the_full_bonus'
@@ -351,9 +351,9 @@ class Blame(Page):
         elif self.player.is_judge():
             return ['blame_JUDGE_I_blame_the_estimator_for_their_guess',
                     'blame_JUDGE_I_blame_the_adviser_for_the_estimators_guess',
-                    'blame_JUDGE_The_estimator_has_a_legitimate_grievance_against_the_adviser',
-                    'blame_JUDGE_The_estimator_has_a_strong_case_if_he_or_she_choses_to_pursue_an_appeal',
-                    'blame_JUDGE_I_believe_that_others_would_rule_in_the_estimators_favor_on_an_appeal',
+                    'blame_JUDGE_estimator_has_legitimate_grievance_against_adviser',
+                    'blame_JUDGE_estimator_has_a_strong_case_to_pursue_an_appeal',
+                    'blame_JUDGE_I_believe_others_would_rule_in_estimators_favor',
                     'blame_JUDGE_The_adviser_treated_the_estimator_fairly',
                     'blame_JUDGE_The_estimator_was_mistreated_by_the_adviser',
                     'blame_JUDGE_The_estimator_deserves_to_receive_the_full_bonus']
