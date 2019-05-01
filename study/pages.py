@@ -334,56 +334,46 @@ class WaitForJudgment(WaitPage):
         }
 
 
-class AdvPostJudgment(Page):
+class Blame(Page):
+    form_model = 'player'
+
+    def get_form_fields(self):
+        if self.player.is_estimator():
+            return ['blame_EST_I_blame_myself_for_my_guess',
+                    'blame_EST_I_blame_the_adviser_for_my_guess',
+                    'blame_EST_I_have_a_legitimate_grievance_against_the_adviser',
+                    'blame_EST_I_have_a_strong_case_if_I_choose_to_pursue_an_appeal',
+                    'blame_EST_I_believe_that_others_would_rule_in_my_favor_on_an_appeal',
+                    'blame_EST_The_adviser_treated_me_fairly',
+                    'blame_EST_I_was_mistreated_by_the_adviser',
+                    'blame_EST_I_deserve_to_receive_the_full_bonus'
+                    ]
+        elif self.player.is_judge():
+            return ['blame_JUDGE_I_blame_the_estimator_for_their_guess',
+                    'blame_JUDGE_I_blame_the_adviser_for_the_estimators_guess',
+                    'blame_JUDGE_The_estimator_has_a_legitimate_grievance_against_the_adviser',
+                    'blame_JUDGE_The_estimator_has_a_strong_case_if_he_or_she_choses_to_pursue_an_appeal',
+                    'blame_JUDGE_I_believe_that_others_would_rule_in_the_estimators_favor_on_an_appeal',
+                    'blame_JUDGE_The_adviser_treated_the_estimator_fairly',
+                    'blame_JUDGE_The_estimator_was_mistreated_by_the_adviser',
+                    'blame_JUDGE_The_estimator_deserves_to_receive_the_full_bonus']
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_adviser() and self.participant.vars['expiry'] - time.time() > 3
+        return (not self.player.is_adviser()) and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
-    # Removed for adviser
-    # class Blame(Page):
-    # template_name = "study/PostQuestions.html"
-
-    form_model = 'group'
-
-    def get_form_fields(self):
-        if self.player.is_estimator():
-            return ['e1', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7', 'e8', 'e9']
-        elif self.player.is_judge():
-            return ['j1', 'j2', 'j3', 'j4', 'j5', 'j6', 'j7', 'j8', 'j9']
-        elif self.player.is_adviser():
-            return ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9']
-
-    def vars_for_template(self):
-        return {'header': "Now we'd like to ask you to rate your level of agreement with a series of statements."}
-
 
 class PostQuestions(Page):
     # Manipulation Checks
     form_model = 'player'
-
-    def get_form_fields(self):
-        if self.player.is_adviser():
-            if self.player.disclosure:
-                return ['manip_adviser_final_adviser_payment_question', 'manip_adviser_final_estimator_payment_question', 'manip_adviser_final_payment_scheme_disclosed']
-            else:
-                return ['manip_adviser_final_adviser_payment_question', 'manip_adviser_final_estimator_payment_question', 'manip_adviser_final_payment_scheme_not_disclosed']
-        elif self.player.is_estimator():
-            if self.player.disclosure:
-                return ['manip_estimator_final_adviser_payment_question', 'manip_estimator_final_estimator_payment_question', 'manip_estimator_final_payment_scheme_disclosed']
-            else:
-                return ['manip_estimator_final_adviser_payment_question', 'manip_estimator_final_estimator_payment_question', 'manip_estimator_final_payment_scheme_not_disclosed']
-        elif self.player.is_judge():
-            if self.player.disclosure:
-                return ['manip_judge_final_adviser_payment_question', 'manip_judge_final_estimator_payment_question', 'manip_judge_final_payment_scheme_disclosed']
-            else:
-                return ['manip_judge_final_adviser_payment_question', 'manip_judge_final_estimator_payment_question', 'manip_judge_final_payment_scheme_not_disclosed']
+    form_fields = ['manip_final_adviser_payment_question',
+                   'manip_final_estimator_payment_question', 'manip_final_conflict_disclosed_or_not']
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -484,6 +474,7 @@ page_sequence = [
     EstPostAppeal,
     JudgeBegin,
     JudgeCaseAndJudgment,
+    Blame,
     PostQuestions,
     Demographics1,
     Demographics2,

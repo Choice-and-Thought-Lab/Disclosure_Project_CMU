@@ -165,54 +165,6 @@ class Group(BaseGroup):
     example_grid_number = models.IntegerField()
     example_grid_path = models.StringField()
     example_small_grid_path = models.StringField()
-
-    # Likert scale questions
-    e1 = make_Likert_agreement("I blame myself for my guess.")
-    e2 = make_Likert_agreement("I blame my adviser for my guess.")
-    e3 = make_Likert_agreement(
-        "I have a legitimate grievance against my adviser.")
-    e4 = make_Likert_agreement(
-        "I have a strong case if I chose to pursue an appeal.")
-    e5 = make_Likert_agreement(
-        "I believe that others would rule in my favor on an appeal.")
-    e6 = make_Likert_agreement("My adviser treated me fairly.")
-    e7 = make_Likert_agreement("I was mistreated by my adviser.")
-    e8 = make_Likert_agreement(
-        "I deserve to receive the full bonus of " + str(Constants.appeal_reward) + ".")
-    e9 = make_Likert_agreement("My adviser does not deserve to receive " + str(Constants.appeal_reward_split) +
-                               " of the bonus.")
-    j1 = make_Likert_agreement("I blame the estimator for his/her estimate.")
-    j2 = make_Likert_agreement(
-        "I blame the adviser for the estimator's estimate.")
-    j3 = make_Likert_agreement(
-        "The estimator has a legitimate grievance against the adviser.")
-    j4 = make_Likert_agreement(
-        "The estimator has a strong case if he/she chooses to pursue an appeal.")
-    j5 = make_Likert_agreement(
-        "I believe that others would rule in the estimator's favor on an appeal.")
-    j6 = make_Likert_agreement("The adviser treated the estimator fairly.")
-    j7 = make_Likert_agreement("The estimator was mistreated by the adviser.")
-    j8 = make_Likert_agreement(
-        "The estimator deserves to receive the full bonus of " + str(Constants.appeal_reward) + ".")
-    j9 = make_Likert_agreement("The adviser does not deserve to receive " + str(Constants.appeal_reward_split) +
-                               " of the bonus.")
-    a1 = make_Likert_agreement("I blame the estimator for his/her estimate.")
-    a2 = make_Likert_agreement(
-        "I blame myself, the adviser, for the estimator's estimate.")
-    a3 = make_Likert_agreement(
-        "The estimator has a legitimate grievance against me, the adviser.")
-    a4 = make_Likert_agreement(
-        "The estimator has a strong case if he/she chooses to pursue an appeal.")
-    a5 = make_Likert_agreement(
-        "I believe that others would rule in the estimator's favor on an appeal.")
-    a6 = make_Likert_agreement("I, the adviser treated the estimator fairly.")
-    a7 = make_Likert_agreement(
-        "The estimator was mistreated by me, the adviser.")
-    a8 = make_Likert_agreement(
-        "The estimator deserves to receive the full bonus of " + str(Constants.appeal_reward) + ".")
-    a9 = make_Likert_agreement("I, the adviser, do not deserve to receive " + str(Constants.appeal_reward_split) +
-                               " of the bonus.")
-
     estimator_opposite_appeal_payoff = models.CurrencyField(initial=c(0))
 
     # Chooses a grid. Will choose a random grid-3x3_grid pair based on what is in the directory. Files must be named
@@ -367,68 +319,13 @@ class Player(BasePlayer):
         initial=None
     )
 
-    # Final Manipulation checks - No restrictions on answers to players - Advisers
-    manip_adviser_final_adviser_payment_question = models.BooleanField(
-        label="In the dot-estimation task, you would get a bigger bonus the more the estimator overestimated the true number of solid dots.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_adviser_final_estimator_payment_question = models.BooleanField(
-        label="In the dot-estimation task, the estimator would get a bigger bonus the more accurate his or her estimate was.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_adviser_final_payment_scheme_disclosed = models.BooleanField(
-        label="In the dot-estimation task, your payment scheme was disclosed to the estimator in the online communication form.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_adviser_final_payment_scheme_not_disclosed = models.BooleanField(
-        label="In the dot-estimation task, your payment scheme was NOT disclosed to the estimator in the online communication form.",
-        widget=widgets.RadioSelect
-    )
-
-    # Final Manipulation checks - No restrictions on answers to players - Estimators
-    manip_estimator_final_adviser_payment_question = models.BooleanField(
-        label="In the dot-estimation task, the adviser would get a bigger bonus the more you overestimated the true number of solid dots.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_estimator_final_estimator_payment_question = models.BooleanField(
-        label="In the dot-estimation task, you would get a bigger bonus the more accurate your estimate was.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_estimator_final_payment_scheme_disclosed = models.BooleanField(
-        label="In the dot-estimation task, the adviser's payment scheme was disclosed to you in the online communication form.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_estimator_final_payment_scheme_not_disclosed = models.BooleanField(
-        label="In the dot-estimation task, the adviser's payment scheme was NOT disclosed to you in the online communication form.",
-        widget=widgets.RadioSelect
-    )
-
-    # Final Manipulation checks - No restrictions on answers to players - Judges
-    manip_judge_final_adviser_payment_question = models.BooleanField(
-        label="In the dot-estimation task, the adviser would get a bigger bonus the more the estimator overestimated the true number of solid dots.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_judge_final_estimator_payment_question = models.BooleanField(
-        label="In the dot-estimation task, the estimator would get a bigger bonus the more accurate his or her estimate was.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_judge_final_payment_scheme_disclosed = models.BooleanField(
-        label="In the dot-estimation task, the adviser’s payment scheme was disclosed to the estimator in the online communication form.",
-        widget=widgets.RadioSelect
-    )
-
-    manip_judge_final_payment_scheme_not_disclosed = models.BooleanField(
-        label="In the dot-estimation task, the adviser’s payment scheme was NOT disclosed to the estimator in the online communication form.",
-        widget=widgets.RadioSelect
-    )
+    # Final Manipulation checks - No restrictions on answers to players - Role Independent
+    manip_final_adviser_payment_question = models.BooleanField(
+        widget=widgets.RadioSelect)
+    manip_final_estimator_payment_question = models.BooleanField(
+        widget=widgets.RadioSelect)
+    manip_final_conflict_disclosed_or_not = models.BooleanField(
+        widget=widgets.RadioSelect)
 
     # Initial Manipulation Questions - Players not allowed to proceed unless answered True
     manip_adv_adviser_payment_question = models.BooleanField(
@@ -459,7 +356,44 @@ class Player(BasePlayer):
     comment = models.LongStringField(
         label="Do you have any comments for the researchers? (Optional)", blank=True)
 
+    # Blame Questions - Estimator
+    blame_EST_I_blame_myself_for_my_guess = make_Likert_agreement(
+        "I blame myself for my guess.")
+    blame_EST_I_blame_the_adviser_for_my_guess = make_Likert_agreement(
+        "I blame the adviser for my guess.")
+    blame_EST_I_have_a_legitimate_grievance_against_the_adviser = make_Likert_agreement(
+        "I have a legitimate grievance against the adviser.")
+    blame_EST_I_have_a_strong_case_if_I_choose_to_pursue_an_appeal = make_Likert_agreement(
+        "I have a strong case if I choose to pursue an appeal.")
+    blame_EST_I_believe_that_others_would_rule_in_my_favor_on_an_appeal = make_Likert_agreement(
+        "I believe that others would rule in my favor on an appeal.")
+    blame_EST_The_adviser_treated_me_fairly = make_Likert_agreement(
+        "The adviser treated me fairly.")
+    blame_EST_I_was_mistreated_by_the_adviser = make_Likert_agreement(
+        "I was mistreated by the adviser.")
+    blame_EST_I_deserve_to_receive_the_full_bonus = make_Likert_agreement(
+        "I deserve to receive the full bonus of $2.00.")
+
+    # Blame Questions - Judge
+    blame_JUDGE_I_blame_the_estimator_for_their_guess = make_Likert_agreement(
+        "I blame the estimator for their guess.")
+    blame_JUDGE_I_blame_the_adviser_for_the_estimators_guess = make_Likert_agreement(
+        "I blame the adviser for the estimator's guess.")
+    blame_JUDGE_The_estimator_has_a_legitimate_grievance_against_the_adviser = make_Likert_agreement(
+        "The estimator has a legitimate grievance against the adviser.")
+    blame_JUDGE_The_estimator_has_a_strong_case_if_he_or_she_choses_to_pursue_an_appeal = make_Likert_agreement(
+        "The estimator has a strong case if he or she choses to pursue an appeal.")
+    blame_JUDGE_I_believe_that_others_would_rule_in_the_estimators_favor_on_an_appeal = make_Likert_agreement(
+        "I believe that others would rule in the estimator's favor on an appeal.")
+    blame_JUDGE_The_adviser_treated_the_estimator_fairly = make_Likert_agreement(
+        "The adviser treated the estimator fairly.")
+    blame_JUDGE_The_estimator_was_mistreated_by_the_adviser = make_Likert_agreement(
+        "The estimator was mistreated by the adviser.")
+    blame_JUDGE_The_estimator_deserves_to_receive_the_full_bonus = make_Likert_agreement(
+        "The estimator deserves to receive the full bonus of $2.00.")
+
     # 6 Player Group - 1 triplet for disclosure and 1 triplet for non-disclosure conditions
+
     def role(self):
         if 1 <= self.id_in_group <= 2:
             return 'adviser'
