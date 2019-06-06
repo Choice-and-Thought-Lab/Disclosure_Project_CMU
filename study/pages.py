@@ -387,6 +387,7 @@ class PostQuestions(Page):
 
 class ClarificationQuestions(Page): 
     form_model = 'player'
+    form_fields = ['estimator_appeal_question', 'judge_bonus_awarded_clarify', 'judge_bonus_not_awarded_clarify']
     
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()

@@ -11,9 +11,14 @@
         {% formfield player.estimator_appeal_question label="Please explain why you decided to file an appeal" %}
     {% else %}
         {% formfield player.estimator_appeal_question label="Please explain why you decided to not file an appeal" %}
+    {% endif %}
 {% else %}
-    {% if player.appeal_granted == True %}
-      
+    {% if player.appeal_granted %}
+        {% formfield player.judge_bonus_awarded_clarify %}
+    {% else %}
+        {% formfield player.judge_bonus_not_awarded_clarify %}
+    {% endif %}
+{% endif %}    
 
 <hr />
 

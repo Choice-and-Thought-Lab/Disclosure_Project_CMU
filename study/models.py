@@ -31,6 +31,16 @@ def make_Likert_agreement(label):
         widget=widgets.RadioSelect
     )
 
+def judge_bonus_label(appeal):
+    if (appeal):
+        return "The estimator should receive " + str(Constants.appeal_reward) + " and the adviser should receive nothing."
+    else: 
+        return "The estimator and adviser should both receive " + str(Constants.appeal_reward_split) + "."
+
+def judge_bonus_field(appeal):
+    return models.LongStringField(
+        label= judge_bonus_label(appeal),
+        blank=True)
 
 class Constants(BaseConstants):
     name_in_url = 'study'
@@ -358,7 +368,11 @@ class Player(BasePlayer):
 
     estimator_appeal_question = models.LongStringField(blank=True)
 
+    judge_bonus_awarded_clarify = judge_bonus_field(True)
+    judge_bonus_not_awarded_clarify = judge_bonus_field(True)
 
+
+    
     # Blame Questions - Estimator
     blame_EST_I_blame_myself_for_my_guess = make_Likert_agreement(
         "I blame myself for my guess.")
@@ -394,6 +408,7 @@ class Player(BasePlayer):
         "The estimator was mistreated by the adviser.")
     blame_JUDGE_The_estimator_deserves_to_receive_the_full_bonus = make_Likert_agreement(
         "The estimator deserves to receive the full bonus of $2.00.")
+
 
     # 6 Player Group - 1 triplet for disclosure and 1 triplet for non-disclosure conditions
 
