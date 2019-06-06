@@ -356,6 +356,9 @@ class Player(BasePlayer):
     comment = models.LongStringField(
         label="Do you have any comments for the researchers? (Optional)", blank=True)
 
+    estimator_appeal_question = models.LongStringField(blank=True)
+
+
     # Blame Questions - Estimator
     blame_EST_I_blame_myself_for_my_guess = make_Likert_agreement(
         "I blame myself for my guess.")

@@ -385,6 +385,22 @@ class PostQuestions(Page):
     def vars_for_template(self):
         return {'header': "To verify that you understood the dot-estimation task, please answer the following three questions:"}
 
+class ClarificationQuestions(Page): 
+    form_model = 'player'
+    
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+
+    def is_displayed(self):
+        return (not self.player.is_adviser()) and self.participant.vars['expiry'] - time.time() > 3
+
+    def vars_for_template(self):
+        return {'header': "To help us understand why you made the decision you did ,please answer the following question"}
+
 
 class Conclusion(Page):
     def vars_for_template(self):
@@ -476,6 +492,7 @@ page_sequence = [
     JudgeCaseAndJudgment,
     Blame,
     PostQuestions,
+    ClarificationQuestions,
     Demographics1,
     Demographics2,
     Comments,
