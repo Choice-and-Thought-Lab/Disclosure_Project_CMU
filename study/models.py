@@ -33,13 +33,13 @@ def make_Likert_agreement(label):
 
 def judge_bonus_label(appeal):
     if (appeal):
-        return "The estimator should receive " + str(Constants.appeal_reward) + " and the adviser should receive nothing."
+        return "The estimator should receive " + str(Constants.appeal_reward) + " and the adviser should receive nothing"
     else: 
-        return "The estimator and adviser should both receive " + str(Constants.appeal_reward_split) + "."
+        return "The estimator and adviser should both receive " + str(Constants.appeal_reward_split)
 
 def judge_bonus_field(appeal):
     return models.LongStringField(
-        label= judge_bonus_label(appeal),
+        label= "Why did you decide that " + judge_bonus_label(appeal) + "?",
         blank=True)
 
 class Constants(BaseConstants):
