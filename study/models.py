@@ -363,6 +363,16 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
+    manip_est_judge_payment_question = models.BooleanField(
+        label="The estimator got a bigger bonus the more accurate their estimate was.",
+        widget=widgets.RadioSelect
+    )
+
+    manip_adv_judge_payment_question = models.BooleanField(
+        label="The advisor got a bigger bonus the more the estimator overestimated the true number of solid dots..",
+        widget=widgets.RadioSelect
+    )
+
     comment = models.LongStringField(
         label="Do you have any comments for the researchers? (Optional)", blank=True)
 

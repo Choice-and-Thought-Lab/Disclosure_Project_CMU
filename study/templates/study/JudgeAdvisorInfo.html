@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block content %}
+
+<h3>Advisor's Payment </h3>
+
+<p>
+  Advisers got bigger bonuses the more estimators overestimated the true number of solid dots.
+</p>
+
+<p>For example, suppose the correct number of solid dots were <strong>450</strong>, the advisers' compensation scheme
+  was shown as follows:</p>
+
+{% include "./PaymentsTable.html" with answer=450 role=player.role %}
+
+<hr />
+
+<p>Advisers gave advice using an online communication form, like the one shown below.</p>
+
+<p>Note that the advisers' payment scheme <strong>was{% if player.disclosure == False %} NOT{% endif %}
+    disclosed</strong>
+  to the estimators on the communcation form. That is, estimators <strong>would
+    {% if player.disclosure == False %}
+    NOT
+    {% endif %}
+    know</strong> when making their estimates that advisers would be paid a bigger bonus the more estimators
+  overestimated the correct number of solid dots.
+</p>
+
+
+{% comment %} Manipulation Checks specific to Judges {% endcomment %}
+{% comment %} Not letting player advance unless these are answered as True {% endcomment %}
+<p>To ensure that you understand the instructions, please answer the following question:</p>
+{% formfield player.manip_adv_judge_payment_question %}
+
+<hr />
+
+{% next_button %}
+
+{% endblock %}

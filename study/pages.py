@@ -302,6 +302,60 @@ class JudgeBegin(Page):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
+class JudgeEstimatorInfo(Page):
+    form_model = 'player'
+    form_fields = ['manip_est_judge_payment_question']
+
+    def manip_est_judge_payment_question_error_message(self, value):
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_judge() and self.participant.vars['expiry'] - time.time() > 3
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+
+class JudgeAdvisorInfo(Page):
+    form_model = 'player'
+    form_fields = ['manip_adv_judge_payment_question']
+
+    def manip_adv_judge_payment_question_error_message(self, value):
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_judge() and self.participant.vars['expiry'] - time.time() > 3
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+
+class JudgeExample(Page):
+    form_model = 'player'
+
+    def manip_adv_judge_payment_question_error_message(self, value):
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_judge() and self.participant.vars['expiry'] - time.time() > 3
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+
+
 
 class JudgeCaseAndJudgment(Page):
     form_model = 'player'
@@ -489,6 +543,9 @@ page_sequence = [
     EstReveal,
     EstAppeal,
     EstPostAppeal,
+    JudgeEstimatorInfo,
+    JudgeAdvisorInfo,
+    JudgeExample,
     JudgeBegin,
     JudgeCaseAndJudgment,
     Blame,
