@@ -364,12 +364,12 @@ class Player(BasePlayer):
     )
 
     manip_est_judge_payment_question = models.BooleanField(
-        label="The estimator got a bigger bonus the more accurate their estimate was.",
+        label="The estimator will get a bigger bonus the more accurate their estimate is.",
         widget=widgets.RadioSelect
     )
 
     manip_adv_judge_payment_question = models.BooleanField(
-        label="The advisor got a bigger bonus the more the estimator overestimated the true number of solid dots..",
+        label="The advisor will get a bigger bonus the more the estimator overestimated the true number of solid dots..",
         widget=widgets.RadioSelect
     )
 
