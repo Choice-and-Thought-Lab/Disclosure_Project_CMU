@@ -256,7 +256,7 @@ class Player(BasePlayer):
     )
 
     # Demographic questions
-    d1 = models.IntegerField(
+    gender = models.IntegerField(
         label="What is your gender?",
         choices=[
             [1, 'Male'],
@@ -265,13 +265,13 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         blank=True
     )
-    d2 = models.IntegerField(
+    age = models.IntegerField(
         label="What is your age?",
         min=18,
         max=130,
         blank=True
     )
-    d3 = models.IntegerField(
+    race = models.IntegerField(
         label="What is your race?",
         choices=[
             [1, 'White'],
@@ -284,7 +284,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         blank=True
     )
-    d4 = models.IntegerField(
+    education = models.IntegerField(
         label="Please indicate the highest level of education completed.",
         choices=[
             [1, 'Grammar school'],
@@ -300,7 +300,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         blank=True
     )
-    d5 = models.IntegerField(
+    income = models.IntegerField(
         label="Please indicate your current household income in U.S. dollars",
         choices=[
             [1, 'Under $10,000'],
