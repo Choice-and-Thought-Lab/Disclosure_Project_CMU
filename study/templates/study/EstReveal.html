@@ -32,10 +32,8 @@
 
 <p>Your adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>.</p>
 
-<p>These payoffs were based on the following compensation scheme:</p>
 
-{% include "./PaymentsTable.html" with answer=player.get_correct_answer role='adviser' %}
-
+{% include "./PaymentsTable.html" with answer=player.get_correct_answer role=player.role %}
 <hr />
 
 <p>Note that your adviser earned a bigger bonus the more you overestimated the true number of solid dots.</p>

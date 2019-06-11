@@ -43,6 +43,8 @@
     </div>
 </div>
 
+<br>
+
 <p>
     Note that the adviser’s payment scheme <strong>was{% if player.disclosure == False %} NOT{% endif %}
         disclosed</strong> to the estimator on the online communication form. That
@@ -51,7 +53,9 @@
     estimator overestimated the correct number of dots.
 </p>
 
+<br>
 <hr />
+<br>
 
 <p>The estimator attempted to estimate the number of solid dots in the 30x30 grid. The estimator knew that the number of
     dots could vary from 0 – 900, but they were only able to see the small 3x3 subset of the grid highlighted in yellow
@@ -72,6 +76,8 @@
 {% include "./PaymentsTable.html" with answer=player.get_correct_answer role=player.role %}
 <hr />
 
+<br>
+
 <h3>Your Judgment</h3>
 <p>
     Now, we’d like you to make a decision about allocating bonuses.
@@ -89,6 +95,7 @@
     adviser.</p>
 <p>If you think that the estimator was treated fairly, you should award the estimator and adviser $1.00 apiece.</p>
 
+<br>
 <p>
     <strong>To summarize:</strong>
 

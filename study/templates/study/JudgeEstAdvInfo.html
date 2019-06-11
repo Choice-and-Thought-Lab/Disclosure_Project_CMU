@@ -6,33 +6,31 @@
 
 <h3>Estimator's Payment</h3>
 
-<p>
-  The dots estimation task had the following compensation scheme:</p>
-<p>
-  Estimators will get bigger bonuses the more accurate their estimates are.
-</p>
 
-<p>For example, suppose the correct number of solid dots were <strong>450</strong>, the estimators' compensation scheme
-  was shown as follows:</p>
-{% include "./PaymentsTable.html" with answer=450 role='estimator' %}
+<p> The estimator will be rewarded for the accuracy of his or her estimate of the correct number of solid dots in the 30x30 grid that you see.</p>
+
+<p> <strong> If the estimator's estimate is within 10 dots of the correct number, </strong> the estimator will receive a bonus of $5.00 </p>
+
+<p> <strong>The estimator will receive a smaller bonus the further his or her estimate is from the correct number.</strong> </p>
+
+<p> <strong> If the estimator's estimate is off by more than 40,  </strong>he or she will receive no bonus.</p>
+
+
 <hr />
 
+<h3>Adviser's Payment </h3>
+
+<p> The adviser will receive a bonus <strong> if the estimator provides an estimate that is greater than the correct value. </strong></p>
+<p> <strong>The adviser will receive a bigger bonus the further his or her estimate is from the correct number. </strong></p>
+<p> The adviser will receive a $5.00 bonus <strong> if the estimator provides an estimate that is more than 40 dots or more over the correct value.</strong></p>
+
 <hr />
 
-<h3>Advisor's Payment </h3>
+For example, suppose the correct number of solid dots were 450, the compensation scheme would be as follows:
 
-<p>
-  Advisers will get bigger bonuses the more estimators overestimated the true number of solid dots.
-</p>
-
-<p>For example, suppose the correct number of solid dots were <strong>450</strong>, the advisers' compensation scheme
-  was shown as follows:</p>
+<hr />
 
 {% include "./PaymentsTable.html" with answer=450 role=player.role %}
-
-<hr />
-
-<p>Advisers gave advice using an online communication form, like the one shown below.</p>
 
 
 {% comment %} Manipulation Checks specific to Judges {% endcomment %}
@@ -40,7 +38,6 @@
 <p>To ensure that you understand the instructions, please answer the following question:</p>
 {% formfield player.manip_adv_judge_payment_question %}
 
-<p>To ensure that you understand the instructions, please answer the following question:</p>
 {% formfield player.manip_est_judge_payment_question %}
 
 <hr />

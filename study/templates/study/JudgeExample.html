@@ -4,19 +4,10 @@
 
 {% block content %}
 
-<h3> Example</h3>
+<h3> Communication Form (Example)</h3>
 
-<p>Note that the advisers' payment scheme <strong>was{% if player.disclosure == False %} NOT{% endif %}
-  disclosed</strong>
-to the estimators on the communcation form. That is, estimators <strong>would
-  {% if player.disclosure == False %}
-  NOT
-  {% endif %}
-  know</strong> when making their estimates that advisers would be paid a bigger bonus the more estimators
-overestimated the correct number of solid dots.
-</p>
+<p>Advisers gave advice using an online communication form, like the one shown below:</p>
 
-<p>An example of a communication form from an adviser to an estimator: </p>
 {% comment %} Sample communication form goes here {% endcomment %}
 <div align="center" style="border: thin solid black">
   {% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}
@@ -30,6 +21,18 @@ overestimated the correct number of solid dots.
   </div>
 </div>
 <hr />
+
+
+<p>Note that the advisers' payment scheme <strong>was{% if player.disclosure == False %} NOT{% endif %}
+  disclosed</strong>
+to the estimators on the communcation form. That is, estimators <strong>would
+  {% if player.disclosure == False %}
+  NOT
+  {% endif %}
+  know</strong> when making their estimates that advisers would be paid a bigger bonus the more estimators
+overestimated the correct number of solid dots.
+</p>
+
 
 {% next_button %}
 

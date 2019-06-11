@@ -471,7 +471,7 @@ class Demographics1(Page):
 
 class Demographics2(Page):
     form_model = 'player'
-    form_fields = ['d1', 'd2', 'd3', 'd4', 'd5']
+    form_fields = ['gender', 'age', 'race', 'education', 'income']
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
