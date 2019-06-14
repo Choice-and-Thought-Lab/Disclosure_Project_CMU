@@ -379,7 +379,7 @@ class Player(BasePlayer):
     estimator_appeal_question = models.LongStringField(blank=True)
 
     judge_bonus_awarded_clarify = judge_bonus_field(True)
-    judge_bonus_not_awarded_clarify = judge_bonus_field(True)
+    judge_bonus_not_awarded_clarify = judge_bonus_field(False)
 
 
     
