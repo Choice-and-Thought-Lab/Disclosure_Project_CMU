@@ -7,31 +7,19 @@
 <h3>Estimator's Payment</h3>
 
 
-<p> The estimator will be rewarded for the accuracy of his or her estimate of the correct number of solid dots in the 30x30 grid that you see.</p>
+<p> Estimators would get bigger bonuses the more accurate their estimates were.</p>
 
-<p> <strong> If the estimator's estimate is within 10 dots of the correct number, </strong> the estimator will receive a bonus of $5.00 </p>
+<p> <strong> Estimators could earn money if their estimate was close to the correct answer. 
+  For example, if the estimator’s guess was within 10 of the correct answer, he or she would earn $5.00. </strong> </p>
 
-<p> <strong>The estimator will receive a smaller bonus the further his or her estimate is from the correct number.</strong> </p>
-
-<p> <strong> If the estimator's estimate is off by more than 40,  </strong>he or she will receive no bonus.</p>
-
-
-<hr />
-
+<br>
 <h3>Adviser's Payment </h3>
 
-<p> The adviser will receive a bonus <strong> if the estimator provides an estimate that is greater than the correct value. </strong></p>
-<p> <strong>The adviser will receive a bigger bonus the further his or her estimate is from the correct number. </strong></p>
-<p> The adviser will receive a $5.00 bonus <strong> if the estimator provides an estimate that is more than 40 dots or more over the correct value.</strong></p>
+<p> Advisers could earn money if the estimator’s guess was too high. 
+  For example, if the estimator’s guess was 40 or more over the correct answer, the adviser would earn $5.00. Advisers would get bigger bonuses the more estimators overestimated the number of solid dots.</p>
 
 <hr />
-
-For example, suppose the correct number of solid dots were 450, the compensation scheme would be as follows:
-
-<hr />
-
-{% include "./PaymentsTable.html" with answer=450 role=player.role %}
-
+<br>
 
 {% comment %} Manipulation Checks specific to Judges {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
@@ -41,6 +29,8 @@ For example, suppose the correct number of solid dots were 450, the compensation
 {% formfield player.manip_est_judge_payment_question %}
 
 <hr />
+<hr />
+
 
 {% next_button %}
 
