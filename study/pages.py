@@ -304,7 +304,7 @@ class JudgeBegin(Page):
 
 class JudgeEstAdvInfo(Page):
     form_model = 'player'
-    form_fields = ['manip_est_judge_payment_question', 'manip_adv_judge_payment_question']
+    form_fields = ['manip_est_judge_payment_question', 'manip_adv_judge_payment_question', 'manip_judge_disclosure_question']
 
     def manip_est_judge_payment_question_error_message(self, value):
         if value == False:

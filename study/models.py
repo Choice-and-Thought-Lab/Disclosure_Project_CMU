@@ -373,6 +373,16 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
+    manip_judge_disclosure_question = models.StringField(
+        label="Did estimators know that advisors would get a bonus if they overestimated?",
+        widget=widgets.RadioSelect,
+        choices=[
+            "No, they didn’t",
+            "Yes, they did",
+            "Some estimators were told and some were not told"
+        ]
+    )
+
     comment = models.LongStringField(
         label="Do you have any comments for the researchers? (Optional)", blank=True)
 

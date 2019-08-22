@@ -6,20 +6,23 @@
 
 <h3>Estimator's Payment</h3>
 
+<p>Estimators were paid based on their accuracy. </p> 
+<p>If the estimator’s guess was within 10 of the correct answer, he or she would earn a bonus of $5.00. </p>
 
-<p><strong>  Estimators could earn money if their estimate was close to the correct answer. Estimators would get bigger bonuses the more accurate their estimates were. </strong></p>
+<p>For example, If the estimator’s guess was within 40 of the correct answer (but not within 10), he or she would earn a bonus of $2.00 </p>
 
-<p>
-  For example, if the estimator’s guess was within 10 of the correct answer, he or she would earn $5.00. </p>
-
-<br>
 <h3>Adviser's Payment </h3>
 
-<p> <strong> Advisers could earn money if the estimator’s guess was too high. Advisers would get bigger bonuses the more estimators overestimated the number of solid dots. </strong> </p>
-<p>  
-  For example, if the estimator’s guess was 40 or more over the correct answer, the adviser would earn $5.00. </p>
-<hr />
+<p>Advisors had different incentives: Advisors were paid to the extent that estimators overestimated the true number of solid dots. </p> 
+<p>For example, Advisors received a bonus of $2.00 if the estimator overestimated the true number of dots by 11-40. </p>
+<p>For exampleAdvisors received a bonus of $5.00 if the estimator overestimated the true number of dots by more than 40.</p>
+
 <br>
+
+<p>Here is the most critical thing for you to know:</p>
+<p>For some pairs, the estimators did not know that the advisors wanted them to overestimate the number of dots, and the advisors knew that estimators did not know.</p>
+<p>For other pairs, along with the advice that they gave to estimators, advisors also informed estimators that the advisor would be paid more if they estimator overestimated the true number of solid dots.  The warning was as follows:</p> 
+
 
 {% comment %} Manipulation Checks specific to Judges {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
@@ -27,6 +30,8 @@
 {% formfield player.manip_adv_judge_payment_question %}
 
 {% formfield player.manip_est_judge_payment_question %}
+
+{% formfield player.manip_judge_disclosure_question %}
 
 <hr />
 <hr />

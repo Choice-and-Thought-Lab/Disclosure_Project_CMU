@@ -7,18 +7,7 @@
 <h3> Communication Form (Example)</h3>
 
 <p>
-  Advisers communicated with estimators using an online communication form, like the one shown below.
-</p>
-
-
-<p><strong>Note that the advisers' payment scheme was{% if player.disclosure == False %} NOT{% endif %}
-  disclosed
-to the estimators on the communication form.  </strong></strong> That is, estimators <strong>would
-  {% if player.disclosure == False %}
-  NOT
-  {% endif %}
-  know</strong> when making their estimates that advisers would be paid a bigger bonus the more estimators
-overestimated the correct number of solid dots.
+  Advisors gave advice to estimators, in the form: 
 </p>
 
 <div align="center" style="border: thin solid black">
@@ -34,10 +23,9 @@ overestimated the correct number of solid dots.
 </div>
 <hr />
 
-
-
-
-
+<p>
+  where {% formfield player.recommendation %}  is the number the advisor specified.  Estimators received this advice before they made their estimate.
+</p>
 
 
 {% next_button %}

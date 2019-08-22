@@ -10,15 +10,15 @@ Introduction
 {% if player.role == 'adviser' %}
 <p>Thank you for participating in this study. You will play the role of <strong>ADVISER</strong>. You have been paired
     with an "Estimator."</p>
+<br />
 {% elif player.role == 'estimator' %}
 <p>Thank you for participating in this study. You will play the role of <strong>ESTIMATOR</strong>. You have been paired
     with an "Adviser."</p>
-{% elif player.role == 'judge' %}
-<p>Thank you for participating in this study. You will play the role of <strong>JUDGE</strong>. You have been paired
-    with an "Adviser" and an "Estimator."</p>
-{% endif %}
-
 <br />
+{% elif player.role == 'judge' %}
+<p> In this study, you will play the role of a neutral judge, and render a judgment.  Please read the instructions very carefully, because it is crucial that you have full information to make a reasoned judgment.  We will be asking some comprehension questions as you go along; you will get paid a bonus (double your base hit) if you answer them all correctly. 
+Please enter your Amazon MTurk ID to continue: </p>
+{% endif %}
 
 <!-- MTurk Id -->
 {% for field in form %}
