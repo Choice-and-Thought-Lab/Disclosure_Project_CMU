@@ -13,20 +13,34 @@
 
 <h3>Adviser's Payment </h3>
 
-<p>Advisors had different incentives: Advisors were paid to the extent that estimators overestimated the true number of solid dots. </p> 
-<p>For example, Advisors received a bonus of $2.00 if the estimator overestimated the true number of dots by 11-40. </p>
-<p>For exampleAdvisors received a bonus of $5.00 if the estimator overestimated the true number of dots by more than 40.</p>
+<p>Advisors had different incentives: Advisors were paid to the extent that estimators <i>overestimated the true number of solid dots.  </i> </p> 
+<p> Advisors received a bonus of $2.00 if the estimator overestimated the true number of dots by 11-40. </p>
+<p> Advisors received a bonus of $5.00 if the estimator overestimated the true number of dots by more than 40.</p>
 
-<br>
+<hr>
 
 <p>Here is the most critical thing for you to know:</p>
-<p>For some pairs, the estimators did not know that the advisors wanted them to overestimate the number of dots, and the advisors knew that estimators did not know.</p>
-<p>For other pairs, along with the advice that they gave to estimators, advisors also informed estimators that the advisor would be paid more if they estimator overestimated the true number of solid dots.  The warning was as follows:</p> 
+<p> <i> For some pairs, the estimators did not know that the advisors wanted them to overestimate the number of dots, and the advisors knew that estimators did not know. </i></p>
+<p> <i> For other pairs, along with the advice that they gave to estimators, advisors also informed estimators that the advisor would be paid more if they estimator overestimated the true number of solid dots.  The warning was as follows: </i></p> 
+
+
+<div align="center" style="border: thin solid black">
+  {% include "./CommunicationFormTemplate.html" with player=player group=group disclosure=True type="example" %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col text-center mb-3">
+        {% comment %} <h1><strong>542</strong></h1> {% endcomment %}
+        <h1><strong>---</strong></h1>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
 
 
 {% comment %} Manipulation Checks specific to Judges {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
-<p>To ensure that you understand the instructions, please answer the following question:</p>
+<p>To ensure that you understand the instructions, please answer the following questions:</p>
 {% formfield player.manip_adv_judge_payment_question %}
 
 {% formfield player.manip_est_judge_payment_question %}

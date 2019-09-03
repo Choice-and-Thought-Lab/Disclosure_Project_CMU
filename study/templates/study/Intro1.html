@@ -7,23 +7,43 @@ Introduction
 
 {% block content %}
 
+
 {% if player.role == 'adviser' %}
-<p>Thank you for participating in this study. You will play the role of <strong>ADVISER</strong>. You have been paired
-    with an "Estimator."</p>
-<br />
+<p> Thank you for participating in our survey!</p>
+
+<p> You will receive $0.50 base payment within 24 hours and any bonus payments that you earned within 5 business days. Bonus payments may be up to $7.00. </p>
+
+{% for field in form %}
+{% formfield field %}
+{% endfor %}
+<p> In this study, there are two roles: Advisor and Estimator.  You have been randomly assigned to play the role of advisor. You have been paired with another MTurker who will play the role of estimator. The advisor will give advice to the estimator, who will make a decision that will determine both of your bonuses.</p> 
+
+<p>In the course of the experiment, both of the individuals who have been paired together - the advisor and estimator - will be asked some basic comprehension questions.  You will both be eliminated from the study and not be eligible for any bonuses if either of you answer any of these questions incorrectly.  So, please pay close attention.</p> 
+
 {% elif player.role == 'estimator' %}
-<p>Thank you for participating in this study. You will play the role of <strong>ESTIMATOR</strong>. You have been paired
-    with an "Adviser."</p>
-<br />
-{% elif player.role == 'judge' %}
-<p> In this study, you will play the role of a neutral judge, and render a judgment.  Please read the instructions very carefully, because it is crucial that you have full information to make a reasoned judgment.  We will be asking some comprehension questions as you go along; you will get paid a bonus (double your base hit) if you answer them all correctly. 
-Please enter your Amazon MTurk ID to continue: </p>
-{% endif %}
+<p> Thank you for participating in our survey!</p>
+
+<p> You will receive $0.50 base payment within 24 hours and any bonus payments that you earned within 5 business days. Bonus payments may be up to $7.00. </p>
 
 <!-- MTurk Id -->
 {% for field in form %}
 {% formfield field %}
 {% endfor %}
+
+<p> In this study, there are two roles: Advisor and Estimator.  You have been randomly assigned to play the role of estimator. You have been paired with another MTurker who will play the role of advisor. The advisor will give advice to the estimator, who will make a decision that will determine both of your bonuses.</p> 
+
+<p>In the course of the experiment, both of the individuals who have been paired together - the advisor and estimator - will be asked some basic comprehension questions.  You will both be eliminated from the study and not be eligible for any bonuses if either of you answer any of these questions incorrectly.  So, please pay close attention.</p> 
+
+{% elif player.role == 'judge' %}
+<p> In this study, you will play the role of a neutral judge, and render a judgment.  Please read the instructions very carefully, because it is crucial that you have full information to make a reasoned judgment.  We will be asking some comprehension questions as you go along; you will get paid a bonus (double your base hit) if you answer them all correctly. </p>
+
+<!-- MTurk Id -->
+{% for field in form %}
+{% formfield field %}
+{% endfor %}
+
+{% endif %}
+
 
 {% next_button %}
 

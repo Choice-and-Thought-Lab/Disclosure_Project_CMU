@@ -11,7 +11,7 @@
 </p>
 
 <div align="center" style="border: thin solid black">
-  {% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}
+  {% include "./CommunicationFormTemplate.html" with player=player group=group disclosure=False type="example" %}
   <div class="container-fluid">
     <div class="row">
       <div class="col text-center mb-3">
@@ -24,7 +24,7 @@
 <hr />
 
 <p>
-  where {% formfield player.recommendation %}  is the number the advisor specified.  Estimators received this advice before they made their estimate.
+  where "---" is the number the advisor specified.  Estimators received this advice before they made their estimate.
 </p>
 
 

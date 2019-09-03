@@ -8,7 +8,6 @@
 
 <p>
     Now it is time for you, as the judge, to evaluate an interaction between a particular adviser and estimator.
-
 </p>
 <p>
     In this case, the adviser saw this 30x30 grid and learned that that correct number of solid dots in this grid was
@@ -33,7 +32,7 @@
 </p>
 
 <div align="center" style="border: thin solid black">
-    {% include "./CommunicationFormTemplate.html" with player=player group=group type="actual"%}
+    {% include "./CommunicationFormTemplate.html" with player=player group=group disclosure=False  type="actual"%}
     <div class="container-fluid">
         <div class="row">
             <div class="col text-center mb-3">
@@ -43,26 +42,26 @@
     </div>
 </div>
 
-<br>
-
-<p>
-    Note that the adviser’s payment scheme <strong>was{% if player.disclosure == False %} NOT{% endif %}
-        disclosed</strong> to the estimator on the online communication form. That
-    is, the <strong>estimator did{% if player.disclosure == False %} NOT{% endif %} know</strong> when making his or her
-    estimates that the adviser would be paid a bonus if the
-    estimator overestimated the correct number of dots.
-</p>
 
 <br>
+
+{% if player.disclosure == False %}
+<p> In the case of this pair, the adviser’s payment scheme <strong>  was NOT disclosed </strong> to the estimator on the online communication form. That is, the estimator <strong> did NOT know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p>
+{% else %}
+<p> In the case of this pair, the adviser’s payment scheme <strong>  WAS disclosed </strong> to the estimator on the online communication form. That is, the estimator <strong> knew </strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p> 
+{% endif %}
+<br>
+
 <hr />
 <br>
 
-<p>The estimator attempted to estimate the number of solid dots in the 30x30 grid. The estimator knew that the number of
-    dots could vary from 0 – 900, but they were only able to see the small 3x3 subset of the grid highlighted in yellow
-    along with the advice that the adviser provided on the communication form above.</p>
+<p>The estimator attempted to estimate the number of solid dots in the 30x30 grid. The estimator knew that the number of dots could vary from 0 – 900, but they were only able to see the small 3x3 subset of the grid highlighted in yellow along with the advice that the adviser provided on the communication form above.</p>
 
-<p>Based on the adviser’s recommendation, the estimator provided an estimate of <strong
+<p>Based on the small grid they saw and the adviser’s recommendation, the estimator provided an estimate of <strong
         style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
+
+<p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}, that the advisor knew. </p> 
+
 
 <p>
     As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and the
@@ -70,13 +69,6 @@
     <strong>{{ player.matched_estimator.grid_reward }}</strong>.
 
 </p>
-<p>
-    These payments were based on the payment table below:
-</p>
-{% include "./PaymentsTable.html" with answer=player.get_correct_answer role=player.role %}
-<hr />
-
-<br>
 
 <h3>Your Judgment</h3>
 <p>
@@ -90,6 +82,9 @@
 </p>
 <p>It is your job, as the judge, to decide how to split the money. You should make this decision based on whether you
     think the estimator was treated unfairly by the adviser during the dots-estimation task.</p>
+   
+<p> When making your judgment, please recall that the advisor<strong> was {% if not player.disclosure %} not {% endif %} informed </strong>that the estimator would receive a larger bonus if he/she overestimated the correct number of solid dots.</p>
+
 
 <p>If you think that the estimator was treated unfairly, you should award $2.00 to the estimator and $0.00 to the
     adviser.</p>

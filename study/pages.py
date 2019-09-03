@@ -527,7 +527,7 @@ page_sequence = [
     EstAppeal,
     EstPostAppeal,
     JudgeEstAdvInfo,
-    JudgeExample,
+    #JudgeExample,
     JudgeBegin,
     JudgeCaseAndJudgment,
     Blame,

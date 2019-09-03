@@ -62,6 +62,12 @@ class Constants(BaseConstants):
     estimator_bonus_within_31_and_40 = c(1)
     estimator_bonus_greater_than_40 = c(0)
 
+    estimator_bonus_within_neg_40_and_11 = c(2)
+    estimator_bonus_within_11_and_40 = c(2)
+
+
+
+
     # New PayOffs - adviser
     adviser_bonus_less_than_neg_40 = c(0)
     adviser_bonus_within_neg_40_and_31 = c(0)
@@ -73,6 +79,9 @@ class Constants(BaseConstants):
     adviser_bonus_within_21_and_30 = c(1.5)
     adviser_bonus_within_31_and_40 = c(2)
     adviser_bonus_greater_than_40 = c(5)
+
+    adviser_bonus_within_11_and_40 = c(2)
+
 
     appeal_reward = c(2)  # given to estimator on appeal win
     # given to both estimator and adviser if appeal lost or no appeal
@@ -174,6 +183,7 @@ class Group(BaseGroup):
 
     example_grid_number = models.IntegerField()
     example_grid_path = models.StringField()
+    example_grid_num_dots = models.StringField()
     example_small_grid_path = models.StringField()
     estimator_opposite_appeal_payoff = models.CurrencyField(initial=c(0))
 
@@ -200,6 +210,7 @@ class Group(BaseGroup):
         self.example_grid_path = 'study/' + grid_choices.pop()
         self.example_grid_number = int(
             re.search(r"grid([0-9]*)_[0-9]*\.svg", self.example_grid_path).group(1))
+        self.example_grid_num_dots = self.example_grid_path[12:15]
         self.example_small_grid_path = 'study/small_grid' + \
             str(self.example_grid_number) + '.svg'
         print("Example------------------------ GridNum: ", self.example_grid_number,
@@ -369,7 +380,7 @@ class Player(BasePlayer):
     )
 
     manip_adv_judge_payment_question = models.BooleanField(
-        label="The adviser will get a bigger bonus the more the estimator overestimated the true number of solid dots..",
+        label="The adviser will get a bigger bonus the more the estimator overestimated the true number of solid dots.",
         widget=widgets.RadioSelect
     )
 
@@ -487,6 +498,9 @@ class Player(BasePlayer):
 
     def is_timed_out(self):
         return self.participant.vars['expiry'] - time.time() <= 3
+
+    def number_off(self):
+        return self.matched_estimator().estimate - self.group.correct_answer
 
     # Calculates rewards based on the adviser's recommendation and estimator's estimate, then stores them per player
     # in grid_reward.
