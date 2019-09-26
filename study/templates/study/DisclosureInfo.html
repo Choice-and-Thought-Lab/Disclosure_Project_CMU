@@ -11,21 +11,24 @@
 <p>You will give the estimator advice using an online communication form like the one shown below.</p>
 {% if player.disclosure == True %}
 
-<p> As you will see, the estimator will be told that your goal is for him/her to overestimate the number of solid dots.  </p> 
+<p> <i> As you will see, the estimator will be told that your goal is for him/her to overestimate the number of solid dots. </i> </p> 
 {% else %}
 
-<p> As you will see, the estimator will not be told that your goal is for him/her to overestimate the number of solid dots.</p>
+<p> <i> As you will see, the estimator will not be told that your goal is for him/her to overestimate the number of solid dots. </i></p>
 
 {% endif %}
 {% elif player.role == 'estimator' %}
 <p>The adviser will give you, the estimator, advice using an online communication form like the one shown below.</p>
+
+{% if player.disclosure == True %}
+<p> Your adviser has different interests than yours. Your adviser will receive a bonus only if you overestimate the number of solid dots in the grid.  Along with the advice your adviser gives you, your adviser will give you a disclosure like the one shown below:</p>{% endif %}
 
 {% endif %}
 
 <p>An example of a communication form from an adviser to an estimator: </p>
 {% comment %} Sample communication form goes here {% endcomment %}
 <div align="center" style="border: thin solid black">
-	{% include "./CommunicationFormTemplate.html" with player=player group=group type="example" %}
+	{% include "./CommunicationFormTemplate.html" with player=player group=group type="example" disclosure=True %}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col text-center mb-3">

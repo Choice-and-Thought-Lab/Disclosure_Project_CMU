@@ -20,18 +20,18 @@
 
             </br>
 
+
+            <p><strong>
+                I, your adviser, recommend that the number of solid dots on the 30x30 grid is:
+            </strong></p>
+
             {% if player.disclosure == True or disclosure == True %}
 
-            <p><strong>Important Disclosure: </strong>I, your adviser, will get a bonus if you overestimate the true number of solid dots. </p>
+            <p><strong>Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </p>
 
             <p>So, it is in my interest that you estimate a high number of dots. </p> 
 
             {% endif %}
-
-
-            <p><strong>
-                    I, your adviser, recommend that the number of solid dots on the 30x30 grid is:
-                </strong></p>
 
             {% comment %} {% formfield player.recommendation %} {% endcomment %}
 
