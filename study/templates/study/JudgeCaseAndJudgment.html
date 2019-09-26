@@ -46,9 +46,9 @@
 <br>
 
 {% if player.disclosure == False %}
-<p> In the case of this pair, the adviser’s payment scheme <strong>  was NOT disclosed </strong> to the estimator on the online communication form. That is, the estimator <strong> did NOT know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p>
+<p> In the case of this pair, the adviser <strong>  did NOT disclose </strong> their payment scheme to the estimator on the online communication form. That is, the estimator <strong> did NOT know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p>
 {% else %}
-<p> In the case of this pair, the adviser’s payment scheme <strong>  WAS disclosed </strong> to the estimator on the online communication form. That is, the estimator <strong> knew </strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p> 
+<p> In the case of this pair, the adviser <strong>  did disclose </strong> their payment scheme to the estimator on the online communication form. That is, the estimator <strong> knew </strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p> 
 {% endif %}
 <br>
 
@@ -60,7 +60,7 @@
 <p>Based on the small grid they saw and the adviser’s recommendation, the estimator provided an estimate of <strong
         style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
 
-<p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}, that the advisor knew. </p> 
+<p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}, that the adviser knew. </p> 
 
 
 <p>
@@ -70,47 +70,16 @@
 
 </p>
 
-<h3>Your Judgment</h3>
-<p>
-    Now, we’d like you to make a decision about allocating bonuses.
 
-</p>
-<p>
-    The adviser and the estimator are both eligible to receive additional bonuses for participating. There is
-    {{ Constants.appeal_reward }} to be split between the adviser and the estimator.
+<h4>{{ header }}</h4>
 
-</p>
-<p>It is your job, as the judge, to decide how to split the money. You should make this decision based on whether you
-    think the estimator was treated unfairly by the adviser during the dots-estimation task.</p>
-   
-<p> When making your judgment, please recall that the advisor<strong> was {% if not player.disclosure %} not {% endif %} informed </strong>that the estimator would receive a larger bonus if he/she overestimated the correct number of solid dots.</p>
-
-
-<p>If you think that the estimator was treated unfairly, you should award $2.00 to the estimator and $0.00 to the
-    adviser.</p>
-<p>If you think that the estimator was treated fairly, you should award the estimator and adviser $1.00 apiece.</p>
-
-<br>
-<p>
-    <strong>To summarize:</strong>
-
-    <ul>
-        <li>The correct number of solid dots was <strong>{{ player.get_correct_answer }}</strong>.</li>
-        <li>The adviser told the estimator there were <strong>{{ player.get_recommendation }}</strong> solid dots, and
-            the estimator <strong>was{% if player.disclosure == False %} NOT{% endif %} informed</strong> that the
-            adviser would get a bigger bonus if the estimator overestimated.</li>
-        <li>The estimator estimated there were <strong>{{ player.get_estimate }}</strong> solid dots. </li>
-        <li>As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and
-            the estimator earned
-            <strong>{{ player.matched_estimator.grid_reward }}</strong>.</li>
-    </ul>
-
-</p>
-
-<hr />
-{% formfield player.appeal_granted %}
-
-<hr />
+{% formfield player.manip_final_adviser_payment_question label="In the case, the adviser would get a bigger bonus the more the estimator overestimated the true number of solid dots." %}
+{% formfield player.manip_final_estimator_payment_question label="In the case, the estimator would get a bigger bonus the more accurate his or her estimate was." %}
+{% if player.disclosure == True %}
+    {% formfield player.manip_final_conflict_disclosed_or_not label="In the case, the adviser did disclose their payment scheme to the estimator in the online communication form." %}
+{% else %}
+    {% formfield player.manip_final_conflict_disclosed_or_not label="In the case, the adviser did NOT disclose their payhment scheme to the estimator in the online communication form." %}
+{% endif %}
 
 {% next_button %}
 

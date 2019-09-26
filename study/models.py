@@ -340,6 +340,8 @@ class Player(BasePlayer):
         initial=None
     )
 
+    get_answer_wrong = models.BooleanField()
+
     # Final Manipulation checks - No restrictions on answers to players - Role Independent
     manip_final_adviser_payment_question = models.BooleanField(
         widget=widgets.RadioSelect)
@@ -385,11 +387,11 @@ class Player(BasePlayer):
     )
 
     manip_judge_disclosure_question = models.StringField(
-        label="Did estimators know that advisors would get a bonus if they overestimated?",
+        label="Did the advisers disclose to the estimators that they would get a bonus if they overestimated?",
         widget=widgets.RadioSelect,
         choices=[
-            "No, they didn’t",
             "Yes, they did",
+            "No, they didn’t",
             "Some estimators were told and some were not told"
         ]
     )

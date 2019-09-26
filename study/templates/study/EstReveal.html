@@ -31,17 +31,17 @@
 <p>As a result, you earned a bonus of <strong>{{ player.matched_estimator.grid_reward }}</strong></p>
 
 <p>Your adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>.</p>
-
-
-{% include "./PaymentsTable.html" with answer=player.get_correct_answer role=player.role %}
-<hr />
-
-<p>Note that your adviser earned a bigger bonus the more you overestimated the true number of solid dots.</p>
-
-<p>
-    As you may recall, the adviser <strong>did{% if player.disclosure == False %} NOT{% endif %} notify you</strong>
-    about his or her conflict of interest before you made your estimate.
+<p> 
+{% if player.disclosure == True %} 
+As you were informed,
+{% else %}
+Although your advisor did not inform you about this,
+{% endif %}
+your advisor knew, when providing advice to you, that he she would be paid more if you overestimated the number of solid dots in the grid.  These were the payoffs facing your advisor:  
 </p>
+
+{% include "./PaymentsTable.html" with answer=player.get_correct_answer role="adviser" %}
+<p></p> Because you estimated that there were {{ player.get_estimate }} dots, and there were {{ player.get_correct_answer }} dots, your advisor earned a bonus of {{ player.matched_adviser.grid_reward }}.
 
 <hr />
 

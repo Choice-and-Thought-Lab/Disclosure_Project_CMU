@@ -11,16 +11,14 @@
 </p>
 <p>
     <strong>You and the adviser are both going to receive additional bonuses for participating.</strong> There is
-    <strong>{{ Constants.appeal_reward }}</strong> to be split evenly between yourself and the adviser, for
-    <strong>{{ Constants.appeal_reward_split }}</strong> apiece.
+    <strong>{{ Constants.appeal_reward }}</strong> to be split evenly between you and the adviser
 </p>
 
 <hr />
 
 <h3>Opportunity to file an appeal</h3>
 
-<p>You may file an appeal to keep 100% of the <strong>{{ Constants.appeal_reward }}</strong> bonus if you think that
-    your adviser treated you unfairly in the dots-estimation task.</p>
+<p> If you do nothing, then the $2.00 will be split evenly between you.  However, you may file an appeal to keep 100% of the <strong>$2.00 </strong> bonus if you think that your adviser treated you unfairly in the dots-estimation task.</p>
 
 
 <p>
@@ -29,26 +27,24 @@
     were treated unfairly by your adviser.
 </p>
 
-<p>It will cost you <strong>{{ Constants.appeal_cost }}</strong> to file an appeal with a judge. You will pay this fee
-    <strong>regardless
-        of whether or not you win the appeal.</strong>
+<p>It will cost you <strong>{{ Constants.appeal_cost }}</strong> to file an appeal with a judge. You will not pay this fee, however, if you win the appeal.</strong>
 </p>
 
 <hr />
 
-<h3>How the judge will decide your case</h3>
+<h3>This is how the judge will decide your case</h3>
 <p>
     If you choose to file an appeal, the judge will see that your adviser told you there were
-    <strong>{{ player.get_recommendation }}</strong> dots and
-    that you <strong>were {% if player.disclosure == False %}NOT {% endif %}informed</strong> that your adviser stood to
-    benefit financially if you overestimated.
+    <strong>{{ player.get_recommendation }}</strong> dots
 </p>
+
 <p>
     The judge will know that the correct number of dots is <strong>{{ player.get_correct_answer }}</strong>. The judge
     will also see that
-    you estimated there were <strong>{{ player.get_estimate }}</strong> dots. The judge will see how much both you and
-    your adviser earned.
+    you estimated there were <strong>{{ player.get_estimate }}</strong> dots.
 </p>
+<p> <strong> The judge will also be informed that you were informed that your advisor would benefit if you overestimated the true number of solid dots </strong> </p> 
+ 
 <p><strong>
         The judge will then make a decision about whether you are entitled to 100% of the
         {{ Constants.appeal_reward }} bonus or whether it should be split evenly between you and your adviser.
@@ -57,8 +53,7 @@
 <hr />
 
 <p>
-    <strong>If you file an appeal and the judge decides you were treated unfairly</strong>, you will pay
-    <strong>{{ Constants.appeal_cost }}</strong> and receive <strong>{{ Constants.appeal_reward }}</strong>, while your
+    <strong>If you file an appeal and the judge decides you were treated unfairly</strong>, you will receive <strong>{{ Constants.appeal_reward }}</strong>, while your
     adviser will receive no bonus.
 </p>
 <p>

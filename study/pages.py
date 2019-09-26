@@ -28,6 +28,7 @@ class Intro1(Page):
     form_fields = ['mTurkId']
 
     def error_message(self, values):
+        self.player.get_answer_wrong = True
         if len(values["mTurkId"]) < 5:
             return 'Please enter a valid mTurkId.'
 
@@ -37,6 +38,20 @@ class Intro1(Page):
     def is_displayed(self):
         self.participant.vars['expiry'] = time.time() + 100000
         return self.participant.vars['expiry'] - time.time() > 3
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+
+class Intro15(Page):
+    form_model = 'player'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        self.participant.vars['expiry'] = time.time() + 100000
+        return (not self.player.role == "judge") and self.participant.vars['expiry'] - time.time() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -63,10 +78,12 @@ class AdvPaymentScheme(Page):
                    'manip_adv_estimator_payment_question']
 
     def manip_adv_adviser_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
 
     def manip_adv_estimator_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
 
@@ -96,10 +113,12 @@ class DisclosureInfo(Page):
             return []
 
     def manip_adv_payment_scheme_disclosed_error_message(self, value):
+        self.player.get_answer_wrong = True
         if value == False and self.player.is_adviser():
             return 'Not the right choice. Please read the instructions carefully'
 
     def manip_adv_payment_scheme_not_disclosed_error_message(self, value):
+        self.player.get_answer_wrong = True
         if value == False and self.player.is_adviser():
             return 'Not the right choice. Please read the instructions carefully'
 
@@ -165,6 +184,7 @@ class EstPaymentScheme(Page):
     form_fields = ['manip_est_estimator_payment_question']
 
     def manip_est_estimator_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
 
@@ -307,6 +327,7 @@ class JudgeEstAdvInfo(Page):
     form_fields = ['manip_est_judge_payment_question', 'manip_adv_judge_payment_question', 'manip_judge_disclosure_question']
 
     def manip_est_judge_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
 
@@ -325,6 +346,7 @@ class JudgeExample(Page):
     form_model = 'player'
 
     def manip_adv_judge_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
 
@@ -342,6 +364,32 @@ class JudgeExample(Page):
 
 class JudgeCaseAndJudgment(Page):
     form_model = 'player'
+    form_fields = ['manip_final_adviser_payment_question',
+                   'manip_final_estimator_payment_question', 'manip_final_conflict_disclosed_or_not']
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_judge()
+
+    def before_next_page(self):
+        if self.player.appeal_granted:
+            self.player.recalculate_payOffs_with_appeal(True)
+        else:
+            self.player.recalculate_payOffs_with_appeal(False)
+
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+        
+    def error_message(self, values):
+        """TODO: implement?"""
+
+    def vars_for_template(self):
+        return {'header': "To verify that you understood the case, please answer the following three questions:"}
+
+class JudgeJudgement(Page):
+    form_model = 'player'
     form_fields = ['appeal_granted']
 
     def get_timeout_seconds(self):
@@ -358,7 +406,6 @@ class JudgeCaseAndJudgment(Page):
 
         if self.timeout_happened:
             self.player.set_timeout_data()
-
 
 class WaitForJudgment(WaitPage):
     template_name = 'study/WaitProgress.html'
@@ -414,6 +461,9 @@ class PostQuestions(Page):
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return not self.player.is_judge()
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -514,6 +564,7 @@ class Finish(Page):
 page_sequence = [
     # Consent,
     Intro1,
+    Intro15,
     Intro2,
     AdvPaymentScheme,
     EstPaymentScheme,
@@ -530,6 +581,7 @@ page_sequence = [
     #JudgeExample,
     JudgeBegin,
     JudgeCaseAndJudgment,
+    JudgeJudgement,
     Blame,
     PostQuestions,
     ClarificationQuestions,

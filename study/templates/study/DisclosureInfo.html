@@ -7,8 +7,16 @@
 
 
 {% if player.role == 'adviser' %}
-<p>You will give the estimator advice using an online communication form like the one shown below.</p>
 
+<p>You will give the estimator advice using an online communication form like the one shown below.</p>
+{% if player.disclosure == True %}
+
+<p> As you will see, the estimator will be told that your goal is for him/her to overestimate the number of solid dots.  </p> 
+{% else %}
+
+<p> As you will see, the estimator will not be told that your goal is for him/her to overestimate the number of solid dots.</p>
+
+{% endif %}
 {% elif player.role == 'estimator' %}
 <p>The adviser will give you, the estimator, advice using an online communication form like the one shown below.</p>
 
