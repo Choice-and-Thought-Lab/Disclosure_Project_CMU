@@ -7,20 +7,20 @@
 <h3>{{ header }}</h3>
 
 {% if player.role == 'adviser' %}
-    {% formfield player.manip_final_adviser_payment_question label="In the dot-estimation task, you would get a bigger bonus the more the estimator overestimated the true number of solid dots." %}
-    {% formfield player.manip_final_estimator_payment_question label="In the dot-estimation task, the estimator would get a bigger bonus the more accurate his or her estimate was." %}
+    {% formfield player.manip_final_estimator_payment_question label="In the dot-estimation task, the estimator gets a bigger bonus the more accurate his or her estimate is." %}
+    {% formfield player.manip_final_adviser_payment_question label="In the dot-estimation task, you get a bonus only if the estimator underestimates the true number of solid dots." %}
     {% if player.disclosure == True %}
-        {% formfield player.manip_final_conflict_disclosed_or_not label="In the dot-estimation task, your payment scheme was disclosed to the estimator in the online communication form." %}
+        {% formfield player.manip_final_conflict_disclosed_or_not label="Your payment scheme was disclosed to the estimator in the online communication form." %}
     {% else %}
-        {% formfield player.manip_final_conflict_disclosed_or_not label="In the dot-estimation task, your payment scheme was NOT disclosed to the estimator in the online communication form." %}
+        {% formfield player.manip_final_conflict_disclosed_or_not label="Your payment scheme was NOT disclosed to the estimator in the online communication form." %}
     {% endif %}
 {% elif player.role == 'estimator' %}
-    {% formfield player.manip_final_adviser_payment_question label="In the dot-estimation task, the adviser would get a bigger bonus the more you overestimated the true number of solid dots." %}
     {% formfield player.manip_final_estimator_payment_question label="In the dot-estimation task, you would get a bigger bonus the more accurate your estimate was." %}
+    {% formfield player.manip_final_adviser_payment_question label="In the dot-estimation task, the adviser would get a bonus only if you underestimated the true number of solid dots." %}
     {% if player.disclosure == True %}
-        {% formfield player.manip_final_conflict_disclosed_or_not label="In the dot-estimation task, the adviser's payment scheme was disclosed to you in the online communication form." %}
+        {% formfield player.manip_final_conflict_disclosed_or_not label="In the dot-estimation task, the adviser's payment scheme was disclosed in the online communication form." %}
     {% else %}
-        {% formfield player.manip_final_conflict_disclosed_or_not label="In the dot-estimation task, the adviser's payment scheme was NOT disclosed to you in the online communication form." %}
+        {% formfield player.manip_final_conflict_disclosed_or_not label="In the dot-estimation task, the adviser's payment scheme was NOT disclosed in the online communication form." %}
     {% endif %}
 {% else %}
     {% formfield player.manip_final_adviser_payment_question label="In the dot-estimation task, the adviser would get a bigger bonus the more the estimator overestimated the true number of solid dots." %}

@@ -10,7 +10,7 @@
     below. Recall that the number of solid dots can vary from 0 – 900.</p>
 
 <div align="center" style="border: thin solid black">
-    {% include "./CommunicationFormTemplate.html" with player=player group=group type="actual"%}
+    {% include "./CommunicationFormTemplate.html" with player=player group=group type="actual" disclosure=True %}
     <div class="container-fluid">
         <div class="row">
             <div class="col text-center mb-3">
@@ -24,8 +24,13 @@
 
 <p>Recall that you will get a bigger bonus the more accurate your estimate is, as detailed below.</p>
 
-{% include "./PaymentsTable.html" with answer=0 role=player.role %}
-
+<div class="container-fluid">
+    <div class="row">
+      <div class="col text-center pb-4">
+        <img src="/static/study/estimator_payoffs.png" height="478.5" width="1130"  />
+      </div>
+    </div>
+  </div>
 <hr />
 
 <p>Please make your estimate of the number of solid dots in the full 30x30 grid:</p>

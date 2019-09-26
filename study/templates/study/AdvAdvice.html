@@ -31,12 +31,18 @@
 <p>Recall that the estimator will get a bigger bonus the more accurate his or her estimate is, and that you will get a
     bigger bonus the more the estimator overestimates the true number of solid dots, as detailed below:</p>
 
-{% include "./PaymentsTable.html" with answer=player.get_correct_answer role=player.role %}
-
+<div class="container-fluid">
+    <div class="row">
+      <div class="col text-center pb-4">
+        <img src="/static/study/estimator_and_advisor_payoffs.png" height="478.5" width="1130"  />
+        </div>
+    </div>
+</div>
+      
 <hr />
 
-<p>Recall that the estimator<strong> will{% if player.disclosure == False %} NOT{% endif %} know</strong> that you
-    will be paid bigger bonus the more the estimator overestimates the true number of solid dots:</p>
+<p> <i> <strong>Recall that the estimator will{% if player.disclosure == False %} NOT{% endif %} know that you
+    will be paid bigger bonus the more the estimator overestimates the true number of solid dots. </i> </strong></p>
 
 <p>Please provide your advice to the estimator using the communication form below:</p>
 

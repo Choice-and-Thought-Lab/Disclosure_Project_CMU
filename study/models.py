@@ -372,7 +372,7 @@ class Player(BasePlayer):
     )
 
     manip_est_estimator_payment_question = models.BooleanField(
-        label="In the dots estimation task, the you will get a bigger bonus the more accurate your estimate is.",
+        label="In the dots estimation task, you will get a bigger bonus the more accurate your estimate is.",
         widget=widgets.RadioSelect
     )
 

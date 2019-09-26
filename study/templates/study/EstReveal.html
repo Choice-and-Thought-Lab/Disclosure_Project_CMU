@@ -31,19 +31,32 @@
 <p>As a result, you earned a bonus of <strong>{{ player.matched_estimator.grid_reward }}</strong></p>
 
 <p>Your adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>.</p>
+<hr>
 <p> 
 {% if player.disclosure == True %} 
 As you were informed,
 {% else %}
-Although your advisor did not inform you about this,
+Although your adviser did not inform you about this,
 {% endif %}
-your advisor knew, when providing advice to you, that he she would be paid more if you overestimated the number of solid dots in the grid.  These were the payoffs facing your advisor:  
+your adviser knew, when providing advice to you, that he she would be paid more if you overestimated the number of solid dots in the grid.  These were the payoffs facing your adviser:  
 </p>
 
-{% include "./PaymentsTable.html" with answer=player.get_correct_answer role="adviser" %}
-<p></p> Because you estimated that there were {{ player.get_estimate }} dots, and there were {{ player.get_correct_answer }} dots, your advisor earned a bonus of {{ player.matched_adviser.grid_reward }}.
+<p> Your advisor was paid a bonus of $2.00 if you overestimated the number of solid dots by between 11 to 40.</p>
 
+<p>Your advisor was paid a bonus of $5.00 if you overestimated the number of solid dots by 41 or more.</p> 
+
+<p> Your advisor was shown the following diagram illustrating your payoffs: </p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col text-center pb-4">
+        <img src="/static/study/estimator_and_advisor_payoffs.png" height="478.5" width="1130"  />
+      </div>
+    </div>
+  </div>
 <hr />
+
+<p> Because you estimated that there were {{ player.get_estimate }} dots, and there were {{ player.get_correct_answer }} dots, your adviser earned a bonus of {{ player.matched_adviser.grid_reward }}.
+</p>
 
 {% next_button %}
 
