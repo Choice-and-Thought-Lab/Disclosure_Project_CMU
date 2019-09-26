@@ -352,12 +352,12 @@ class Player(BasePlayer):
 
     # Initial Manipulation Questions - Players not allowed to proceed unless answered True
     manip_adv_adviser_payment_question = models.BooleanField(
-        label="You will get a bigger bonus the more the estimator overestimates the true number of solid dots.",
+        label="In the dots estimation task, you get a bonus only if the estimator underestimates the true number of solid dots.",
         widget=widgets.RadioSelect
     )
 
     manip_adv_estimator_payment_question = models.BooleanField(
-        label="The estimator will get a bigger bonus the more accurate his or her estimate is.",
+        label="In the dots estimation task, the estimator gets a bigger bonus the more accurate his or her estimate is.",
         widget=widgets.RadioSelect
     )
 
@@ -372,7 +372,7 @@ class Player(BasePlayer):
     )
 
     manip_est_estimator_payment_question = models.BooleanField(
-        label="You will get a bigger bonus the more accurate your estimate is.",
+        label="In the dots estimation task, the you will get a bigger bonus the more accurate your estimate is.",
         widget=widgets.RadioSelect
     )
 

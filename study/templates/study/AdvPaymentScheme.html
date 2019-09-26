@@ -4,46 +4,33 @@
 {% block content %}
 
 <h3>
-    <i> Estimator's payment</i>
+    <i> Estimator's Payment</i>
 </h3>
 <p>
     <strong> The estimator will be rewarded for the accuracy of his or her estimate of the correct number of solid
     dots in the 30x30 grid that you see. </strong>
 </p>
-<p>The estimator will receive a bonus of {{ Constants.estimator_bonus_within_0_and_10 }} <strong > if his/her estimate is within 10 dots of the correct number (either higher or lower). </strong></p>
+<p>The estimator will receive a {{ Constants.estimator_bonus_within_0_and_10 }} bonus if his/her estimate is within 10 dots of the correct number (either higher or lower). </p>
 
-<p> The estimator will receive a bonus of $2.00 <strong> if his or her estimate is within 40 dots of the correct number (either higher or lower, but not within 10 dots). </strong></p>
+<p> The estimator will receive a $2.00 bonus if his or her estimate is within 40 dots of the correct number (either higher or lower, but not within 10 dots). </p>
 
-<p>The estimator will receive no bonus <strong> if his/her estimate is off by more than 40. </strong></p>
+<p>The estimator will receive no bonus if his/her estimate is off by more than 40. </p>
 
 <h3>
-    <i> Your payment</i>
+    <i> Your Payment</i>
 </h3>
 
 <p>
-    As the adviser, you will receive a bonus <strong> if the
-        estimator provides an estimate
-        that is greater
-        than the correct value.</strong>
+    <strong> As the adviser, you will receive a bonus if the estimator provides an estimate that is greater than the correct value. You will receive a bigger bonus the more the estimator overestimates the true number of solid dots.</strong>
 </p>
 
+<p> You will receive a $2.00 bonus if the estimator provides an estimate that is more than 10 dots greater than the correct number. </p>
 <p>
-    <strong>
-        You will receive a bigger bonus the further his or her estimate is from the correct number.
-    </strong>
-</p>
-
-<p> You will receive a $2.00 bonus <strong> if the estimator provides an estimate that is more than 10 greater than the correct value </strong></p>
-<p>
-    You will receive a {{ Constants.adviser_bonus_greater_than_40 }} bonus <strong>if the estimator provides an estimate that is more than 40 dots or over the correct value</strong>.
+    You will receive a {{ Constants.adviser_bonus_greater_than_40 }} bonus if the estimator provides an estimate that is more than 40 dots or over the correct number.
 </p>
 <hr />
 
 <h3>Example</h3>
-<p>
-    For example, suppose the correct number of solid dots were <strong>450</strong>, the compensation scheme would be as
-    follows:
-</p>
 
 <div class="container-fluid">
   <div class="row">
@@ -61,8 +48,9 @@
 {% comment %} Manipulation Checks specific to Adviser {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
 <p>To ensure that you understand the instructions, please answer the following questions: </p>
-{% formfield player.manip_adv_adviser_payment_question %}
 {% formfield player.manip_adv_estimator_payment_question %}
+
+{% formfield player.manip_adv_adviser_payment_question %}
 
 <hr />
 

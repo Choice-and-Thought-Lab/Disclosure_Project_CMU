@@ -79,7 +79,7 @@ class AdvPaymentScheme(Page):
 
     def manip_adv_adviser_payment_question_error_message(self, value):
         self.player.get_answer_wrong = True
-        if value == False:
+        if value == True:
             return 'Not the right choice. Please read the instructions carefully'
 
     def manip_adv_estimator_payment_question_error_message(self, value):
