@@ -40,7 +40,7 @@
 	    - The estimator's estimate was <strong>{{ group.estimate }}</strong> dots, while the correct answer was <strong>{{ player.get_correct_answer }}</strong>. Therefore, the estimator earned a {{ estimator_grid_reward }} bonus, while you earned a {{ adviser_grid_reward }} bonus.
 	    </p>
 	    <p>
-	    - Additionally, you and the estimator were both eligible to receive additional bonuses for participating. There was {{ Constants.appeal_reward }} to be split evenly between you and the estimator, for {{ Constants.appeal_reward_split }} apiece. The estimator had the option to instead pay {{ Constants.appeal_cost }} to send his/her case to a third-party judge. If the judge decided that you treated the estimator unfairly, the estimator would receive the entire {{ Constants.appeal_reward }} bonus (and you would receive no bonus).
+	    - Additionally, you and the estimator were both eligible to receive additional bonuses for participating. There was {{ Constants.appeal_reward }} to be split evenly between you and the estimator, for {{ Constants.appeal_reward_split }} apiece. The estimator had the option to instead pay {{ Constants.appeal_cost }} to send his or her case to a third-party judge. If the judge decided that you treated the estimator unfairly, the estimator would receive the entire {{ Constants.appeal_reward }} bonus (and you would receive no bonus).
 	    {% if group.appealed %}
 	        {% if group.appeal_granted %}
 		    The estimator chose to pay {{ Constants.appeal_cost }} to send the case to the judge. The judge decided that you treated the estimator unfairly. Therefore, you earned no additional bonus.
