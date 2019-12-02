@@ -57,6 +57,20 @@ class Intro15(Page):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
+class JudgeInstructions(Page):
+    form_model = 'player'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        self.participant.vars['expiry'] = time.time() + 100000
+        return (not self.player.role == "judge") 
+        
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+
 
 # show EXAMPLE image based on role
 class Intro2(Page):
@@ -390,6 +404,18 @@ class JudgeCaseAndJudgment(Page):
 
 class JudgeJudgement(Page):
     form_model = 'player'
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.player.is_judge()
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+
+class JudgeJudgementSummary(Page):
+    form_model = 'player'
     form_fields = ['appeal_granted']
 
     def get_timeout_seconds(self):
@@ -566,6 +592,7 @@ page_sequence = [
     Intro1,
     Intro15,
     Intro2,
+    JudgeInstructions,
     AdvPaymentScheme,
     EstPaymentScheme,
     DisclosureInfo,
@@ -577,11 +604,12 @@ page_sequence = [
     EstReveal,
     EstAppeal,
     EstPostAppeal,
+    JudgeExample,
     JudgeEstAdvInfo,
-    #JudgeExample,
     JudgeBegin,
     JudgeCaseAndJudgment,
     JudgeJudgement,
+    JudgeJudgementSummary,
     Blame,
     PostQuestions,
     ClarificationQuestions,

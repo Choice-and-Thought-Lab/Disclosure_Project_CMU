@@ -16,35 +16,11 @@
 </p>
 <p>It is your job, as the judge, to decide how to split the money. You should make this decision based on whether you
     think the estimator was treated unfairly by the adviser during the dots-estimation task.</p>
-   
-<p> When making your judgment, please recall that the adviser<strong> was {% if not player.disclosure %} not {% endif %} informed </strong>that the estimator would receive a larger bonus if he/she overestimated the correct number of solid dots.</p>
-
 
 <p>If you think that the estimator was treated unfairly, you should award $2.00 to the estimator and $0.00 to the
     adviser.</p>
-<p>If you think that the estimator was treated fairly, you should award the estimator and adviser $1.00 apiece.</p>
+<p>If you think the estimator was treated fairly, you should split the award so $1.00 goes to the adviser and $1.00 goes to the estimator. </p>
 
-<br>
-<p>
-    <strong>To summarize:</strong>
-
-    <ul>
-        <li>The correct number of solid dots was <strong>{{ player.get_correct_answer }}</strong>.</li>
-        <li>The adviser told the estimator there were <strong>{{ player.get_recommendation }}</strong> solid dots, and
-            the advisor <strong>did {% if player.disclosure == False %} NOT{% endif %} inform </strong> the estimator that the
-            adviser would get a bigger bonus if the estimator overestimated.</li>
-        <li>The estimator estimated there were <strong>{{ player.get_estimate }}</strong> solid dots. </li>
-        <li>As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and
-            the estimator earned
-            <strong>{{ player.matched_estimator.grid_reward }}</strong>.</li>
-    </ul>
-
-</p>
-
-<hr />
-{% formfield player.appeal_granted %}
-
-<hr />
 
 {% next_button %}
 

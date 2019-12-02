@@ -53,9 +53,9 @@
 <br>
 
 {% if player.disclosure == False %}
-<p> In the case of this pair, the adviser <strong>  did NOT disclose </strong> their payment scheme to the estimator on the online communication form. That is, the estimator <strong> did NOT know</strong> when making his/her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p>
+<p> In this case, the adviser <strong>did NOT disclose </strong>to the estimater that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> did NOT know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p>
 {% else %}
-<p> In the case of this pair, the adviser <strong>  did disclose </strong> their payment scheme to the estimator on the online communication form. That is, the estimator <strong> knew </strong> when making his/her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p> 
+<p> In this case, the adviser <strong>DID disclose </strong> to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> knew </strong>when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p> 
 {% endif %}
 <br>
 
@@ -67,8 +67,7 @@
 <p>Based on the small grid they saw and the adviser’s recommendation, the estimator provided an estimate of <strong
         style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
 
-<p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}, that the adviser knew. </p> 
-
+<p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}. Remember, the adviser knew the true number was {{ player.group.correct_answer }} </p> 
 
 <p>
     As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and the

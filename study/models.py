@@ -227,13 +227,12 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
     appeal_granted = models.BooleanField(
-        label="As judge, I determine that the " +
-        str(Constants.appeal_reward) + " bonus should be awarded as follows:",
+        label= "Wnat is your judgement?",
         choices=[
-            [True, "The estimator should receive " + str(Constants.appeal_reward) +
-             " and the adviser should receive nothing."],
             [False, "The estimator and adviser should both receive " +
-                str(Constants.appeal_reward_split) + "."]
+                str(Constants.appeal_reward_split) + "."],
+            [True, "The estimator should receive " + str(Constants.appeal_reward) +
+             " and the adviser should receive nothing."]
         ],
         widget=widgets.RadioSelect
     )
@@ -387,11 +386,11 @@ class Player(BasePlayer):
     )
 
     manip_judge_disclosure_question = models.StringField(
-        label="Did the advisers disclose to the estimators that they would get a bonus if they overestimated?",
+        label="Did estimators know that the advisers would get a bonus if they overestimated?",
         widget=widgets.RadioSelect,
         choices=[
-            "Yes, they did",
             "No, they didn’t",
+            "Yes, they did",
             "Some estimators were told and some were not told"
         ]
     )

@@ -19,7 +19,9 @@ Overview
 
 <p>In the course of the experiment, you will be asked some basic comprehension questions. You will not be eligible for any bonuses if you answer any of these questions incorrectly. So, please pay close attention.</p> 
 
+{% elif player.role == 'judge' %}
 
+<p> In this study, you have been randomly assigned to play the role of a neutral judge, and render a judgment.  Please read the instructions very carefully, because it is crucial that you have full information to make a reasoned judgment. </p>
 {% endif %}
 
 {% next_button %}

@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block title %}
+Instructions
+{% endblock %}
+
+{% block content %}
+<p> In this study, estimators attempted to estimate the number of solid dots in a grid like the 30x30 grid shown below:  </p>
+
+<!-- Sample Grid -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col text-center">
+      <img src="/static/{{ group.example_grid_path }}" />
+    </div>
+  </div>
+</div>
+
+<p>
+  However, estimators were only able to see a small 3x3 subset of the grid, such as the one highlighted in yellow below:
+</p>
+
+{% comment %} Sample Small Grid {% endcomment %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col text-center pb-4">
+      <img src="/static/{{ group.example_small_grid_path }}" />
+    </div>
+  </div>
+</div>
+
+<hr />
+
+
+
+{% if player.role == 'judge' %}
+
+<p>Advisers were shown the full grid and were given the true number of solid dots in the grid.  In the grid shown above, the adviser would know that {{ group.example_grid_num_dots }} of the 900 dots were solid. </p>
+
+{% endif %}
+
+{% next_button %} {% endblock %}

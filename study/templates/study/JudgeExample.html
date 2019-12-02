@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h3> Communication Form (Example)</h3>
+<h3>Instructions</h3>
 
 <p>
   Advisers gave advice to estimators, in the form: 
@@ -16,15 +16,14 @@
     <div class="row">
       <div class="col text-center mb-3">
         {% comment %} <h1><strong>542</strong></h1> {% endcomment %}
-        <h1><strong>---</strong></h1>
       </div>
     </div>
   </div>
   {% if player.disclosure == True %}
 
-            <p><strong>Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </p>
+   <p><strong>Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </p>
 
-            <p>So, it is in my interest that you estimate a high number of dots. </p> 
+   <p>So, it is in my interest that you estimate a high number of dots. </p> 
 
   {% endif %}
 </div>
@@ -33,6 +32,21 @@
 <p>
   where "---" is the number the adviser specified.  Estimators received this advice before they made their estimate.
 </p>
+
+
+<h3>Estimator's Payment</h3>
+
+<p>Estimators were paid based on their accuracy.  If the estimator’s guess was within 10 of the correct answer, he or she would earn a bonus of $5.00.</p> 
+
+<p>The estimator could earn a smaller bonus - $2.00 - if his or her guess was within 40 of the correct answer (but not within 10). </p>
+
+<h3>Adviser's Payment </h3>
+
+<p>Advisers had different incentives: Advisers were paid to the extent that estimators <i>overestimated the true number of solid dots.  </i> </p> 
+<p>Advisers received a bonus of $2.00 if the estimator overestimated the true number of dots by 11-40. </p>
+<p>Advisers received a bonus of $5.00 if the estimator overestimated the true number of dots by more than 40.</p>
+
+<hr>
 
 
 {% next_button %}
