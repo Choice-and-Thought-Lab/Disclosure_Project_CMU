@@ -64,8 +64,7 @@ class JudgeInstructions(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        self.participant.vars['expiry'] = time.time() + 100000
-        return (not self.player.role == "judge") 
+        return self.player.role == "judge"
         
     def before_next_page(self):
         if self.timeout_happened:
