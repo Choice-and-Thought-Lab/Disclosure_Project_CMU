@@ -52,11 +52,13 @@
 
 <br>
 
+<font color="red"> 
 {% if player.disclosure == False %}
 <p> In this case, the adviser <strong>did NOT disclose </strong>to the estimater that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> did NOT know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p>
 {% else %}
 <p> In this case, the adviser <strong>DID disclose </strong> to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> knew </strong>when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p> 
 {% endif %}
+</font>
 <br>
 
 <hr />
@@ -75,7 +77,7 @@
     <strong>{{ player.matched_estimator.grid_reward }}</strong>.
 
 </p>
-
+<br>
 
 <h4>{{ header }}</h4>
 

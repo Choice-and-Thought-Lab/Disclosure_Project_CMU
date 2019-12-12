@@ -337,11 +337,11 @@ class JudgeBegin(Page):
 
 class JudgeEstAdvInfo(Page):
     form_model = 'player'
-    form_fields = ['manip_est_judge_payment_question', 'manip_adv_judge_payment_question', 'manip_judge_disclosure_question']
+    form_fields = ['manip_judge_disclosure_question']
 
-    def manip_est_judge_payment_question_error_message(self, value):
+    def manip_judge_disclosure_question_error_message(self, value):
         self.player.get_answer_wrong = True
-        if value == False:
+        if value != "Some estimators were told and some were not told":
             return 'Not the right choice. Please read the instructions carefully'
 
     def get_timeout_seconds(self):
@@ -357,8 +357,15 @@ class JudgeEstAdvInfo(Page):
 
 class JudgeExample(Page):
     form_model = 'player'
+    form_fields = ['manip_adv_judge_payment_question',
+                   'manip_est_judge_payment_question']
 
     def manip_adv_judge_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+    def manip_est_judge_payment_question_error_message(self, value):
         self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
@@ -378,7 +385,8 @@ class JudgeExample(Page):
 class JudgeCaseAndJudgment(Page):
     form_model = 'player'
     form_fields = ['manip_final_adviser_payment_question',
-                   'manip_final_estimator_payment_question', 'manip_final_conflict_disclosed_or_not']
+                   'manip_final_estimator_payment_question',
+                   'manip_final_conflict_disclosed_or_not']
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -395,8 +403,22 @@ class JudgeCaseAndJudgment(Page):
         if self.timeout_happened:
             self.player.set_timeout_data()
         
-    def error_message(self, values):
-        """TODO: implement?"""
+    def manip_final_adviser_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+
+    def manip_final_estimator_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+    def manip_final_conflict_disclosed_or_not_error_message(self, value):
+        self.player.get_answer_wrong = True
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
 
     def vars_for_template(self):
         return {'header': "To verify that you understood the case, please answer the following three questions:"}

@@ -227,7 +227,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
     appeal_granted = models.BooleanField(
-        label= "Wnat is your judgement?",
+        label= "What is your judgment?",
         choices=[
             [False, "The estimator and adviser should both receive " +
                 str(Constants.appeal_reward_split) + "."],

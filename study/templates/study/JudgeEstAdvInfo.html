@@ -4,10 +4,13 @@
 
 {% block content %}
 
+<h3> Disclosure of Adviser’s Conflict of Interest</h3> 
+
 <p>Here is the most critical thing for you to know:</p>
-<p> <i> In some cases, the adviser <strong> did NOT disclose </strong>to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> did NOT know </strong> strong when making his or her estimate that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </i></p>
-<p> <i> In other cases, the adviser <strong>DID disclose </strong>  to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> knew </strong> when making his or her estimate that the adviser would be paid a bonus if the estimator overestimated the correct number of dots.  The warning was as follows: </i></p> 
-<p> <i> The warning was as follows: </i> </p>
+<p> <i> <font color="red">  In some cases, the adviser <strong> did NOT disclose </strong>to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> did NOT know </strong> strong when making his or her estimate that the adviser would be paid a bonus if the estimator overestimated the correct number of dots.</font> </i></p>
+<p> <i> <font color="red"> In other cases, the adviser <strong>DID disclose </strong>  to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> knew </strong> when making his or her estimate that the adviser would be paid a bonus if the estimator overestimated the correct number of dots.</font></i></p> 
+
+<p>The warning was as follows: </p> 
 
 <div align="center" style="border: thin solid black">
   {% include "./CommunicationFormTemplate.html" with player=player group=group disclosure=True type="example" %}
@@ -28,9 +31,6 @@
 {% comment %} Manipulation Checks specific to Judges {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
 <p>To ensure that you understand the instructions, please answer the following questions:</p>
-{% formfield player.manip_adv_judge_payment_question %}
-
-{% formfield player.manip_est_judge_payment_question %}
 
 {% formfield player.manip_judge_disclosure_question %}
 

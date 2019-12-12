@@ -20,9 +20,6 @@
 {% elif player.role == 'estimator' %}
 <p> The adviser will give you, the estimator, advice using an online communication form like the one shown below.</p>
 
-{% if player.disclosure == True %}
-<p>  Your adviser has different interests than yours. Your adviser will receive a bonus only if you overestimate the number of solid dots in the grid.  <font color="red" > Along with the advice your adviser gives you, your adviser will give you a disclosure like the one shown below: </font></p>{% endif %}
-
 {% endif %}
 
 <p>An example of a communication form from an adviser to an estimator: </p>
@@ -38,15 +35,15 @@
 	</div>
             {% if player.disclosure == True %}
 
-            <p><strong>Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </p>
+            <p><font color="red"><strong> Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </font></p>
 
-            <p>So, it is in my interest that you estimate a high number of dots. </p> 
+            <p><font color="red">So, it is in my interest that you estimate a high number of dots. </font></p> 
 
             {% endif %}
 </div>
 
 <hr />
-
+<font color="red">
 {% if player.role == 'adviser' %}
 	{% if player.disclosure == True %}
 	<p>
@@ -65,12 +62,12 @@
 		That is, the estimator <strong>will NOT know</strong> when making his/her estimate that you will be paid a bonus
 		if he or she overestimates the correct number of solid dots.
 	</p>
-		
+
 	<br />
 	<hr />
 	{% endif %}
 {% endif %}
-
+</font>
 
 {% comment %} To Ensure: Manipulation Checks {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
