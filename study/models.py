@@ -115,7 +115,8 @@ class Subsession(BaseSubsession):
 
         # Disclosure Non-Disclosure Condition assignment - debug print
         print("group matrix:")
-        print(self.get_group_matrix())
+        print(*self.get_group_matrix(), sep="\n")
+          
         for group in self.get_groups():
             players = group.get_players()
             for p in players:
@@ -289,7 +290,7 @@ class Player(BasePlayer):
             [3, 'American Indian or Alaska Native'],
             [4, 'Asian or Asian-American'],
             [5, 'Pacific Islander'],
-            [6, 'Some other race']
+            [6, 'Multiple races or some other race']
         ],
         widget=widgets.RadioSelect,
         blank=True
@@ -381,7 +382,7 @@ class Player(BasePlayer):
     )
 
     manip_adv_judge_payment_question = models.BooleanField(
-        label="The adviser will get a bigger bonus the more the estimator overestimated the true number of solid dots.",
+        label="The adviser will get a bigger bonus the more the estimator underestimated the true number of solid dots.",
         widget=widgets.RadioSelect
     )
 

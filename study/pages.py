@@ -23,7 +23,7 @@ class Consent(Page):
 
 
 # "You will play the role of %role%."
-class Intro1(Page):
+class Introduction(Page):
     form_model = 'player'
     form_fields = ['mTurkId']
 
@@ -43,7 +43,7 @@ class Intro1(Page):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
-class Intro15(Page):
+class Overview(Page):
     form_model = 'player'
 
     def get_timeout_seconds(self):
@@ -72,7 +72,7 @@ class JudgeInstructions(Page):
 
 
 # show EXAMPLE image based on role
-class Intro2(Page):
+class Instructions(Page):
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
@@ -362,7 +362,7 @@ class JudgeExample(Page):
 
     def manip_adv_judge_payment_question_error_message(self, value):
         self.player.get_answer_wrong = True
-        if value == False:
+        if value == True:
             return 'Not the right choice. Please read the instructions carefully'
 
     def manip_est_judge_payment_question_error_message(self, value):
@@ -405,7 +405,7 @@ class JudgeCaseAndJudgment(Page):
         
     def manip_final_adviser_payment_question_error_message(self, value):
         self.player.get_answer_wrong = True
-        if value == False:
+        if value == True:
             return 'Not the right choice. Please read the instructions carefully'
 
 
@@ -610,9 +610,9 @@ class Finish(Page):
 
 page_sequence = [
     # Consent,
-    Intro1,
-    Intro15,
-    Intro2,
+    Introduction,
+    Overview,
+    Instructions,
     JudgeInstructions,
     AdvPaymentScheme,
     EstPaymentScheme,

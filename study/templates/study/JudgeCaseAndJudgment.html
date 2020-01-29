@@ -69,7 +69,7 @@
 <p>Based on the small grid they saw and the adviser’s recommendation, the estimator provided an estimate of <strong
         style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
 
-<p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}. Remember, the adviser knew the true number was {{ player.group.correct_answer }} </p> 
+<p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}. Remember, the adviser knew the true number was {{ player.group.correct_answer }}.</p> 
 
 <p>
     As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and the
@@ -81,7 +81,7 @@
 
 <h4>{{ header }}</h4>
 
-{% formfield player.manip_final_adviser_payment_question label="In the case, the adviser would get a bigger bonus the more the estimator overestimated the true number of solid dots." %}
+{% formfield player.manip_final_adviser_payment_question label="In the case, the adviser would get a bigger bonus the more the estimator underestimated the true number of solid dots." %}
 {% formfield player.manip_final_estimator_payment_question label="In the case, the estimator would get a bigger bonus the more accurate his/her estimate was." %}
 {% if player.disclosure == True %}
     {% formfield player.manip_final_conflict_disclosed_or_not label="In the case, the adviser did disclose their payment scheme to the estimator in the online communication form." %}
