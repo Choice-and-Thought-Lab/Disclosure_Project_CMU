@@ -8,7 +8,7 @@
 
 {% if player.role == 'adviser' %}
     {% formfield player.manip_final_estimator_payment_question label="In the dot-estimation task, the estimator gets a bigger bonus the more accurate his/her estimate is." %}
-    {% formfield player.manip_final_adviser_payment_question label="In the dot-estimation task, you get a bonus only if the estimator underestimates the true number of solid dots." %}
+    {% formfield player.manip_final_adviser_payment_question label="In the dot-estimation task, you get a bonus only if the estimator underestimated the true number of solid dots." %}
     {% if player.disclosure == True %}
         {% formfield player.manip_final_conflict_disclosed_or_not label="Your payment scheme was disclosed to the estimator in the online communication form." %}
     {% else %}

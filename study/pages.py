@@ -408,7 +408,6 @@ class JudgeCaseAndJudgment(Page):
         if value == True:
             return 'Not the right choice. Please read the instructions carefully'
 
-
     def manip_final_estimator_payment_question_error_message(self, value):
         self.player.get_answer_wrong = True
         if value == False:
@@ -505,6 +504,21 @@ class PostQuestions(Page):
     form_model = 'player'
     form_fields = ['manip_final_adviser_payment_question',
                    'manip_final_estimator_payment_question', 'manip_final_conflict_disclosed_or_not']
+    def manip_final_adviser_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
+        if value == True:
+            return 'Not the right choice. Please read the instructions carefully'
+
+
+    def manip_final_estimator_payment_question_error_message(self, value):
+        self.player.get_answer_wrong = True
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
+
+    def manip_final_conflict_disclosed_or_not_error_message(self, value):
+        self.player.get_answer_wrong = True
+        if value == False:
+            return 'Not the right choice. Please read the instructions carefully'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
