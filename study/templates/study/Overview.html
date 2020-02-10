@@ -13,15 +13,16 @@ Overview
 <p>In the course of the experiment, you will be asked some basic comprehension questions. You will not be able to advance to the next page of the survey until you answer these questions correctly. So, please pay close attention.</p> 
 
 {% elif player.role == 'estimator' %}
-
-
 <p> In this study, there are two roles: Adviser and Estimator.  You have been randomly assigned to play the role of estimator. You have been paired with another MTurker who will play the role of adviser. The adviser will give advice to you, and you will make a decision that will determine both of your bonuses.</p> 
 
 <p>In the course of the experiment, you will be asked some basic comprehension questions. You will not be able to advance to the next page of the survey until you answer these questions correctly. So, please pay close attention.</p> 
 
 {% elif player.role == 'judge' %}
-
-<p> In this study, you have been randomly assigned to play the role of a neutral judge, and render a judgment.  Please read the instructions very carefully, because it is crucial that you have full information to make a reasoned judgment. </p>
+<p> In this study, there are three roles: Adviser, Estimator, and Judge. You have been randomly assigned to play the role of a judge, and render a judgment.
+</p>
+<p>
+  In the course of the experiment, you will be asked some basic comprehension questions. You will not be able to advance to the next page of the survey until you answer these questions correctly. So, please pay close attention.
+</p>
 {% endif %}
 
 {% next_button %}

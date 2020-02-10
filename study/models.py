@@ -176,7 +176,6 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-
     grid_number = models.IntegerField()
     correct_answer = models.IntegerField()
     grid_path = models.StringField()
@@ -195,28 +194,20 @@ class Group(BaseGroup):
     def choose_grid(self):
         static_dir = './study/static/study'
         static_files = os.listdir(static_dir)
-        grid_choices = list(filter(lambda x: re.match(
-            r"grid[0-9]*_[0-9]*\.svg", x), static_files))
+        grid_choices = list(filter(lambda x: re.match(r"grid[0-9]*_[0-9]*\.svg", x), static_files))
 
         random.shuffle(grid_choices)
 
         self.grid_path = 'study/' + grid_choices.pop()
-        self.grid_number = int(
-            re.search(r"grid([0-9]*)_[0-9]*\.svg", self.grid_path).group(1))
-        self.correct_answer = int(
-            re.search(r"grid[0-9]*_([0-9]*)\.svg", self.grid_path).group(1))
-        self.small_grid_path = 'study/small_grid' + \
-            str(self.grid_number) + '.svg'
+        self.grid_number = int(re.search(r"grid([0-9]*)_[0-9]*\.svg", self.grid_path).group(1))
+        self.correct_answer = int(re.search(r"grid[0-9]*_([0-9]*)\.svg", self.grid_path).group(1))
+        self.small_grid_path = 'study/small_grid' + str(self.grid_number) + '.svg'
 
         self.example_grid_path = 'study/' + grid_choices.pop()
-        self.example_grid_number = int(
-            re.search(r"grid([0-9]*)_[0-9]*\.svg", self.example_grid_path).group(1))
+        self.example_grid_number = int(re.search(r"grid([0-9]*)_[0-9]*\.svg", self.example_grid_path).group(1))
         self.example_grid_num_dots = self.example_grid_path[12:15]
-        self.example_small_grid_path = 'study/small_grid' + \
-            str(self.example_grid_number) + '.svg'
-        print("Example------------------------ GridNum: ", self.example_grid_number,
-              " GridPath: ", self.example_grid_path, " SmallGridPath: ", self.example_small_grid_path)
-
+        self.example_small_grid_path = 'study/small_grid' + str(self.example_grid_number) + '.svg'
+        print("GridNum: ", self.example_grid_number, " GridPath: ", self.example_grid_path, " SmallGridPath: ", self.example_small_grid_path)
 
 class Player(BasePlayer):
     appealed = models.BooleanField(

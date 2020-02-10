@@ -9,7 +9,7 @@ Instructions
 {% block content %}
 
 {% if player.role == 'adviser' %}
-<p>    Recall that you are the adviser.    </p> 
+<p>Recall that you are the adviser.</p> 
 <p>The judgment that the estimator will make is to estimate the number of solid (filled) dots in a 30x30 grid.</p>
 <p>The number of solid dots can vary from 0-900. Below is an example.</p>
 
@@ -21,15 +21,13 @@ Instructions
 <p>The number of solid dots can vary from 0-900. Below is an example.</p>
 
 {% elif player.role == 'judge' %}
-
 <p> In another part of the study, participants were paired with one another. One person was assigned the role of estimator and the other to the role of adviser.  They then engaged in a dots-estimation task. </p> 
-<p> First, we will introduce to you the dots-estimation task. Then, we will provide you with information about an interaction between a particular adviser and estimator. Last, we will ask you to make a judgment about how to allocate bonuses based on the interaction between the adviser and estimator. </p>
-
-
+<p>
+  In this study, estimators attempted to estimate the number of solid dots in a grid like the 30x30 grid shown below:  
+</p>
 
 {% endif %}
 
-{% if player.role != 'judge' %}
 
 <!-- Sample Grid -->
 <div class="container-fluid">
@@ -41,8 +39,6 @@ Instructions
 </div>
 
 
-{% endif %}
-
 {% if player.role == 'adviser' %}
 <p> The estimator will attempt to estimate the number of dots in that grid and will be rewarded based on how close his/her estimate is to the actual number of solid dots. However, the estimator will only be able to see a small 3x3 subset of the grid highlighted in yellow below
  along with your advice. Below is an example of the small grid that the estimator will see along with your advice. </p>
@@ -53,9 +49,8 @@ Instructions
   only be able to see a small 3x3 subset of the grid highlighted in yellow below along with the advice you receive from your
   adviser. Below is an example.</p>
 
-{% endif %}
-
-{% if player.role != 'judge' %}
+{% elif player.role == 'judge' %}
+<p>However, estimators were only able to see a small 3x3 subset of the grid, such as the one highlighted in yellow below:</p>
 
 {% comment %} Sample Small Grid {% endcomment %}
 <div class="container-fluid">
@@ -65,7 +60,12 @@ Instructions
     </div>
   </div>
 </div>
+{% endif %}
 
+{% if player.role == 'judge' %}
+<p>
+  Advisers were shown the full grid and were given the true number of solid dots in the grid.  In the grid shown above, the adviser would know that xxx of the 900 dotes were solid.
+</p>
 {% endif %}
 
 {% next_button %} {% endblock %}

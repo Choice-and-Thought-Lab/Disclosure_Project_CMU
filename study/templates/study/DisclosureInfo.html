@@ -7,19 +7,15 @@
 
 
 {% if player.role == 'adviser' %}
-
 <p>You will give the estimator advice using an online communication form like the one shown below.</p>
 {% if player.disclosure == True %}
-
-<p> <i> <font color="red"> As you will see, As you will see, the estimator will be told that you will get a bonus if he/she overestimates the number of solid dots.</font> </i> </p> 
+<p> <i> <font color="red">As you will see, the estimator will be told that you will get a bonus if he/she overestimates the number of solid dots.</font> </i> </p> 
 {% else %}
-
 <p> <i> <font color="red">As you will see, the estimator will not be told that you will get a bonus if he/she overestimates the number of solid dots.</font></i></p>
-
 {% endif %}
+
 {% elif player.role == 'estimator' %}
 <p> The adviser will give you, the estimator, advice using an online communication form like the one shown below.</p>
-
 {% endif %}
 
 <p>An example of a communication form from an adviser to an estimator: </p>
@@ -33,13 +29,13 @@
 			</div>
 		</div>
 	</div>
-            {% if player.disclosure == True %}
+  {% if player.disclosure == True %}
 
-            <p><font color="red"><strong> Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </font></p>
+  <p><font color="red"><strong> Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </font></p>
 
-            <p><font color="red">So, it is in my interest that you estimate a high number of dots. </font></p> 
+  <p><font color="red">So, it is in my interest that you estimate a high number of dots. </font></p> 
 
-            {% endif %}
+  {% endif %}
 </div>
 
 <hr />
