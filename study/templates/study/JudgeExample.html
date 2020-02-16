@@ -27,28 +27,30 @@
 
   {% endif %}
 </div>
-<hr />
-
+<br/>
 <p>
   where "---" is the number the adviser specified.  Estimators received this advice before they made their estimate.
 </p>
+<hr/>
 
+<h3 style="margin: 1em 0 0.5em 0;">Estimator's Payment</h3>
 
-<h3>Estimator's Payment</h3>
+<p><strong>Estimators were rewarded for the accuracy of their estimates of the correct number of solid dots in the 30x30 grid. </strong></p>
+<p>Estimators received a $5.00 bonus if their estimates were within 10 dots of the correct number (either higher or lower). </p>
+<p>Estimator received a $2.00 bonus if their estimate was within 40 dots of the correct number (either higher or lower, but not within 10 dots). </p>
+<p>Estimator received no bonus if their estimate was off by more than 40.</p>
+<hr/>
 
-<p>Estimators were paid based on their accuracy.  If the estimator’s guess was within 10 of the correct answer, he or she would earn a bonus of $5.00.</p> 
-<p>The estimator could earn a smaller bonus - $2.00 - if his or her guess was within 40 of the correct answer (but not within 10). </p>
-<p>Estimators received no bonus if their estimate was off by more than 40.</p>
+<h3 style="margin: 1em 0 0.5em 0;">Adviser's Payment </h3>
 
-<h3>Adviser's Payment </h3>
+<p><strong>Unbeknownst to estimators, advisers had different incentives:</strong></p>
+<p><strong>Advisers received a bonus if the estimator provided an estimate that was greater than the correct value. Advisers received a bigger bonus the more the estimator overestimated the true number of solid dots.</strong></p>
+<p>Advisers received a $2.00 bonus if the estimator provided an estimate that was more than 10 dots greater than the correct number. </p>
+<p>Advisers received a $5.00 bonus if the estimator provided an estimate that was more than 40 dots greater than the correct number. </p>
+<p>Otherwise, advisers did not receive a bonus. </p>
+<hr/>
 
-<p>Advisers had different incentives: Advisers were paid to the extent that estimators <i>overestimated the true number of solid dots.  </i> </p> 
-<p>Advisers received a bonus of $2.00 if the estimator overestimated the true number of dots by 11-40. </p>
-<p>Advisers received a bonus of $5.00 if the estimator overestimated the true number of dots by more than 40.</p>
-<p>Otherwise, advisers did not receive a bonus.</p>
-<hr>
-
-<h3>Example </h3>
+<h3 style="margin-top: 1em;">Example </h3>
 
 <div class="container-fluid">
   <div class="row">
@@ -57,13 +59,11 @@
     </div>
   </div>
 </div>
-
+<hr/>
 
 <p>To ensure that you understand the instructions, please answer the following questions: </p>
-{% formfield player.manip_adv_judge_payment_question %}
-
 {% formfield player.manip_est_judge_payment_question %}
-
+{% formfield player.manip_adv_judge_payment_question %}
 
 {% next_button %}
 

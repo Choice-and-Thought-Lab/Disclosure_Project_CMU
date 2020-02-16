@@ -9,7 +9,7 @@ from otree.api import (
 )
 
 author = 'Aaron Yao-Smith'
-modification_author = 'Saran Prasad Ambikapathy'
+modification_author = ['Saran Prasad Ambikapathy', 'Hung Nguyen']
 
 doc = """
 Incentive Compatible Disclosure Study
@@ -65,9 +65,6 @@ class Constants(BaseConstants):
     estimator_bonus_within_neg_40_and_11 = c(2)
     estimator_bonus_within_11_and_40 = c(2)
 
-
-
-
     # New PayOffs - adviser
     adviser_bonus_less_than_neg_40 = c(0)
     adviser_bonus_within_neg_40_and_31 = c(0)
@@ -79,9 +76,7 @@ class Constants(BaseConstants):
     adviser_bonus_within_21_and_30 = c(1.5)
     adviser_bonus_within_31_and_40 = c(2)
     adviser_bonus_greater_than_40 = c(5)
-
     adviser_bonus_within_11_and_40 = c(2)
-
 
     appeal_reward = c(2)  # given to estimator on appeal win
     # given to both estimator and adviser if appeal lost or no appeal
@@ -114,18 +109,18 @@ class Subsession(BaseSubsession):
             i += 1
 
         # Disclosure Non-Disclosure Condition assignment - debug print
-        print("group matrix:")
+        print("Group matrix:")
         print(*self.get_group_matrix(), sep="\n")
           
-        for group in self.get_groups():
+        for i, group in enumerate(self.get_groups()):
+            print('Group {}'.format(i))
             players = group.get_players()
             for p in players:
                 if p.id_in_group % 2 == 1:
                     p.disclosure = True
                 else:
                     p.disclosure = False
-                print(p.role(), p.id_in_group, p.matched_adviser().id_in_group,
-                      p.matched_estimator().id_in_group, p.matched_judge().id_in_group)
+                print(p.role(), 'Disclosure' if p.disclosure else 'Non-disclosure', p.id_in_group, p.matched_adviser().id_in_group, p.matched_estimator().id_in_group, p.matched_judge().id_in_group)
             print("-----------")
 
         # To be removed
@@ -367,13 +362,13 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
-    manip_est_judge_payment_question = models.BooleanField(
-        label="The estimator will get a bigger bonus the more accurate their estimate is.",
-        widget=widgets.RadioSelect
+    manip_adv_judge_payment_question = models.BooleanField(
+      label="In the dots estimation task, the adviser gets a bonus only if the estimator underestimates the true number of solid dots.",
+      widget=widgets.RadioSelect
     )
 
-    manip_adv_judge_payment_question = models.BooleanField(
-        label="The adviser will get a bigger bonus the more the estimator underestimated the true number of solid dots.",
+    manip_est_judge_payment_question = models.BooleanField(
+        label="In the dots estimation task, the estimator gets a bigger bonus the more accurate his/her estimate is.",
         widget=widgets.RadioSelect
     )
 

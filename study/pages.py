@@ -335,26 +335,6 @@ class JudgeBegin(Page):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
-class JudgeEstAdvInfo(Page):
-    form_model = 'player'
-    form_fields = ['manip_judge_disclosure_question']
-
-    def manip_judge_disclosure_question_error_message(self, value):
-        self.player.get_answer_wrong = True
-        if value != "Some estimators were told and some were not told":
-            return 'Not the right choice. Please read the instructions carefully'
-
-    def get_timeout_seconds(self):
-        return self.participant.vars['expiry'] - time.time()
-
-    def is_displayed(self):
-        return self.player.is_judge() and self.participant.vars['expiry'] - time.time() > 3
-
-    def before_next_page(self):
-        if self.timeout_happened:
-            self.player.set_timeout_data()
-
-
 class JudgeExample(Page):
     form_model = 'player'
     form_fields = ['manip_adv_judge_payment_question',
@@ -640,7 +620,6 @@ page_sequence = [
     EstAppeal,
     EstPostAppeal,
     JudgeExample,
-    JudgeEstAdvInfo,
     JudgeBegin,
     JudgeCaseAndJudgment,
     JudgeJudgement,

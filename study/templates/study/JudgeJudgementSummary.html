@@ -5,18 +5,17 @@
 {% block content %}
 <h3>Your Judgment </h3>
 <p>
-    <strong>Here is a summary of the information on which to base your decision: </strong>
+  <strong>Here is a summary of the information on which to base your decision: </strong>
 
-    <ul>
-        <li>The true number of solid dots was <strong>{{ player.get_correct_answer }}</strong>.</li>
-        <li>The adviser advised that the number of solid dots was  <strong>{{ player.get_recommendation }}</strong>.</li>          
-        <li>The estimator estimated there were <strong>{{ player.get_estimate }}</strong> solid dots. </li>
-        <li>The estimator earned <strong>{{ player.matched_estimator.grid_reward }}</strong>, and the adviser earned <strong>{{ player.matched_adviser.grid_reward }}</strong>.</li>
-        <li>The adviser <strong>did {% if player.disclosure == False %} NOT{% endif %} inform </strong> the estimator that the
-          adviser would get a bigger bonus if the estimator overestimated the correct number of solid dots. 
-          So, the estimator <strong>did {% if player.disclosure == False %} NOT{% endif %} know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots.
-          </li>
-      </ul>
+  <ul>
+      <li>The true number of solid dots was <strong>{{ player.get_correct_answer }}</strong>.</li>
+      <li>The adviser advised that the number of solid dots was  <strong>{{ player.get_recommendation }}</strong>.</li>          
+      <li>The estimator estimated there were <strong>{{ player.get_estimate }}</strong> solid dots. </li>
+      <li>The estimator earned <strong>{{ player.matched_estimator.grid_reward }}</strong>, and the adviser earned <strong>{{ player.matched_adviser.grid_reward }}</strong>.</li>
+      <li>The adviser <strong>did {% if player.disclosure == False %} NOT{% endif %} inform </strong> the estimator that the adviser would get a bigger bonus if the estimator overestimated the correct number of solid dots. 
+      So, the estimator <strong>did {% if player.disclosure == False %} NOT{% endif %} know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots.
+      </li>
+  </ul>
 </p>
 
 <p> If you think that the estimator was treated fairly, you should award the estimator and adviser $1.00 apiece. </p>

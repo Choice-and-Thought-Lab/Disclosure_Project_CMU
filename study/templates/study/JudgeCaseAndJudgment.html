@@ -31,6 +31,7 @@
     advice using the communication form below:
 </p>
 
+
 <div align="center" style="border: thin solid black">
     {% include "./CommunicationFormTemplate.html" with player=player group=group disclosure=False  type="actual"%}
     <div class="container-fluid">
@@ -49,33 +50,28 @@
     {% endif %}
 </div>
 
-
 <br>
-
 <font color="red"> 
-{% if player.disclosure == False %}
-<p> In this case, the adviser <strong>did NOT disclose </strong>to the estimater that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> did NOT know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p>
+<p>Here is the most critical thing for you to know:</p>
+{% if player.disclosure == True %}
+<p>Note that, on the communication form, the adviser <strong>disclosed</strong> to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong>DID know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots.</p>
 {% else %}
-<p> In this case, the adviser <strong>DID disclose </strong> to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong> knew </strong>when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots. </p> 
+<p>Note that, on the communication form, the adviser <strong>did NOT disclose</strong> to the estimator that the adviser would be paid more if the estimator overestimated the true number of solid dots. So, the estimator <strong>did NOT know</strong> when making his or her estimates that the adviser would be paid a bonus if the estimator overestimated the correct number of dots.</p>
 {% endif %}
 </font>
-<br>
-
-<hr />
-<br>
+<br/>
+<hr/>
 
 <p>The estimator attempted to estimate the number of solid dots in the 30x30 grid. The estimator knew that the number of dots could vary from 0 – 900, but they were only able to see the small 3x3 subset of the grid highlighted in yellow along with the advice that the adviser provided on the communication form above.</p>
 
-<p>Based on the small grid they saw and the adviser’s recommendation, the estimator provided an estimate of <strong
-        style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
+<p>Based on the small grid they saw and the adviser’s recommendation, the estimator provided an estimate of <strong style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
 
 <p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}. Remember, the adviser knew the true number was {{ player.group.correct_answer }}.</p> 
 
 <p>
-    As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and the
-    estimator earned
-    <strong>{{ player.matched_estimator.grid_reward }}</strong>.
-
+  As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and the
+  estimator earned
+  <strong>{{ player.matched_estimator.grid_reward }}</strong>.
 </p>
 <br>
 

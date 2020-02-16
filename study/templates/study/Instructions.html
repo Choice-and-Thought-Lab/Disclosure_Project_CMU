@@ -23,13 +23,17 @@ Instructions
 {% elif player.role == 'judge' %}
 <p> In another part of the study, participants were paired with one another. One person was assigned the role of estimator and the other to the role of adviser.  They then engaged in a dots-estimation task. </p> 
 <p>
-  In this study, estimators attempted to estimate the number of solid dots in a grid like the 30x30 grid shown below:  
+  In this task, estimators attempted to estimate the number of solid (filled) dots in a 30x30 grid.
+</p>  
+<p>
+  The number of solid dots could vary from 0-900.
 </p>
-
+<p>
+  Below is an example of a 30x30 grid that your adviser might see. 
+</p>  
 {% endif %}
 
-
-<!-- Sample Grid -->
+<!-- Full Sample Grid -->
 <div class="container-fluid">
   <div class="row">
     <div class="col text-center">
@@ -37,7 +41,7 @@ Instructions
     </div>
   </div>
 </div>
-
+<hr/>
 
 {% if player.role == 'adviser' %}
 <p> The estimator will attempt to estimate the number of dots in that grid and will be rewarded based on how close his/her estimate is to the actual number of solid dots. However, the estimator will only be able to see a small 3x3 subset of the grid highlighted in yellow below
@@ -50,9 +54,13 @@ Instructions
   adviser. Below is an example.</p>
 
 {% elif player.role == 'judge' %}
-<p>However, estimators were only able to see a small 3x3 subset of the grid, such as the one highlighted in yellow below:</p>
+<p>However, estimators were only able to see a small 3x3 subset of the 30x30 grid along with advice they received from an adviser.
+</p>
+<p>
+  Below is an example of the corresponding 3x3 grid that the estimator might see.
+</p>
 
-{% comment %} Sample Small Grid {% endcomment %}
+<!-- Sample Small Grid  -->
 <div class="container-fluid">
   <div class="row">
     <div class="col text-center pb-4">
@@ -64,8 +72,9 @@ Instructions
 
 {% if player.role == 'judge' %}
 <p>
-  Advisers were shown the full grid and were given the true number of solid dots in the grid.  In the grid shown above, the adviser would know that xxx of the 900 dotes were solid.
+  Advisers were shown the full grid and were given the true number of solid dots in the grid. In the grid shown above, the adviser would know that xxx of the 900 dots were solid.
 </p>
 {% endif %}
+
 
 {% next_button %} {% endblock %}
