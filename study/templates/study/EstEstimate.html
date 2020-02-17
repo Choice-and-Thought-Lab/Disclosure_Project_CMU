@@ -8,8 +8,8 @@
 <p>Now it is time for you, as the estimator, to estimate the number of solid (filled) dots in the full 30x30 grid
     using only the 3x3 subset of the grid shown below and your adviser’s advice, as shown on the communication form
     below. Recall that the number of solid dots can vary from 0 – 900.</p>
-
-<div align="center" style="border: thin solid black">
+<hr/>
+<div style="border: thin solid black; text-align: center; margin: 2em 0; padding: 1em;">
     {% include "./CommunicationFormTemplate.html" with player=player group=group type="actual" disclosure=True %}
     <div class="container-fluid">
         <div class="row">
@@ -20,11 +20,8 @@
     </div>
     <font color="red">
     {% if player.disclosure == True %}
-
-            <p><strong>Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </p>
-
-            <p>So, it is in my interest that you estimate a high number of dots. </p> 
-
+      <p><strong>Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </p>
+      <p>So, it is in my interest that you estimate a high number of dots. </p> 
     {% endif %}
     </font> 
 </div>
@@ -35,7 +32,7 @@
 
 <div class="container-fluid">
     <div class="row">
-      <div class="col text-center pb-4">
+      <div class="col text-center">
         <img style="width: 96%; height: 96%;"  src="/static/study/estimator_payoff.png"/>
       </div>
     </div>
@@ -47,7 +44,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-4"></div>
-        <div class="col-4 mb-3" align="center">
+        <div class="col-4" align="center">
             {% formfield player.estimate %}
         </div>
         <div class="col-4"></div>

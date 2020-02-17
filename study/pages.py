@@ -87,8 +87,7 @@ class Instructions(Page):
 # class AdvComm3(Page):
 class AdvPaymentScheme(Page):
     form_model = 'player'
-    form_fields = ['manip_adv_adviser_payment_question',
-                   'manip_adv_estimator_payment_question']
+    form_fields = ['manip_adv_estimator_payment_question', 'manip_adv_adviser_payment_question']
 
     def manip_adv_adviser_payment_question_error_message(self, value):
         self.player.get_answer_wrong = True
@@ -139,7 +138,7 @@ class DisclosureInfo(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_adviser() or self.player.is_estimator()
+        return self.player.is_adviser()
 
     def before_next_page(self):
         if self.timeout_happened:

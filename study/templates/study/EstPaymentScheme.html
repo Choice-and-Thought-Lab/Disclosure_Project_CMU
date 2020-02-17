@@ -34,10 +34,9 @@ You will receive no bonus if your estimate is off by more than 40.
 
 {% comment %} Manipulation Checks specific to Estimators {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
-<p>To ensure that you understand the instructions, please answer the following question:</p>
-{% formfield player.manip_est_estimator_payment_question %}
+<p><strong>To ensure that you understand the instructions, please answer the following question:</strong></p>
 
-<hr />
+{% formfields %}
 
 {% next_button %}
 

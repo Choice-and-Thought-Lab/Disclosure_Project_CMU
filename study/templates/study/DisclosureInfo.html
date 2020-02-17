@@ -5,17 +5,12 @@
 
 <h3>Communication Form</h3>
 
-
-{% if player.role == 'adviser' %}
 <p>You will give the estimator advice using an online communication form like the one shown below.</p>
+
 {% if player.disclosure == True %}
 <p> <i> <font color="red">As you will see, the estimator will be told that you will get a bonus if he/she overestimates the number of solid dots.</font> </i> </p> 
 {% else %}
 <p> <i> <font color="red">As you will see, the estimator will not be told that you will get a bonus if he/she overestimates the number of solid dots.</font></i></p>
-{% endif %}
-
-{% elif player.role == 'estimator' %}
-<p> The adviser will give you, the estimator, advice using an online communication form like the one shown below.</p>
 {% endif %}
 
 <p>An example of a communication form from an adviser to an estimator: </p>
@@ -30,20 +25,15 @@
 		</div>
 	</div>
   {% if player.disclosure == True %}
-
   <p><font color="red"><strong> Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </font></p>
-
   <p><font color="red">So, it is in my interest that you estimate a high number of dots. </font></p> 
-
   {% endif %}
 </div>
 
 <hr />
 <font color="red">
-{% if player.role == 'adviser' %}
 	{% if player.disclosure == True %}
 	<p>
-
 		Your payment scheme <strong>will be disclosed to the estimator</strong> on the online communication form.
 	</p>
 	<p>
@@ -55,29 +45,20 @@
 		Your payment scheme <strong>will NOT be disclosed</strong> to the estimator.
 	</p>
 	<p>
-		That is, the estimator <strong>will NOT know</strong> when making his/her estimate that you will be paid a bonus
-		if he or she overestimates the correct number of solid dots.
+		That is, the estimator <strong>will NOT know</strong> when making his/her estimate that you will be paid a bonus if he or she overestimates the correct number of solid dots.
 	</p>
 
-	<br />
 	<hr />
 	{% endif %}
-{% endif %}
 </font>
 
 {% comment %} To Ensure: Manipulation Checks {% endcomment %}
 {% comment %} Not letting player advance unless these are answered as True {% endcomment %}
 {% if player.role == 'adviser' %}
-<p>To ensure that you understand the instructions, please answer the following
-	question:</p>
-	{% if player.disclosure == True %}
-		{% formfield player.manip_adv_payment_scheme_disclosed %}
-	{% else %}
-		{% formfield player.manip_adv_payment_scheme_not_disclosed %}
-	{% endif %}
+<p><strong>To ensure that you understand the instructions, please answer the following question:</strong></p>
+  
+{% formfields %}
 		
-	<hr />
-	<br />
 {% endif %}
 
 {% next_button %}
