@@ -87,31 +87,29 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         print("Creating session.")
-        # get default player list
-        players = []        
+        playersList = []
+
+        # get default group assignment
         for group in self.get_groups():
             players = group.get_players()
             for p in players:
-                players.append(p)
+                playersList.append(p)
 
         # assign players to customized groups
-        num_groups = len(self.get_groups())
+        groups_count = len(self.get_groups())
         i = 0
         for group in self.get_groups():
-            # get first player in group
-            players_in_group = [players[i]]
+            players_in_group = [playersList[i]]
             j = i
-            while j + num_groups < len(players):
-                # get the rest players 
-                players_in_group.append(players[j + num_groups])
-                j += num_groups
+            while j + groups_count < len(playersList):
+                players_in_group.append(playersList[j + groups_count])
+                j += groups_count
             group.set_players(players_in_group)
             group.choose_grid()
             i += 1
 
         # Disclosure Non-Disclosure Condition assignment - debug print
         print("Group matrix:")
-        print("Adviser-Disclose, Adviser-Non, Estimator-Disclose, Estimator-Non, Judge-Disclose, Judge-Non")
         print(*self.get_group_matrix(), sep="\n")
           
         for i, group in enumerate(self.get_groups()):
@@ -572,8 +570,9 @@ class Player(BasePlayer):
         if self.is_estimator() or self.is_judge():
             if self.matched_adviser().recommendation is None or self.matched_adviser().recommendation == 0:
                 self.matched_adviser().recommendation = self.group.correct_answer + \
-                  (92 if self.disclosure else 28)
-                print('Prep Recommendation', self.matched_adviser().recommendation)
+                    (92 if self.disclosure else 28)
+                print('Prep Recommendation',
+                      self.matched_adviser().recommendation)
         if self.is_judge():
             if self.matched_estimator().estimate is None or self.matched_estimator().estimate == 0:
                 self.matched_estimator().estimate = self.group.correct_answer + \
