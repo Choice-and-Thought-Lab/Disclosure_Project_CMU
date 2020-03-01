@@ -53,11 +53,11 @@ Instructions
 </div>
 
 {% if player.role == 'adviser' %}
-<p>You will be shown the full grid and will be given the true number of solid dots in the grid. In the grid shown above, you would know that xxx of the 900 dots were solid.</p>
+<p>You will be shown the full grid and will be given the true number of solid dots in the grid. In the grid shown above, you would know that {{ group.example_grid_num_dots }} of the 900 dots were solid.</p>
 {% elif player.role == 'estimator' %}
-<p>Your adviser will be shown the full grid and will be given the true number of solid dots in the grid. In the grid shown above, the adviser would know that xxx of the 900 dots were solid.</p>
+<p>Your adviser will be shown the full grid and will be given the true number of solid dots in the grid. In the grid shown above, the adviser would know that {{ group.example_grid_num_dots }} of the 900 dots were solid.</p>
 {% elif player.role == 'judge' %}
-<p>Advisers were shown the full grid and were given the true number of solid dots in the grid. In the grid shown above, the adviser would know that xxx of the 900 dots were solid.</p>
+<p>Advisers were shown the full grid and were given the true number of solid dots in the grid. In the grid shown above, the adviser would know that {{ group.example_grid_num_dots }} of the 900 dots were solid.</p>
 {% endif %}
 
 

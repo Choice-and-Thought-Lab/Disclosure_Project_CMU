@@ -66,7 +66,7 @@
 
 <p>Based on the small grid they saw and the adviser’s recommendation, the estimator provided an estimate of <strong style="font-size: large;">{{ player.get_estimate }}</strong>. </p>
 
-<p> This estimate is {{ player.number_off }} above the true number, {{ player.group.correct_answer }}. Remember, the adviser knew the true number was {{ player.group.correct_answer }}.</p> 
+<p> This estimate is {{ number_off }} {% if player.number_off < 0 %}below {% else %}above{% endif %} the true number, {{ player.group.correct_answer }}. Remember, the adviser knew the true number was {{ player.group.correct_answer }}.</p> 
 
 <p>
   As a result, the adviser earned a bonus of <strong>{{ player.matched_adviser.grid_reward }}</strong>, and the

@@ -57,19 +57,6 @@ class Overview(Page):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
-class JudgeInstructions(Page):
-    form_model = 'player'
-
-    def get_timeout_seconds(self):
-        return self.participant.vars['expiry'] - time.time()
-
-    def is_displayed(self):
-        return self.player.role == "judge"
-        
-    def before_next_page(self):
-        if self.timeout_happened:
-            self.player.set_timeout_data()
-
 
 # show EXAMPLE image based on role
 class Instructions(Page):
@@ -126,12 +113,12 @@ class DisclosureInfo(Page):
 
     def manip_adv_payment_scheme_disclosed_error_message(self, value):
         self.player.get_answer_wrong = True
-        if value == False and self.player.is_adviser():
+        if value == False :
             return 'Not the right choice. Please read the instructions carefully'
 
     def manip_adv_payment_scheme_not_disclosed_error_message(self, value):
         self.player.get_answer_wrong = True
-        if value == False and self.player.is_adviser():
+        if value == False :
             return 'Not the right choice. Please read the instructions carefully'
 
     def get_timeout_seconds(self):
@@ -399,7 +386,11 @@ class JudgeCaseAndJudgment(Page):
 
 
     def vars_for_template(self):
-        return {'header': "To verify that you understood the case, please answer the following three questions:"}
+        number_off = self.player.number_off()
+        if number_off < 0:
+          number_off *= -1
+        return {'number_off': number_off,
+          'header': "To verify that you understood the case, please answer the following three questions:"}
 
 class JudgeJudgement(Page):
     form_model = 'player'
@@ -606,7 +597,6 @@ page_sequence = [
     Introduction,
     Overview,
     Instructions,
-    JudgeInstructions,
     AdvPaymentScheme,
     EstPaymentScheme,
     DisclosureInfo,
