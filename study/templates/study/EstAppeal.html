@@ -2,10 +2,13 @@
 {% load otree static %}
 {% load static %}
 
+
+{% block title %}
+Additional bonus
+{% endblock %}
+
 {% block content %}
 
-
-<h3>Additional bonus</h3>
 <p>
     We now have some additional information for you.
 </p>
@@ -18,58 +21,45 @@
 
 <h3>Opportunity to file an appeal</h3>
 
-<p> If you do nothing, then the $2.00 will be split evenly between you and the adviser.  However, you may file an appeal to keep 100% of the <strong>$2.00 </strong> bonus if you think that your adviser treated you unfairly in the dots-estimation task.</p>
+<p> If you do nothing, then the {{ Constants.appeal_reward }} will be split evenly between you and the adviser.  However, you may file an appeal to keep 100% of the <strong>{{ Constants.appeal_reward }}</strong> bonus if you think that your adviser treated you unfairly in the dots-estimation task.</p>
 
 
-<p>
-    If you file an appeal, a third-party judge will review what
-    happened to you in the dots-estimation task and determine whether you
-    were treated unfairly by your adviser.
-</p>
+<p>If you file an appeal, a third-party judge will review what happened to you in the dots-estimation task and determine whether you were treated unfairly by your adviser.</p>
 
-<p>It will cost you <strong>{{ Constants.appeal_cost }}</strong> to file an appeal with a judge. This will come out of your $1.00 if you lose the appeal. You will not pay this fee, however, if you win the appeal.
-</p>
+<p>It will cost you <strong>{{ Constants.appeal_cost }}</strong> to file an appeal with a judge. This will come out of your {{ Constants.appeal_reward_split }} if you lose the appeal. You will not pay this fee, however, if you win the appeal.</p>
 
 <hr />
 
 <h3>This is how the judge will decide your case</h3>
 <p>
-    If you choose to file an appeal, the judge will see that your adviser told you there were
-    <strong>{{ player.get_recommendation }}</strong> dots
+    If you choose to file an appeal, the judge will see that your adviser told you there were <strong>{{ player.get_recommendation }}</strong> dots.
 </p>
 
 <p>
-    The judge will know that the correct number of dots is <strong>{{ player.get_correct_answer }}</strong>. The judge
-    will also see that
-    you estimated there were <strong>{{ player.get_estimate }}</strong> dots.
+    The judge will know that the correct number of dots is <strong>{{ player.get_correct_answer }}</strong>. The judge will also see that you estimated there were <strong>{{ player.get_estimate }}</strong> dots.
 </p>
 <p> 
-The judge will know about your payoffs and your adviser’s payoffs that were based on your estimate.  The judge will see how much both you and your adviser earned.
+The judge will know about your payoffs and your adviser’s payoffs that were based on your estimate. The judge will see how much both you and your adviser earned.
 </p>
 {% if player.disclosure == True %}
-<p> <strong> The judge will also know that your adviser informed you that they would benefit if you overestimated the true number of solid dots </strong> </p> 
+<p> <strong> The judge will also know that your adviser informed you that they would benefit if you overestimated the true number of solid dots. </strong> </p> 
 {% else %}
-<p> <strong> The judge will also know that your adviser did not inform you that they would benefit if you overestimated the true number of solid dots </strong> </p> 
+<p> <strong> The judge will also know that your adviser did not inform you that they would benefit if you overestimated the true number of solid dots. </strong> </p> 
 {% endif %}
 <p><strong>
-        The judge will then make a decision about whether you are entitled to 100% of the
-        {{ Constants.appeal_reward }} bonus or whether it should be split evenly between you and your adviser.
-    </strong></p>
+        The judge will then make a decision about whether you are entitled to 100% of the {{ Constants.appeal_reward }} bonus or whether it should be split evenly between you and your adviser.
+</strong></p>
 
 <hr />
 
 <p>
-    <strong>If you file an appeal and the judge decides you were treated unfairly</strong>, you will receive <strong>{{ Constants.appeal_reward }}</strong>, while your
-    adviser will receive no bonus.
+    <strong>If you file an appeal and the judge decides you were treated unfairly</strong>, you will receive <strong>{{ Constants.appeal_reward }}</strong>, while your adviser will receive no bonus.
 </p>
 <p>
-    <strong>If you file an appeal and the judge decides you were treated fairly</strong>, you will pay
-    <strong>{{ Constants.appeal_cost }}</strong>. Both you and your adviser will receive
-    <strong>{{ Constants.appeal_reward_split }}</strong>.
+    <strong>If you file an appeal and the judge decides you were treated fairly</strong>, you will pay <strong>{{ Constants.appeal_cost }}</strong>. Both you and your adviser will receive <strong>{{ Constants.appeal_reward_split }}</strong>.
 </p>
 <p>
-    <strong>If you decide not to file an appeal</strong>, you and your adviser will each receive
-    <strong>{{ Constants.appeal_reward_split }}</strong>.
+    <strong>If you decide not to file an appeal</strong>, you and your adviser will each receive <strong>{{ Constants.appeal_reward_split }}</strong>.
 </p>
 
 <hr />

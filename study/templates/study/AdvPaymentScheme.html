@@ -9,8 +9,8 @@ Estimator's Payment
 <p>
     <strong> The estimator will be rewarded for the accuracy of his/her estimate of the correct number of solid dots in the 30x30 grid. </strong>
 </p>
-<p>The estimator will receive a {{ Constants.estimator_bonus_within_0_and_10 }} bonus if his/her estimate is within 10 dots of the correct number (either higher or lower). </p>
-<p>The estimator will receive a $2.00 bonus if his/her estimate is within 40 dots of the correct number (either higher or lower, but not within 10 dots). </p>
+<p>The estimator will receive a {{ Constants.estimator_bonus_within_neg_10_and_10 }} bonus if his/her estimate is within 10 dots of the correct number (either higher or lower). </p>
+<p>The estimator will receive a {{ Constants.estimator_bonus_within_10_and_40  }} bonus if his/her estimate is within 40 dots of the correct number (either higher or lower, but not within 10 dots). </p>
 <p>The estimator will receive no bonus if his/her estimate is off by more than 40. </p>
 <hr/>
 
@@ -20,13 +20,9 @@ Your Payment
 <p>
     <strong>As the adviser, you will receive a bonus if the estimator provides an estimate that is greater than the correct value. You will receive a bigger bonus the more the estimator overestimates the true number of solid dots.</strong>
 </p>
-<p>You will receive a $2.00 bonus if the estimator provides an estimate that is more than 10 dots greater than the correct number.</p>
-<p>
-    You will receive a {{ Constants.adviser_bonus_greater_than_40 }} bonus if the estimator provides an estimate that is more than 40 dots greater than the correct number.
-</p>   
-<p>
-  Otherwise, you will not receive a bonus.
-</p>
+<p>You will receive a {{ Constants.adviser_bonus_within_10_and_40 }} bonus if the estimator provides an estimate that is more than 10 dots greater than the correct number.</p>
+<p>You will receive a {{ Constants.adviser_bonus_greater_than_40 }} bonus if the estimator provides an estimate that is more than 40 dots greater than the correct number.</p>   
+<p>Otherwise, you will not receive a bonus.</p>
 <hr />
 
 <h3>Example</h3>

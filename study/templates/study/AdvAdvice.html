@@ -2,9 +2,11 @@
 {% load otree static %}
 {% load static %}
 
-{% block content %}
+{% block title %}
+Your Advice
+{% endblock %}
 
-<h3>Your Advice</h3>
+{% block content %}
 <p>
     Now it is time for you, as the adviser, to give the estimator advice on the number of solid (filled) dots in the
     30x30 grid, as shown below. The correct number of solid dots in this grid is
@@ -39,9 +41,6 @@
 </div>
 <hr />
 
-<p> <i> <strong>Recall that the estimator will{% if player.disclosure == False %} NOT{% endif %} know that you
-    will be paid bigger bonus the more the estimator overestimates the true number of solid dots. </i> </strong></p>
-
 <p>Please provide your advice to the estimator using the communication form below:</p>
 
 <div align="center" style="border: thin solid black">
@@ -65,9 +64,9 @@
     {% endif %}
 </div>
 
-<p class="mt-3"><font color="red">  
+<p class="mt-3"><font color="red"><strong>
   Remember that the estimator will {% if not player.disclosure %}NOT {% endif %}know that you will be paid bigger bonus the more he/she overestimates the true number of solid dots.
-</font></p>
+</strong></font></p>
 <hr />
 
 {% next_button %}

@@ -11,8 +11,8 @@ class Consent(Page):
     form_fields = ['consent18', 'consentRead', 'consentWant', 'mTurkId']
 
     def before_next_page(self):
-        # user has 60 minutes to complete as many pages as possible
-        self.participant.vars['expiry'] = time.time() + 3600
+        # set timeout - user has 60 minutes 
+        self.participant.vars['expiry'] = time.time() + 60*60
         # self.player.disclosure = random.choice([True, False])
 
     def error_message(self, values):
@@ -32,17 +32,6 @@ class Introduction(Page):
         if len(values["mTurkId"]) < 5:
             return 'Please enter a valid mTurkId.'
 
-    def get_timeout_seconds(self):
-        return self.participant.vars['expiry'] - time.time()
-
-    def is_displayed(self):
-        self.participant.vars['expiry'] = time.time() + 100000
-        return self.participant.vars['expiry'] - time.time() > 3
-
-    def before_next_page(self):
-        if self.timeout_happened:
-            self.player.set_timeout_data()
-
 class Overview(Page):
     form_model = 'player'
 
@@ -50,10 +39,11 @@ class Overview(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        self.participant.vars['expiry'] = time.time() + 100000
-        return (not self.player.role == "judge") and self.participant.vars['expiry'] - time.time() > 3
+        return (not self.player.role == "judge") and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
+       # set timout - user has 60 minutes 
+        self.participant.vars['expiry'] = time.time() + 60*1
         if self.timeout_happened:
             self.player.set_timeout_data()
 
@@ -64,14 +54,12 @@ class Instructions(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.participant.vars['expiry'] - time.time() > 3
+        return self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
-
-# class AdvComm3(Page):
 class AdvPaymentScheme(Page):
     form_model = 'player'
     form_fields = ['manip_adv_estimator_payment_question', 'manip_adv_adviser_payment_question']
@@ -90,14 +78,12 @@ class AdvPaymentScheme(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_adviser() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_adviser() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
-
-# class AdvComm4(Page):
 class DisclosureInfo(Page):
     form_model = 'player'
 
@@ -139,14 +125,13 @@ class AdvBegin(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_adviser() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_adviser() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
 
-# class AdvComm7(Page):
 class AdvAdvice(Page):
     # this to keep the value entered by each adviser only to that player
     form_model = 'player'
@@ -176,8 +161,6 @@ class WaitForRecommendation(WaitPage):
             'judge': self.group.get_player_by_role('judge').participant
         }
 
-
-# class EstComm2(Page):
 class EstPaymentScheme(Page):
     form_model = 'player'
     form_fields = ['manip_est_estimator_payment_question']
@@ -191,7 +174,7 @@ class EstPaymentScheme(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_estimator() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -205,7 +188,7 @@ class EstBegin(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_estimator() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         self.player.prep_before_decision()
@@ -234,31 +217,19 @@ class EstRevealPreamble(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_estimator() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
             self.player.set_timeout_data()
 
 
-class WaitForEstimate(WaitPage):
-    template_name = 'study/WaitProgress.html'
-
-    def vars_for_template(self):
-        return {
-            'adviser': self.group.get_player_by_role('adviser').participant,
-            'estimator': self.group.get_player_by_role('estimator').participant,
-            'judge': self.group.get_player_by_role('judge').participant
-        }
-
-
 class RevealGrid(Page):
-
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_estimator() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -270,7 +241,7 @@ class EstReveal(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_estimator() and self.get_timeout_seconds() > 3
 
     def vars_for_template(self):
         return {'adviser_reward': self.group.get_player_by_role('adviser').grid_reward}
@@ -288,7 +259,7 @@ class EstAppeal(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_estimator() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -300,7 +271,7 @@ class EstPostAppeal(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_estimator() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_estimator() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -340,12 +311,11 @@ class JudgeExample(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.player.is_judge() and self.participant.vars['expiry'] - time.time() > 3
+        return self.player.is_judge() and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
             self.player.set_timeout_data()
-
 
 
 class JudgeCaseAndJudgment(Page):
@@ -361,10 +331,6 @@ class JudgeCaseAndJudgment(Page):
         return self.player.is_judge()
 
     def before_next_page(self):
-        if self.player.appeal_granted:
-            self.player.recalculate_payOffs_with_appeal(True)
-        else:
-            self.player.recalculate_payOffs_with_appeal(False)
 
         if self.timeout_happened:
             self.player.set_timeout_data()
@@ -384,13 +350,11 @@ class JudgeCaseAndJudgment(Page):
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
 
-
     def vars_for_template(self):
-        number_off = self.player.number_off()
-        if number_off < 0:
-          number_off *= -1
-        return {'number_off': number_off,
-          'header': "To verify that you understood the case, please answer the following three questions:"}
+        return {
+          'number_off': self.player.number_off() if self.player.number_off() >= 0 else -self.player.number_off(),
+          'header': "To verify that you understood the case, please answer the following three questions:"
+          }
 
 class JudgeJudgement(Page):
     form_model = 'player'
@@ -415,11 +379,7 @@ class JudgeJudgementSummary(Page):
         return self.player.is_judge()
 
     def before_next_page(self):
-        if self.player.appeal_granted:
-            self.player.recalculate_payOffs_with_appeal(True)
-        else:
-            self.player.recalculate_payOffs_with_appeal(False)
-
+        self.player.recalculate_payOffs_with_appeal(self.player.appeal_granted)
         if self.timeout_happened:
             self.player.set_timeout_data()
 
@@ -462,7 +422,7 @@ class Blame(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return (not self.player.is_adviser()) and self.participant.vars['expiry'] - time.time() > 3
+        return (not self.player.is_adviser()) and self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -474,27 +434,11 @@ class PostQuestions(Page):
     form_model = 'player'
     form_fields = ['manip_final_adviser_payment_question',
                    'manip_final_estimator_payment_question', 'manip_final_conflict_disclosed_or_not']
-    def manip_final_adviser_payment_question_error_message(self, value):
-        self.player.get_answer_wrong = True
-        if value == True:
-            return 'Not the right choice. Please read the instructions carefully'
-
-
-    def manip_final_estimator_payment_question_error_message(self, value):
-        self.player.get_answer_wrong = True
-        if value == False:
-            return 'Not the right choice. Please read the instructions carefully'
-
-    def manip_final_conflict_disclosed_or_not_error_message(self, value):
-        self.player.get_answer_wrong = True
-        if value == False:
-            return 'Not the right choice. Please read the instructions carefully'
-
+    
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
-
     def is_displayed(self):
-        return not self.player.is_judge()
+      return self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -515,7 +459,7 @@ class ClarificationQuestions(Page):
             self.player.set_timeout_data()
 
     def is_displayed(self):
-        return (not self.player.is_adviser()) and self.participant.vars['expiry'] - time.time() > 3
+        return (not self.player.is_adviser()) and self.get_timeout_seconds() > 3
 
     def vars_for_template(self):
         return {'header': "To help us understand why you made the decision you did, please answer the following question:"}
@@ -543,7 +487,7 @@ class Demographics1(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.participant.vars['expiry'] - time.time() > 3
+        return self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -558,7 +502,7 @@ class Demographics2(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return self.participant.vars['expiry'] - time.time() > 3
+        return self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -568,9 +512,12 @@ class Demographics2(Page):
 class Comments(Page):
     form_model = 'player'
     form_fields = ['comment']
-
+    
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+    
     def is_displayed(self):
-        return self.participant.vars['expiry'] - time.time() > 3
+        return self.get_timeout_seconds() > 3
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -593,7 +540,6 @@ class Finish(Page):
 
 
 page_sequence = [
-    # Consent,
     Introduction,
     Overview,
     Instructions,

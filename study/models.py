@@ -48,39 +48,30 @@ class Constants(BaseConstants):
     num_rounds = 1
 
     # base reward for completing the survey
-    base_reward = c(0)  # Saran - Recent change: from 1 to 0
+    base_reward = c(0.5)  
 
     # New PayOffs - estimator
+    # (-inf, -40)
     estimator_bonus_less_than_neg_40 = c(0)
-    estimator_bonus_within_neg_40_and_31 = c(1)
-    estimator_bonus_within_neg_30_and_21 = c(1.5)
-    estimator_bonus_within_neg_20_and_11 = c(2)
-    estimator_bonus_within_neg_10_and_1 = c(5)
-    estimator_bonus_within_0_and_10 = c(5)
-    estimator_bonus_within_11_and_21 = c(2)
-    estimator_bonus_within_21_and_30 = c(1.5)
-    estimator_bonus_within_31_and_40 = c(1)
+    # [-40, -10)  
+    estimator_bonus_within_neg_40_and_neg_10 = c(2)
+    # [-10, 10]
+    estimator_bonus_within_neg_10_and_10 = c(5)
+    # (10, 40]
+    estimator_bonus_within_10_and_40 = c(2)
+    # (40, inf)
     estimator_bonus_greater_than_40 = c(0)
 
-    estimator_bonus_within_neg_40_and_11 = c(2)
-    estimator_bonus_within_11_and_40 = c(2)
-
     # New PayOffs - adviser
-    adviser_bonus_less_than_neg_40 = c(0)
-    adviser_bonus_within_neg_40_and_31 = c(0)
-    adviser_bonus_within_neg_30_and_21 = c(0)
-    adviser_bonus_within_neg_20_and_11 = c(0)
-    adviser_bonus_within_neg_10_and_1 = c(0)
-    adviser_bonus_within_0_and_10 = c(0.5)
-    adviser_bonus_within_11_and_21 = c(1)
-    adviser_bonus_within_21_and_30 = c(1.5)
-    adviser_bonus_within_31_and_40 = c(2)
+    # (-inf, 10]
+    adviser_bonus_less_than_10 = c(0)
+    # (10, 40]
+    adviser_bonus_within_10_and_40 = c(2)
+    # (40, inf)
     adviser_bonus_greater_than_40 = c(5)
-    adviser_bonus_within_11_and_40 = c(2)
-
+    
     appeal_reward = c(2)  # given to estimator on appeal win
-    # given to both estimator and adviser if appeal lost or no appeal
-    appeal_reward_split = appeal_reward / 2
+    appeal_reward_split = appeal_reward / 2 # given to both estimator and adviser if appeal lost or no appeal
     appeal_cost = c(0.5)  # cost of appeal to estimator
 
 
@@ -122,53 +113,7 @@ class Subsession(BaseSubsession):
                     p.disclosure = False
                 print(p.role(), 'Disclosure' if p.disclosure else 'Non-disclosure', p.id_in_group, p.matched_adviser().id_in_group, p.matched_estimator().id_in_group, p.matched_judge().id_in_group)
             print("-----------")
-
-        # To be removed
-        print('base_reward', Constants.base_reward)
-        print('estimator_bonus_less_than_neg_40',
-              Constants.estimator_bonus_less_than_neg_40)
-        print('estimator_bonus_within_neg_40_and_31',
-              Constants.estimator_bonus_within_neg_40_and_31)
-        print('estimator_bonus_within_neg_30_and_21',
-              Constants.estimator_bonus_within_neg_30_and_21)
-        print('estimator_bonus_within_neg_20_and_11',
-              Constants.estimator_bonus_within_neg_20_and_11)
-        print('estimator_bonus_within_neg_10_and_1',
-              Constants.estimator_bonus_within_neg_10_and_1)
-        print('estimator_bonus_within_0_and_10',
-              Constants.estimator_bonus_within_0_and_10)
-        print('estimator_bonus_within_11_and_21',
-              Constants.estimator_bonus_within_11_and_21)
-        print('estimator_bonus_within_21_and_30',
-              Constants.estimator_bonus_within_21_and_30)
-        print('estimator_bonus_within_31_and_40',
-              Constants.estimator_bonus_within_31_and_40)
-        print('estimator_bonus_greater_than_40',
-              Constants.estimator_bonus_greater_than_40)
-        print('adviser_bonus_less_than_neg_40',
-              Constants.adviser_bonus_less_than_neg_40)
-        print('adviser_bonus_within_neg_40_and_31',
-              Constants.adviser_bonus_within_neg_40_and_31)
-        print('adviser_bonus_within_neg_30_and_21',
-              Constants.adviser_bonus_within_neg_30_and_21)
-        print('adviser_bonus_within_neg_20_and_11',
-              Constants.adviser_bonus_within_neg_20_and_11)
-        print('adviser_bonus_within_neg_10_and_1',
-              Constants.adviser_bonus_within_neg_10_and_1)
-        print('adviser_bonus_within_0_and_10',
-              Constants.adviser_bonus_within_0_and_10)
-        print('adviser_bonus_within_11_and_21',
-              Constants.adviser_bonus_within_11_and_21)
-        print('adviser_bonus_within_21_and_30',
-              Constants.adviser_bonus_within_21_and_30)
-        print('adviser_bonus_within_31_and_40',
-              Constants.adviser_bonus_within_31_and_40)
-        print('adviser_bonus_greater_than_40',
-              Constants.adviser_bonus_greater_than_40)
-        print('appeal_reward', Constants.appeal_reward)
-        print('appeal_reward_split', Constants.appeal_reward_split)
-        print('appeal_cost', Constants.appeal_cost)
-
+        print('Finish creating session.')
 
 class Group(BaseGroup):
     grid_number = models.IntegerField()
@@ -180,11 +125,9 @@ class Group(BaseGroup):
     example_grid_path = models.StringField()
     example_grid_num_dots = models.StringField()
     example_small_grid_path = models.StringField()
-    estimator_opposite_appeal_payoff = models.CurrencyField(initial=c(0))
 
-    # Chooses a grid. Will choose a random grid-3x3_grid pair based on what is in the directory. Files must be named
-    # in this format: gridX_N.svg and small_gridX.svg, where X is a unique number per grid-3x3_grid pair, and N is
-    # the number of filled in dots in the entire grid.
+    # Chooses a grid. Will choose a random grid-3x3_grid pair based on what is in the directory. Files must be named in this format: 
+    # gridX_N.svg and small_gridX.svg, where X is a unique number per grid-3x3_grid pair, and N is the number of filled in dots in the entire grid.
     # Will assign values to group variables: grid_number, correct_answer, grid_path, small_grid_path.
     def choose_grid(self):
         static_dir = './study/static/study'
@@ -328,6 +271,8 @@ class Player(BasePlayer):
 
     get_answer_wrong = models.BooleanField()
 
+    timed_out = models.BooleanField(initial) 
+
     # Final Manipulation checks - No restrictions on answers to players - Role Independent
     manip_final_adviser_payment_question = models.BooleanField(
         widget=widgets.RadioSelect)
@@ -429,8 +374,8 @@ class Player(BasePlayer):
         "The estimator deserves to receive the full bonus of $2.00.")
 
 
-    # 6 Player Group - 1 triplet for disclosure and 1 triplet for non-disclosure conditions
-
+    # 6-player Group - 1 triplet for disclosure and 1 triplet for non-disclosure conditions
+    # define role
     def role(self):
         if 1 <= self.id_in_group <= 2:
             return 'adviser'
@@ -484,104 +429,79 @@ class Player(BasePlayer):
     def get_estimate(self):
         return self.matched_estimator().estimate
 
-    def is_timed_out(self):
-        return self.participant.vars['expiry'] - time.time() <= 3
-
     def number_off(self):
         return self.matched_estimator().estimate - self.group.correct_answer
 
-    # Calculates rewards based on the adviser's recommendation and estimator's estimate, then stores them per player
-    # in grid_reward.
+    # Calculates rewards based on the adviser's recommendation and estimator's estimate, then stores them per player in %grid_reward%
     def calculate_grid_rewards(self):
         adviser = self.matched_adviser()
         estimator = self.matched_estimator()
 
-        print('Calculate Grid Rewards - before', ' adviser: ', adviser.payoff, ' estimator: ',
-              estimator.payoff)
-        print('Calculate ParticipantPayoff Rewards - before', ' adviser: ', adviser.participant.payoff, ' estimator: ',
-              estimator.participant.payoff)
+        print('Calculate Grid Rewards - before \n', ' adviser: ', adviser.payoff, ' estimator: ', estimator.payoff)
 
+        # (-inf, -40)
         if estimator.estimate < (self.group.correct_answer - 40):
-            estimator.grid_reward = Constants.estimator_bonus_less_than_neg_40  # Nothing
-            adviser.grid_reward = Constants.adviser_bonus_less_than_neg_40  # Nothing
-        elif (self.group.correct_answer - 40) <= estimator.estimate <= (self.group.correct_answer - 31):
-            estimator.grid_reward = Constants.estimator_bonus_within_neg_40_and_31
-            adviser.grid_reward = Constants.adviser_bonus_within_neg_40_and_31  # Nothing
-        elif (self.group.correct_answer - 30) <= estimator.estimate <= (self.group.correct_answer - 21):
-            estimator.grid_reward = Constants.estimator_bonus_within_neg_30_and_21
-            adviser.grid_reward = Constants.adviser_bonus_within_neg_30_and_21  # Nothing
-        elif (self.group.correct_answer - 20) <= estimator.estimate <= (self.group.correct_answer - 11):
-            estimator.grid_reward = Constants.estimator_bonus_within_neg_20_and_11
-            adviser.grid_reward = Constants.adviser_bonus_within_neg_20_and_11  # Nothing
-        elif (self.group.correct_answer - 10) <= estimator.estimate <= (self.group.correct_answer):
-            estimator.grid_reward = Constants.estimator_bonus_within_neg_10_and_1
-            adviser.grid_reward = Constants.adviser_bonus_within_neg_10_and_1  # Nothing
-        elif (self.group.correct_answer + 1) <= estimator.estimate <= (self.group.correct_answer + 10):
-            estimator.grid_reward = Constants.estimator_bonus_within_0_and_10
-            adviser.grid_reward = Constants.adviser_bonus_within_0_and_10
-        elif (self.group.correct_answer + 11) <= estimator.estimate <= (self.group.correct_answer + 20):
-            estimator.grid_reward = Constants.estimator_bonus_within_11_and_21
-            adviser.grid_reward = Constants.adviser_bonus_within_11_and_21
-        elif (self.group.correct_answer + 21) <= estimator.estimate <= (self.group.correct_answer + 30):
-            estimator.grid_reward = Constants.estimator_bonus_within_21_and_30
-            adviser.grid_reward = Constants.adviser_bonus_within_21_and_30
-        elif (self.group.correct_answer + 31) <= estimator.estimate <= (self.group.correct_answer + 40):
-            estimator.grid_reward = Constants.estimator_bonus_within_31_and_40
-            adviser.grid_reward = Constants.adviser_bonus_within_31_and_40
+            estimator.grid_reward = Constants.estimator_bonus_less_than_neg_40 
+            adviser.grid_reward = Constants.adviser_bonus_less_than_10  
+        
+        # [-40, -10)
+        elif (self.group.correct_answer - 40) <= estimator.estimate < (self.group.correct_answer - 10):
+            estimator.grid_reward = Constants.estimator_bonus_within_neg_40_and_neg_10
+            adviser.grid_reward = Constants.adviser_bonus_less_than_10  
+        # [-10, 10]
+        elif (self.group.correct_answer - 10) <= estimator.estimate <= (self.group.correct_answer + 10):
+            estimator.grid_reward = Constants.estimator_bonus_within_neg_10_and_10
+            adviser.grid_reward = Constants.adviser_bonus_within_neg_40_and_31  
+        # (10, 40]
+        elif (self.group.correct_answer - 10) < estimator.estimate <= (self.group.correct_answer + 40):
+            estimator.grid_reward = Constants.estimator_bonus_within_10_and_40
+            adviser.grid_reward = Constants.adviser_bonus_within_10_and_40
+        # (40, inf)
         elif estimator.estimate > (self.group.correct_answer + 40):
-            estimator.grid_reward = Constants.estimator_bonus_greater_than_40  # Nothing
+            estimator.grid_reward = Constants.estimator_bonus_greater_than_40
             adviser.grid_reward = Constants.adviser_bonus_greater_than_40
 
         adviser.payoff = adviser.grid_reward
         estimator.payoff = estimator.grid_reward
-        print('Calculate Grid Rewards - after', ' adviser: ', adviser.payoff, ' estimator: ',
-              estimator.payoff)
-        print('Calculate ParticipantPayoff Rewards - after', ' adviser: ', adviser.participant.payoff, ' estimator: ',
-              estimator.participant.payoff)
+        print('Calculate Grid Rewards - after\n', ' adviser: ', adviser.payoff, ' estimator: ', estimator.payoff)
 
-    def recalculate_payOffs_with_appeal(self, is_appeal_success):
+    def recalculate_payOffs_with_appeal(self, appeal_granted):
         adviser = self.matched_adviser()
         estimator = self.matched_estimator()
         judge = self.matched_judge()
 
-        print('In Recalculate. Payoffs - before', ' adviser: ', adviser.payoff, ' estimator: ',
-              estimator.payoff, ' judge: ', judge.participant.payoff)
-        print('In Recalculate. Participant Payoffs - before', ' adviser: ', adviser.participant.payoff, ' estimator: ',
-              estimator.participant.payoff, ' judge: ', judge.participant.payoff)
+        print('In Recalculate. Payoffs - before\n', ' adviser: ', adviser.payoff, ' estimator: ', estimator.payoff, ' judge: ', judge.participant.payoff)
 
-        if is_appeal_success:
-            adviser.payoff = adviser.grid_reward
-            estimator.payoff = estimator.grid_reward + \
-                Constants.appeal_reward - Constants.appeal_cost
+        if not estimator.appealed:
+          adviser.payoff = adviser.grid_reward + Constants.appeal_reward_split
+          estimator.payoff = estimator.grid_reward + Constants.appeal_reward_split
         else:
+          if appeal_granted:
+            adviser.payoff = adviser.grid_reward
+            estimator.payoff = estimator.grid_reward + Constants.appeal_reward 
+          else:
             adviser.payoff = adviser.grid_reward + Constants.appeal_reward_split
-            estimator.payoff = estimator.grid_reward + \
-                Constants.appeal_reward_split - Constants.appeal_cost
+            estimator.payoff = estimator.grid_reward + Constants.appeal_reward_split - Constants.appeal_cost
 
-        judge.payoff = Constants.appeal_cost
 
-        print('In Recalculate. Payoffs - after', ' adviser: ', adviser.payoff, ' estimator: ',
-              estimator.payoff, ' judge: ', judge.participant.payoff)
-        print('In Recalculate. Participant Payoffs - after', ' adviser: ', adviser.participant.payoff, ' estimator: ',
-              estimator.participant.payoff, ' judge: ', judge.participant.payoff)
+        print('In Recalculate. Payoffs - after\n', ' adviser: ', adviser.payoff, ' estimator: ', estimator.payoff, ' judge: ', judge.participant.payoff)
+    
 
-    # Set Default Values for Recommendation and Estimate in times of unexpected failures in adviser and Estimator rounds respectively
+    # Set Default Values for Recommendation and Estimate in times of unexpected failures in adviser and estimator rounds respectively
     def prep_before_decision(self):
         if self.is_estimator() or self.is_judge():
-            if self.matched_adviser().recommendation is None or self.matched_adviser().recommendation == 0:
-                self.matched_adviser().recommendation = self.group.correct_answer + \
-                    (92 if self.disclosure else 28)
-                print('Prep Recommendation',
-                      self.matched_adviser().recommendation)
+            if not self.matched_adviser().recommendation:
+                self.matched_adviser().recommendation = self.group.correct_answer + (92 if self.disclosure else 28)
+                print('Prep Recommendation', self.matched_adviser().recommendation)
         if self.is_judge():
-            if self.matched_estimator().estimate is None or self.matched_estimator().estimate == 0:
-                self.matched_estimator().estimate = self.group.correct_answer + \
-                    (46 if self.disclosure else 14)
-                self.calculate_grid_rewards()
+            if not self.matched_estimator().estimate:
+                self.matched_estimator().estimate = self.group.correct_answer + (46 if self.disclosure else 14)
                 print('Prep Estimate', self.matched_estimator().estimate)
+                self.calculate_grid_rewards()
 
     # Set Default Data for whole triplet group - for situations like timeout
     def set_timeout_data(self):
+        self.timed_out = True
         if self.is_adviser():
             if self.recommendation is None or self.recommendation == 0:
                 self.recommendation = self.group.correct_answer + \

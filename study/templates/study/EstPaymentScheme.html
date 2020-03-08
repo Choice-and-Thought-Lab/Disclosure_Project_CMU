@@ -2,17 +2,16 @@
 {% load otree static %}
 
 {% block content %}
-
 <h3>Your Payment</h3>
 <p>
-    <strong>You will be rewarded for the accuracy of your estimate of the correct number of solid dots in the 30x30 grid that you see. </strong>
+    <strong>You will be rewarded for the accuracy of your estimate of the correct number of solid dots in the 30x30 grid. </strong>
 </p>
 <p>
-    You will receive a {{ Constants.estimator_bonus_within_0_and_10 }} bonus if your estimate is within 10 dots of the correct number (either higher or lower).
+    You will receive a {{ Constants.estimator_bonus_within_neg_10_and_10 }} bonus if your estimate is within 10 dots of the correct number (either higher or lower).
 </p>
 </p>
 <p>
- You will receive a {{ Constants.estimator_bonus_within_11_and_40 }} bonus if your estimate is within 40 dots of the correct number (either higher or lower, but not within 10 dots).
+ You will receive a {{ Constants.estimator_bonus_within_10_and_40 }} bonus if your estimate is within 40 dots of the correct number (either higher or lower, but not within 10 dots).
 </p>
 <p>
 You will receive no bonus if your estimate is off by more than 40.

@@ -7,37 +7,16 @@ Introduction
 
 {% block content %}
 
-
-{% if player.role == 'adviser' %}
 <p> Thank you for participating in our survey!</p>
 
-<p> You will receive $0.50 base payment within 24 hours and any bonus payments that you earned within 5 business days. Bonus payments may be up to $7.00. </p>
-
-{% for field in form %}
-{% formfield field %}
-{% endfor %}
-
-{% elif player.role == 'estimator' %}
-<p> Thank you for participating in our survey!</p>
-
-<p> You will receive $0.50 base payment within 24 hours and any bonus payments that you earned within 5 business days. Bonus payments may be up to $7.00. </p>
-
-<!-- MTurk Id -->
-{% for field in form %}
-{% formfield field %}
-{% endfor %}
-
-{% elif player.role == 'judge' %}
-<p> Thank you for participating in our survey!</p>
-
-<p> You will receive $0.50 base payment within 24 hours. </p>
-
-<!-- MTurk Id -->
-{% for field in form %}
-{% formfield field %}
-{% endfor %}
-
+{% if player.role == 'judge' %}
+<p> You will receive {{ Constants.base_reward }} base payment within 24 hours. </p>
+{% else %}
+<p> You will receive {{ Constants.base_reward }} base payment within 24 hours and any bonus payments that you earned within 5 business days. Bonus payments may be up to $7.00. </p>
 {% endif %}
+
+<!-- MTurk Id -->
+{% formfields %}
 
 
 {% next_button %}

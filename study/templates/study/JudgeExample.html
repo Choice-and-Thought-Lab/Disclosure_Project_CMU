@@ -2,13 +2,11 @@
 {% load otree static %}
 {% load static %}
 
+{% block title %}
+Instructions
+{% endblock %}
+
 {% block content %}
-
-<h3>Instructions</h3>
-
-<p>
-  Advisers gave advice to estimators, in the form: 
-</p>
 
 <div align="center" style="border: thin solid black">
   {% include "./CommunicationFormTemplate.html" with player=player group=group disclosure=False type="example" %}
@@ -36,8 +34,8 @@
 <h3 style="margin: 1em 0 0.5em 0;">Estimator's Payment</h3>
 
 <p><strong>Estimators were rewarded for the accuracy of their estimates of the correct number of solid dots in the 30x30 grid. </strong></p>
-<p>Estimators received a $5.00 bonus if their estimates were within 10 dots of the correct number (either higher or lower). </p>
-<p>Estimator received a $2.00 bonus if their estimate was within 40 dots of the correct number (either higher or lower, but not within 10 dots). </p>
+<p>Estimators received a {{ Constants.estimator_bonus_within_neg_10_and_10 }} bonus if their estimates were within 10 dots of the correct number (either higher or lower). </p>
+<p>Estimator received a {{ Constants.estimator_bonus_within_10_and_40 }} bonus if their estimate was within 40 dots of the correct number (either higher or lower, but not within 10 dots). </p>
 <p>Estimator received no bonus if their estimate was off by more than 40.</p>
 <hr/>
 
@@ -45,8 +43,8 @@
 
 <p><strong>Unbeknownst to estimators, advisers had different incentives:</strong></p>
 <p><strong>Advisers received a bonus if the estimator provided an estimate that was greater than the correct value. Advisers received a bigger bonus the more the estimator overestimated the true number of solid dots.</strong></p>
-<p>Advisers received a $2.00 bonus if the estimator provided an estimate that was more than 10 dots greater than the correct number. </p>
-<p>Advisers received a $5.00 bonus if the estimator provided an estimate that was more than 40 dots greater than the correct number. </p>
+<p>Advisers received a {{ Constants.adviser_bonus_within_10_and_40 }} bonus if the estimator provided an estimate that was more than 10 dots greater than the correct number. </p>
+<p>Advisers received a {{ Constants.adviser_bonus_greater_than_40 }} bonus if the estimator provided an estimate that was more than 40 dots greater than the correct number. </p>
 <p>Otherwise, advisers did not receive a bonus. </p>
 <hr/>
 

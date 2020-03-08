@@ -2,24 +2,22 @@
 {% load otree static %}
 {% load static %}
 
+{% block title %}
+Your Judgment
+{% endblock %}
+
 {% block content %}
-
-<h3>Your Judgment</h3>
-
 <p>
   Now, we’d like you to make a decision about allocating bonuses.
 </p>
 <p>
-    The adviser and the estimator are both eligible to receive additional bonuses for participating. There is
-    {{ Constants.appeal_reward }} to be split between the adviser and the estimator.
-
+    The adviser and the estimator are both eligible to receive additional bonuses for participating. There is {{ Constants.appeal_reward }} to be split between the adviser and the estimator.
 </p>
-<p>It is your job, as the judge, to decide how to split the money. You should make this decision based on whether you
-    think the estimator was treated unfairly by the adviser during the dots-estimation task.</p>
 
-<p>If you think that the estimator was treated unfairly, you should award $2.00 to the estimator and $0.00 to the
-    adviser.</p>
-<p>If you think the estimator was treated fairly, you should split the award so $1.00 goes to the adviser and $1.00 goes to the estimator. </p>
+<p>It is your job, as the judge, to decide how to split the money. You should make this decision based on whether you think the estimator was treated unfairly by the adviser during the dots-estimation task.</p>
+
+<p>If you think that the estimator was treated unfairly, you should award {{ Constants.appeal_reward }} to the estimator and $0.00 to the adviser.</p>
+<p>If you think the estimator was treated fairly, you should split the award so {{ Constants.appeal_reward_split }} goes to the adviser and {{ Constants.appeal_reward_split }} goes to the estimator. </p>
 
 
 {% next_button %}

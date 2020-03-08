@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% if player.is_timed_out == True %}
+{% if player.timed_out == True %}
 <p> You have timed out</p>
 {% else %}
     <p>
@@ -24,7 +24,7 @@
       <p>
     {% if player.role != 'judge' %}
     <p>
-    You will receive $0.50 base payment within 24 hours and any bonus payments that you earned within 5 business days.
+    You will receive {{ Constants.base_reward }} base payment within 24 hours and any bonus payments that you earned within 5 business days.
     <p>
     <!--<h3>
 	    {{ participant.payoff }}

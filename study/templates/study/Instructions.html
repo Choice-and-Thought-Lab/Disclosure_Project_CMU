@@ -7,7 +7,6 @@ Instructions
 {% endblock %}
 
 {% block content %}
-
 {% if player.role == 'adviser' %}
 <p>Recall that you are the adviser.</p> 
 <p>The judgment that the estimator will make is to estimate the number of solid (filled) dots in a 30x30 grid.</p>
@@ -42,7 +41,9 @@ Instructions
 </p>
 {% endif %}
 
-<p>Below is an example of the corresponding 3x3 grid that the estimator might see.</p>
+
+<p>Below is an example of the corresponding 3x3 grid that {% if player.role == 'estimator' %}you{% else %}the estimator{% endif %} might see.</p>
+  
 <!-- Sample Small Grid  -->
 <div class="container-fluid">
   <div class="row">
@@ -61,4 +62,5 @@ Instructions
 {% endif %}
 
 
-{% next_button %} {% endblock %}
+{% next_button %} 
+{% endblock %}
