@@ -271,7 +271,7 @@ class Player(BasePlayer):
 
     get_answer_wrong = models.BooleanField()
 
-    timed_out = models.BooleanField(initial) 
+    timed_out = models.BooleanField() 
 
     # Final Manipulation checks - No restrictions on answers to players - Role Independent
     manip_final_adviser_payment_question = models.BooleanField(
