@@ -1,1 +1,1 @@
-Written to work with oTree 2.1.5.
+Written to work with Python 3.7
