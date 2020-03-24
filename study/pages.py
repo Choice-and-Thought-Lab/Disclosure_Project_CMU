@@ -32,6 +32,12 @@ class Introduction(Page):
         if len(values["mTurkId"]) < 5:
             return 'Please enter a valid mTurkId.'
 
+    def before_next_page(self):
+       # set timout - user has 60 minutes 
+        self.participant.vars['expiry'] = time.time() + 60*60
+        if self.timeout_happened:
+            self.player.set_timeout_data()
+
 class Overview(Page):
     form_model = 'player'
 
@@ -39,13 +45,12 @@ class Overview(Page):
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
-        return (not self.player.role == "judge") and self.get_timeout_seconds() > 3
+        return self.get_timeout_seconds() > 3
 
     def before_next_page(self):
-       # set timout - user has 60 minutes 
-        self.participant.vars['expiry'] = time.time() + 60*1
         if self.timeout_happened:
             self.player.set_timeout_data()
+    
 
 
 # show EXAMPLE image based on role
