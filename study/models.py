@@ -464,7 +464,7 @@ class Player(BasePlayer):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_10_and_10
             adviser.grid_reward = Constants.adviser_bonus_less_than_10
         # (10, 40]
-        elif (self.group.correct_answer - 10) < estimator.estimate <= (self.group.correct_answer + 40):
+        elif (self.group.correct_answer + 10) < estimator.estimate <= (self.group.correct_answer + 40):
             estimator.grid_reward = Constants.estimator_bonus_within_10_and_40
             adviser.grid_reward = Constants.adviser_bonus_within_10_and_40
         # (40, inf)
@@ -484,16 +484,16 @@ class Player(BasePlayer):
         print('In Recalculate. Payoffs - before\n', ' adviser: ', adviser.payoff, ' estimator: ', estimator.payoff, ' judge: ', judge.participant.payoff)
 
         if not estimator.appealed:
-          adviser.payoff = adviser.grid_reward + Constants.appeal_reward_split
           estimator.payoff = estimator.grid_reward + Constants.appeal_reward_split
+          adviser.payoff = adviser.grid_reward + Constants.appeal_reward_split
         else:
           if appeal_granted:
-            adviser.payoff = adviser.grid_reward
             estimator.payoff = estimator.grid_reward + Constants.appeal_reward 
+            adviser.payoff = adviser.grid_reward
+            
           else:
-            adviser.payoff = adviser.grid_reward + Constants.appeal_reward_split
             estimator.payoff = estimator.grid_reward + Constants.appeal_reward_split - Constants.appeal_cost
-
+            adviser.payoff = adviser.grid_reward + Constants.appeal_reward_split
 
         print('In Recalculate. Payoffs - after\n', ' adviser: ', adviser.payoff, ' estimator: ', estimator.payoff, ' judge: ', judge.participant.payoff)
     
