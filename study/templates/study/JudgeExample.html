@@ -8,35 +8,12 @@ Instructions
 
 {% block content %}
 
-<div align="center" style="border: thin solid black">
-  {% include "./CommunicationFormTemplate.html" with player=player group=group disclosure=False type="example" %}
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col text-center mb-3">
-        {% comment %} <h1><strong>542</strong></h1> {% endcomment %}
-      </div>
-    </div>
-  </div>
-  {% if player.disclosure == True %}
-  <font color='red'>
-    <p><strong>Important Disclosure: </strong>I, your adviser, will get a bonus if you <i> overestimate </i>the true number of solid dots. </p>
-
-    <p>So, it is in my interest that you estimate a high number of dots. </p> 
-  </font>
-  {% endif %}
-</div>
-<br/>
-<p>
-  where "---" is the number the adviser specified.  Estimators received this advice before they made their estimate.
-</p>
-<hr/>
-
 <h3 style="margin: 1em 0 0.5em 0;">Estimator's Payment</h3>
 
 <p><strong>Estimators were rewarded for the accuracy of their estimates of the correct number of solid dots in the 30x30 grid. </strong></p>
 <p>Estimators received a {{ Constants.estimator_bonus_within_neg_10_and_10 }} bonus if their estimates were within 10 dots of the correct number (either higher or lower). </p>
-<p>Estimator received a {{ Constants.estimator_bonus_within_10_and_40 }} bonus if their estimate was within 40 dots of the correct number (either higher or lower, but not within 10 dots). </p>
-<p>Estimator received no bonus if their estimate was off by more than 40.</p>
+<p>Estimators received a {{ Constants.estimator_bonus_within_10_and_40 }} bonus if their estimate was within 40 dots of the correct number (either higher or lower, but not within 10 dots). </p>
+<p>Estimators received no bonus if their estimate was off by more than 40.</p>
 <hr/>
 
 <h3 style="margin: 1em 0 0.5em 0;">Adviser's Payment </h3>
@@ -60,8 +37,7 @@ Instructions
 <hr/>
 
 <p>To ensure that you understand the instructions, please answer the following questions: </p>
-{% formfield player.manip_est_judge_payment_question %}
-{% formfield player.manip_adv_judge_payment_question %}
+{% formfields %}
 
 {% next_button %}
 

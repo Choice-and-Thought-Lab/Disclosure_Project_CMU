@@ -299,15 +299,14 @@ class JudgeBegin(Page):
 
 class JudgeExample(Page):
     form_model = 'player'
-    form_fields = ['manip_adv_judge_payment_question',
-                   'manip_est_judge_payment_question']
+    form_fields = ['manip_judge_est_payment_question', 'manip_judge_adv_payment_question']
 
-    def manip_adv_judge_payment_question_error_message(self, value):
+    def manip_judge_adv_payment_question_error_message(self, value):
         self.player.get_answer_wrong = True
         if value == True:
             return 'Not the right choice. Please read the instructions carefully'
 
-    def manip_est_judge_payment_question_error_message(self, value):
+    def manip_judge_est_payment_question_error_message(self, value):
         self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
@@ -325,9 +324,7 @@ class JudgeExample(Page):
 
 class JudgeCaseAndJudgment(Page):
     form_model = 'player'
-    form_fields = ['manip_final_adviser_payment_question',
-                   'manip_final_estimator_payment_question',
-                   'manip_final_conflict_disclosed_or_not']
+    form_fields = ['manip_judge_est_case_question', 'manip_judge_adv_case_question', 'manip_judge_disclosed_case_question']
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -336,21 +333,20 @@ class JudgeCaseAndJudgment(Page):
         return self.player.is_judge()
 
     def before_next_page(self):
-
         if self.timeout_happened:
             self.player.set_timeout_data()
-        
-    def manip_final_adviser_payment_question_error_message(self, value):
-        self.player.get_answer_wrong = True
-        if value == True:
-            return 'Not the right choice. Please read the instructions carefully'
 
-    def manip_final_estimator_payment_question_error_message(self, value):
+    def manip_judge_est_case_question_error_message(self, value):
         self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
+        
+    def manip_judge_adv_case_question_error_message(self, value):
+        self.player.get_answer_wrong = True
+        if value == True:
+            return 'Not the right choice. Please read the instructions carefully'   
 
-    def manip_final_conflict_disclosed_or_not_error_message(self, value):
+    def manip_judge_disclosed_case_questionerror_message(self, value):
         self.player.get_answer_wrong = True
         if value == False:
             return 'Not the right choice. Please read the instructions carefully'
@@ -437,8 +433,7 @@ class Blame(Page):
 class PostQuestions(Page):
     # Manipulation Checks
     form_model = 'player'
-    form_fields = ['manip_final_adviser_payment_question',
-                   'manip_final_estimator_payment_question', 'manip_final_conflict_disclosed_or_not']
+    form_fields = ['manip_final_adviser_payment_question', 'manip_final_estimator_payment_question', 'manip_final_conflict_disclosed_or_not']
     
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()

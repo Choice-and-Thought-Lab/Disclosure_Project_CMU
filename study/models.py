@@ -274,14 +274,12 @@ class Player(BasePlayer):
     timed_out = models.BooleanField() 
 
     # Final Manipulation checks - No restrictions on answers to players - Role Independent
-    manip_final_adviser_payment_question = models.BooleanField(
-        widget=widgets.RadioSelect)
-    manip_final_estimator_payment_question = models.BooleanField(
-        widget=widgets.RadioSelect)
-    manip_final_conflict_disclosed_or_not = models.BooleanField(
-        widget=widgets.RadioSelect)
+    manip_final_adviser_payment_question = models.BooleanField(widget=widgets.RadioSelect)
+    manip_final_estimator_payment_question = models.BooleanField(widget=widgets.RadioSelect)
+    manip_final_conflict_disclosed_or_not = models.BooleanField(widget=widgets.RadioSelect)
 
     # Initial Manipulation Questions - Players not allowed to proceed unless answered True
+    # adviser
     manip_adv_adviser_payment_question = models.BooleanField(
         label="In the dots estimation task, you get a bonus only if the estimator underestimates the true number of solid dots.",
         widget=widgets.RadioSelect
@@ -307,12 +305,13 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
-    manip_adv_judge_payment_question = models.BooleanField(
+    # judge
+    manip_judge_adv_payment_question = models.BooleanField(
       label="In the dots estimation task, the adviser gets a bonus only if the estimator underestimates the true number of solid dots.",
       widget=widgets.RadioSelect
     )
 
-    manip_est_judge_payment_question = models.BooleanField(
+    manip_judge_est_payment_question = models.BooleanField(
         label="In the dots estimation task, the estimator gets a bigger bonus the more accurate his/her estimate is.",
         widget=widgets.RadioSelect
     )
@@ -326,6 +325,18 @@ class Player(BasePlayer):
             "Some estimators were told and some were not told"
         ]
     )
+
+    manip_judge_adv_case_question = models.BooleanField(
+      label="In the case, the adviser would get a bigger bonus the more the estimator underestimated the true number of solid dots.",
+      widget=widgets.RadioSelect
+    )
+
+    manip_judge_est_case_question = models.BooleanField(
+      label="In the case, the estimator would get a bigger bonus the more accurate his/her estimate was.",
+      widget=widgets.RadioSelect)
+
+    manip_judge_disclosed_case_question = models.BooleanField(widget=widgets.RadioSelect) 
+
 
     comment = models.LongStringField(
         label="Do you have any comments for the researchers? (Optional)", blank=True)
@@ -451,7 +462,7 @@ class Player(BasePlayer):
         # [-10, 10]
         elif (self.group.correct_answer - 10) <= estimator.estimate <= (self.group.correct_answer + 10):
             estimator.grid_reward = Constants.estimator_bonus_within_neg_10_and_10
-            adviser.grid_reward = Constants.adviser_bonus_within_neg_40_and_31  
+            adviser.grid_reward = Constants.adviser_bonus_less_than_10
         # (10, 40]
         elif (self.group.correct_answer - 10) < estimator.estimate <= (self.group.correct_answer + 40):
             estimator.grid_reward = Constants.estimator_bonus_within_10_and_40

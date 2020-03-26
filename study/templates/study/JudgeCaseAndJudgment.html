@@ -79,12 +79,12 @@ The Case
 
 <h4>{{ header }}</h4>
 
-{% formfield player.manip_final_estimator_payment_question label="In the case, the estimator would get a bigger bonus the more accurate his/her estimate was." %}
-{% formfield player.manip_final_adviser_payment_question label="In the case, the adviser would get a bigger bonus the more the estimator underestimated the true number of solid dots." %}
+{% formfield player.manip_judge_est_case_question  %}
+{% formfield player.manip_judge_adv_case_question  %}
 {% if player.disclosure == True %}
-    {% formfield player.manip_final_conflict_disclosed_or_not label="In the case, the adviser did disclose their payment scheme to the estimator in the online communication form." %}
+    {% formfield player.manip_judge_disclosed_case_question label="In the case, the adviser did disclose their payment scheme to the estimator in the online communication form." %}
 {% else %}
-    {% formfield player.manip_final_conflict_disclosed_or_not label="In the case, the adviser did NOT disclose their payment scheme to the estimator in the online communication form." %}
+    {% formfield player.manip_judge_disclosed_case_question label="In the case, the adviser did NOT disclose their payment scheme to the estimator in the online communication form." %}
 {% endif %}
 
 {% next_button %}
