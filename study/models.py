@@ -48,7 +48,7 @@ class Constants(BaseConstants):
     num_rounds = 1
 
     # base reward for completing the survey
-    base_reward = c(0.5)  
+    base_reward = c(2)  
 
     # New PayOffs - estimator
     # (-inf, -40)
